@@ -5,55 +5,107 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>熱門賽事輪播</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#f5f7fa;padding:2rem}
-.section{max-width:1200px;margin:0 auto;padding:2rem;background:linear-gradient(160deg,#e8f0fa 0%,#f0f4fb 60%,#e4ecf8 100%);border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
-.header{text-align:center;margin-bottom:1.5rem}
-.header h1{font-size:28px;font-weight:600;color:#3a5a9a;letter-spacing:.05em;margin-bottom:0.5rem}
-.header p{font-size:14px;color:#7a96c4}
-.tabs-wrap{display:flex;justify-content:center;margin:1.5rem 0 2rem}
-.tabs{display:flex;gap:6px;background:rgba(255,255,255,0.7);border-radius:40px;padding:6px;border:0.5px solid rgba(150,180,230,0.3);box-shadow:0 2px 8px rgba(100,140,200,0.1)}
-.tab{padding:8px 20px;border-radius:30px;font-size:14px;color:#6a88b8;cursor:pointer;border:none;background:transparent;transition:all .25s;white-space:nowrap;font-weight:500}
-.tab:hover{color:#4a6898}
-.tab.active{background:#fff;color:#3a5a9a;box-shadow:0 2px 6px rgba(80,120,200,0.2)}
-.carousel-wrap{position:relative;padding:0 3rem}
-.carousel-viewport{overflow:hidden;border-radius:12px}
-.carousel-track{display:flex;gap:18px;transition:transform .4s cubic-bezier(.4,0,.2,1)}
-.match-card{flex-shrink:0;background:rgba(255,255,255,0.9);border:0.5px solid rgba(150,185,235,0.4);border-radius:14px;padding:1.5rem 1.25rem;text-align:center;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;box-shadow:0 2px 10px rgba(100,140,200,0.1);transition:transform .2s,box-shadow .2s}
-.match-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(100,140,200,0.15)}
-.card-league{font-size:13px;color:#7a96c4;font-weight:600}
-.card-date{font-size:12px;color:#a0b4d0}
-.card-matchup{display:flex;align-items:center;gap:14px;margin:8px 0}
-.flag{font-size:36px;line-height:1}
-.vs-text{font-size:14px;color:#aec0d8;font-weight:600;padding:0 6px}
-.team-name{font-size:13px;color:#5a78a8;margin-top:4px;font-weight:500}
-.team-block{display:flex;flex-direction:column;align-items:center;gap:4px}
-.arrow-btn{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.95);border:0.5px solid rgba(150,185,235,0.5);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5a78b8;font-size:18px;z-index:10;transition:all .25s;box-shadow:0 2px 8px rgba(100,140,200,0.15)}
-.arrow-btn:hover:not(:disabled){background:#fff;box-shadow:0 4px 12px rgba(80,130,200,0.25);transform:translateY(-50%) scale(1.05)}
-.arrow-btn:disabled{opacity:0.25;cursor:not-allowed}
-.arrow-left{left:4px}
-.arrow-right{right:4px}
-.group-label{font-size:11px;font-weight:600;color:#8aabce;background:rgba(140,170,220,0.18);border-radius:12px;padding:3px 10px;margin-bottom:6px}
-.multi-match{display:flex;flex-direction:column;gap:8px;width:100%}
-.mini-match{display:flex;align-items:center;justify-content:center;gap:10px;padding:6px 0;border-top:0.5px solid rgba(150,185,235,0.25)}
-.mini-match:first-child{border-top:none}
-.mini-flag{font-size:22px;line-height:1}
-.mini-vs{font-size:11px;color:#aec0d8;font-weight:600}
-.mini-team{font-size:12px;color:#5a78a8;min-width:42px;font-weight:500}
-.mini-team.left{text-align:right}
-.mini-team.right{text-align:left}
-.dots{display:flex;justify-content:center;gap:8px;margin-top:1.5rem}
-.dot{width:7px;height:7px;border-radius:50%;background:rgba(140,170,220,0.4);transition:all .3s;cursor:pointer}
-.dot:hover{background:rgba(140,170,220,0.6)}
-.dot.active{background:#7a9fd4;width:20px;border-radius:4px}
-</style>
+<link rel="stylesheet" href="./css/index.css">
 </head>
-<body>
+<body id="pageTop">
+
+  <a href="#pageTop" class="toppage" aria-label="回到頁面頂端">
+    <img src="./img/top.png" alt="" srcset="">
+  </a>
+
+  <div class="indexbody"></div>
+
+  <div class="mobilemenu" id="mobileMenu">
+    <button class="mobilemenu-backdrop" id="mobileMenuBackdrop" type="button" aria-label="關閉選單"></button>
+    <div class="mobilemenu-bar">
+      <a href="#" class="mobilemenu-logo">
+        <img src="./img/logo.png" alt="FM 富馬">
+      </a>
+      <button
+        class="mobilemenu-toggle"
+        id="mobileMenuToggle"
+        type="button"
+        aria-label="開啟選單"
+        aria-expanded="false"
+        aria-controls="mobileMenuPanel"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobilemenu-panel" id="mobileMenuPanel">
+      <nav class="mobilemenu-links" aria-label="手機版主選單">
+        <a href="#">賽事排程</a>
+        <a href="#">競猜預測贈彩金</a>
+        <a href="#">下注世足簽到彩金</a>
+        <a href="#">全站續儲贈彩金</a>
+        <a href="#">投注排名直播抽獎</a>
+      </nav>
+      <div class="mobilemenu-actions">
+        <a href="" class="ibtn-1">前往FM富馬首頁</a>
+        <a href="" class="ibtn-2">LINE 客服</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- top -->
+  <div class="pcmenu">
+    <div class="menu-a">
+      <a href="#" class="noline">
+        <img src="./img/logo.png" alt="" srcset="">
+      </a>
+      <a href="#">賽事排程</a>
+      <a href="#">競猜預測贈彩金</a>
+      <a href="#">下注世足簽到彩金</a>
+      <a href="#">全站續儲贈彩金</a>
+      <a href="#">投注排名直播抽獎</a>
+    </div>
+    <div class="menu-b">
+      <a href="" class="ibtn-1">前往FM富馬首頁</a>
+      <a href="" class="ibtn-2">LINE 客服</a>
+    </div>
+  </div> 
+
+
+  <img class="pc-index-banner" alt="">
+
+
+  <div class="index-h2">
+    2026 FIFA 世界盃足球賽，FM 富馬為力挺支持， <br>
+    競猜預測、簽到彩金、續儲彩金、直播抽獎<br>
+    四大專屬活動，邀請您共襄盛舉！
+  </div>
+
+
+
+  <div class="videxbox">
+
+    <div class="video">
+      <div class="video-wrapper">
+        <!-- 點擊遮罩 -->
+        <div class="click-overlay" id="overlay"></div>
+        <!-- API 會把這個 div 替換成 iframe -->
+        <div id="player"></div>
+      </div>
+    </div>
+
+    <img src="./img/c1.png" alt="" srcset="">
+
+    <div class="video-txtbox">
+      <div class="vth1">體育投注、直播、盡在手中</div>
+      <div class="vth2">您可以隨時隨地輕鬆掌握世界各地賽事，提供讓球、大小、半全場、單雙、連串過關等多元投注。另有影音直播，讓您體驗輕鬆聊球，娛樂投注兩不誤！</div>
+      <img class="c2img" src="./img/c2.png" alt="" srcset="">
+    </div>
+
+  </div>
+
+
+
 
 <div class="section">
   <div class="header">
-    <h1>熱門賽事</h1>
+    <h1>賽事排程</h1>
     <p>嚴選頂級賽事 &nbsp;每天暢想不斷</p>
   </div>
 
@@ -73,12 +125,71 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica N
 
 <script src="./json/rounds-data.js"></script>
 <script>
-const CARD_WIDTHS = {"1":240,"2":260,"3":300,"4":340,"6":420};
+const CARD_WIDTHS = {"1":332,"2":332,"3":332,"4":332,"6":332};
+const ROW_TIME_SLOTS = {
+  1:["20:00"],
+  2:["03:00","20:00"],
+  4:["03:00","17:00","19:00","20:00"],
+  6:["03:00","03:00","03:00","17:00","19:00","20:00"]
+};
+const COUNTRY_META = Object.fromEntries([
+  ["墨西哥",{code:"MEX",file:"mex.jpg"}],
+  ["南非",{code:"RSA",file:"rsa.jpg"}],
+  ["南韓",{code:"KOR",file:"kor.jpg"}],
+  ["捷克",{code:"CZE",file:"cze.jpg"}],
+  ["加拿大",{code:"CAN",file:"can.jpg"}],
+  ["波赫",{code:"BIH",file:"bih.jpg"}],
+  ["卡達",{code:"QAT",file:"qat.jpg"}],
+  ["瑞士",{code:"SUI",file:"sui.jpg"}],
+  ["巴西",{code:"BRA",file:"bra.jpg"}],
+  ["摩洛哥",{code:"MAR",file:"mar.jpg"}],
+  ["海地",{code:"HAI",file:"hai.jpg"}],
+  ["蘇格蘭",{code:"SCO",file:"sco.jpg"}],
+  ["美國",{code:"USA",file:"usa.jpg"}],
+  ["巴拉圭",{code:"PAR",file:"par.jpg"}],
+  ["澳洲",{code:"AUS",file:"aus.jpg"}],
+  ["土耳其",{code:"TUR",file:"tur.jpg"}],
+  ["德國",{code:"GER",file:"ger.jpg"}],
+  ["古拉索",{code:"CUW",file:"cuw.jpg"}],
+  ["庫拉索",{code:"CUW",file:"cuw.jpg"}],
+  ["象牙海岸",{code:"CIV",file:"civ.jpg"}],
+  ["厄瓜多",{code:"ECU",file:"ecu.jpg"}],
+  ["荷蘭",{code:"NED",file:"ned.jpg"}],
+  ["日本",{code:"JPN",file:"jpn.jpg"}],
+  ["瑞典",{code:"SWE",file:"swe.jpg"}],
+  ["突尼西亞",{code:"TUN",file:"tun.jpg"}],
+  ["比利時",{code:"BEL",file:"bel.jpg"}],
+  ["埃及",{code:"EGY",file:"egy.jpg"}],
+  ["伊朗",{code:"IRN",file:"irn.jpg"}],
+  ["紐西蘭",{code:"NZL",file:"nzl.jpg"}],
+  ["西班牙",{code:"ESP",file:"esp.jpg"}],
+  ["維德角",{code:"CPV",file:"cpv.jpg"}],
+  ["沙烏地",{code:"KSA",file:"ksa.jpg"}],
+  ["沙烏地阿拉伯",{code:"KSA",file:"ksa.jpg"}],
+  ["烏拉圭",{code:"URU",file:"uru.jpg"}],
+  ["法國",{code:"FRA",file:"fra.jpg"}],
+  ["塞內加爾",{code:"SEN",file:"sen.jpg"}],
+  ["伊拉克",{code:"IRQ",file:"irq.jpg"}],
+  ["挪威",{code:"NOR",file:"nor.jpg"}],
+  ["阿根廷",{code:"ARG",file:"arg.jpg"}],
+  ["阿爾及利亞",{code:"ALG",file:"alg.jpg"}],
+  ["奧地利",{code:"AUT",file:"aut.jpg"}],
+  ["約旦",{code:"JOR",file:"jor.jpg"}],
+  ["葡萄牙",{code:"POR",file:"por.jpg"}],
+  ["剛果民主",{code:"COD",file:"cod.jpg"}],
+  ["剛果民主共和國",{code:"COD",file:"cod.jpg"}],
+  ["烏茲別克",{code:"UZB",file:"uzb.jpg"}],
+  ["哥倫比亞",{code:"COL",file:"col.jpg"}],
+  ["英格蘭",{code:"ENG",file:"eng.jpg"}],
+  ["克羅埃西亞",{code:"CRO",file:"cro.jpg"}],
+  ["迦納",{code:"GHA",file:"gha.jpg"}],
+  ["巴拿馬",{code:"PAN",file:"pan.jpg"}]
+]);
 const rounds = Array.isArray(window.ROUNDS_DATA) ? window.ROUNDS_DATA : [];
 let currentTab = 0;
 let currentIndex = 0;
-let cardW = 240;
-const GAP = 18;
+let cardW = 332;
+const GAP = 26;
 
 const track = document.getElementById("track");
 const viewport = document.getElementById("viewport");
@@ -86,6 +197,11 @@ const btnLeft = document.getElementById("btnLeft");
 const btnRight = document.getElementById("btnRight");
 const dotsEl = document.getElementById("dots");
 const tabsEl = document.getElementById("tabsEl");
+const topPageBtn = document.querySelector(".toppage");
+const mobileMenu = document.getElementById("mobileMenu");
+const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+const mobileMenuPanel = document.getElementById("mobileMenuPanel");
+const mobileMenuBackdrop = document.getElementById("mobileMenuBackdrop");
 
 function renderTabs(){
   tabsEl.innerHTML = "";
@@ -114,57 +230,198 @@ function showStatus(message){
   btnRight.disabled = true;
 }
 
-function makeCard(card){
-  const d = document.createElement("div");
-  const w = CARD_WIDTHS[card.type] || 280;
-  d.className = "match-card";
-  d.style.width = w + "px";
-
-  let html = `<div class="card-league">${card.league}</div><div class="card-date">${card.date}</div>`;
-
-  if(card.type === "1"){
-    const g = card.groups[0];
-    const m = g.matches[0];
-    html += `<div class="card-matchup">
-      <div class="team-block"><div class="flag">${m[0]}</div><div class="team-name">${m[1]}</div></div>
-      <div class="vs-text">VS</div>
-      <div class="team-block"><div class="flag">${m[2]}</div><div class="team-name">${m[3]}</div></div>
-    </div>`;
-  } else if(card.type === "2"){
-    html += `<div class="multi-match" style="margin-top:8px">`;
-    card.groups.forEach(g=>{
-      html += `<div class="group-label">${g.name}</div>`;
-      g.matches.forEach(m=>{
-        html += `<div class="mini-match">
-          <span class="mini-team left">${m[1]}</span>
-          <span class="mini-flag">${m[0]}</span>
-          <span class="mini-vs">vs</span>
-          <span class="mini-flag">${m[2]}</span>
-          <span class="mini-team right">${m[3]}</span>
-        </div>`;
-      });
-    });
-    html += `</div>`;
-  } else {
-    html += `<div class="multi-match" style="margin-top:6px">`;
-    card.groups.forEach(g=>{
-      html += `<div style="display:flex;align-items:center;gap:5px;margin-top:5px;flex-wrap:wrap;justify-content:center">
-        <div class="group-label">${g.name}</div>`;
-      g.matches.forEach(m=>{
-        html += `<div class="mini-match" style="width:100%">
-          <span class="mini-team left" style="font-size:11px">${m[1]}</span>
-          <span class="mini-flag" style="font-size:18px">${m[0]}</span>
-          <span class="mini-vs">vs</span>
-          <span class="mini-flag" style="font-size:18px">${m[2]}</span>
-          <span class="mini-team right" style="font-size:11px">${m[3]}</span>
-        </div>`;
-      });
-      html += `</div>`;
-    });
-    html += `</div>`;
+function setMobileMenuOpen(isOpen){
+  if(!mobileMenu || !mobileMenuToggle || !mobileMenuPanel){
+    return;
   }
 
-  d.innerHTML = html;
+  mobileMenu.classList.toggle("is-open", isOpen);
+  mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+  mobileMenuToggle.setAttribute("aria-label", isOpen ? "關閉選單" : "開啟選單");
+  document.body.classList.toggle("mobilemenu-open", isOpen);
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, char=>{
+    const escapeMap = {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"};
+    return escapeMap[char] || char;
+  });
+}
+
+function getDisplayDate(cardDate){
+  const raw = String(cardDate || "").trim();
+  if(raw.includes("月") && raw.includes("日")){
+    return raw;
+  }
+
+  const parts = raw.split(/\s+/);
+  return parts.length >= 2 ? `${parts[0]} ${parts[1]}` : raw;
+}
+
+function getTimeSlots(card, count){
+  if(Array.isArray(card.times) && card.times.length){
+    return card.times;
+  }
+
+  return ROW_TIME_SLOTS[count] || Array.from({length: count}, (_, index)=>["03:00","17:00","19:00","20:00"][index % 4]);
+}
+
+function getPrimaryMatches(card){
+  const count = Number(card.type) || 1;
+  const timeSlots = getTimeSlots(card, count);
+
+  return card.groups.slice(0, count).map((group, index)=>{
+    const match = Array.isArray(group.matches) && group.matches.length
+      ? group.matches[0]
+      : ["🏳️","待定","🏳️","待定"];
+
+    return {
+      group: group.name || "",
+      time: timeSlots[index] || "03:00",
+      home: {emoji: match[0], name: match[1]},
+      away: {emoji: match[2], name: match[3]}
+    };
+  });
+}
+
+function getCardWidth(card){
+  const baseWidth = card.layout === "group-day" ? 348 : (CARD_WIDTHS[card.type] || 280);
+
+  if(window.innerWidth <= 900){
+    const viewportWidth = viewport ? viewport.clientWidth : window.innerWidth;
+    return Math.min(baseWidth, viewportWidth);
+  }
+
+  return baseWidth;
+}
+
+function getTrackGap(){
+  if(!track){
+    return GAP;
+  }
+
+  const styles = window.getComputedStyle(track);
+  const gap = Number.parseFloat(styles.columnGap || styles.gap || "");
+  return Number.isFinite(gap) ? gap : GAP;
+}
+
+function isGroupDayCard(card, roundLabel){
+  return roundLabel === "小組賽" && card.layout === "group-day";
+}
+
+function getGroupDayCardMinHeight(matchCount){
+  if(matchCount === 6){
+    return "692px";
+  }
+
+  if(matchCount === 4){
+    return "500px";
+  }
+
+  return "308px";
+}
+
+function syncRenderedCardWidths(){
+  const round = rounds[currentTab];
+  if(!round){
+    return;
+  }
+
+  round.cards.forEach((card, index)=>{
+    const renderedCard = track.children[index];
+    if(!renderedCard){
+      return;
+    }
+
+    const width = getCardWidth(card);
+    renderedCard.style.width = width + "px";
+
+    if(isGroupDayCard(card, round.label)){
+      const matchCount = Number(card.type) || 1;
+      renderedCard.style.minHeight = getGroupDayCardMinHeight(matchCount);
+    }
+  });
+
+  if(round.cards.length){
+    cardW = getCardWidth(round.cards[0]);
+  }
+}
+
+function renderFlag(team){
+  const meta = COUNTRY_META[team.name];
+  if(meta){
+    return `<img class="schedule-flag-img" src="./img/flag/${meta.file}" alt="${escapeHtml(team.name)}">`;
+  }
+
+  return `<span class="schedule-flag-emoji" aria-label="${escapeHtml(team.name)}">${escapeHtml(team.emoji || "🏳️")}</span>`;
+}
+
+function renderTeam(team, side){
+  const meta = COUNTRY_META[team.name];
+  const nameHtml = `<span class="schedule-team-name">${escapeHtml(team.name)}</span>`;
+  const flagHtml = renderFlag(team);
+
+  if(side === "left"){
+    return `<div class="schedule-team schedule-team-left">${flagHtml}${nameHtml}</div>`;
+  }
+
+  return `<div class="schedule-team schedule-team-right">${nameHtml}${flagHtml}</div>`;
+}
+
+function makeCard(card, roundLabel){
+  const d = document.createElement("div");
+  const w = getCardWidth(card);
+  const matchCount = Number(card.type) || 1;
+  const dateLabel = getDisplayDate(card.date);
+  const matches = getPrimaryMatches(card);
+  d.className = "match-card";
+  d.style.width = w + "px";
+  d.style.minHeight = isGroupDayCard(card, roundLabel)
+    ? getGroupDayCardMinHeight(matchCount)
+    : (matchCount >= 6 ? "448px" : matchCount === 4 ? "380px" : matchCount === 2 ? "308px" : "236px");
+
+  if(isGroupDayCard(card, roundLabel)){
+    const matchListHtml = matches.map(match=>`
+      <div class="schedule-day-match-block">
+        <div class="schedule-day-time-pill">${escapeHtml(match.time)}</div>
+        <div class="schedule-day-divider"></div>
+        <div class="schedule-day-matchup">
+          <div class="schedule-day-team schedule-day-team-left">${renderFlag(match.home)}<span class="schedule-day-team-name">${escapeHtml(match.home.name)}</span></div>
+          <div class="schedule-day-vs">VS</div>
+          <div class="schedule-day-team schedule-day-team-right"><span class="schedule-day-team-name">${escapeHtml(match.away.name)}</span>${renderFlag(match.away)}</div>
+        </div>
+      </div>
+    `).join("");
+
+    d.innerHTML = `
+      <div class="schedule-card-head schedule-card-head-day">
+        <div class="schedule-day-title">${escapeHtml(roundLabel)}</div>
+        <div class="schedule-day-date">${escapeHtml(dateLabel)}</div>
+      </div>
+      <div class="schedule-day-list">${matchListHtml}</div>
+    `;
+    return d;
+  }
+
+  const rowsHtml = matches.map((match, index)=>`
+    <div class="schedule-row">
+      <div class="schedule-time">${match.time}</div>
+      <div class="schedule-match">
+        ${renderTeam(match.home, "left")}
+        <div class="schedule-vs">VS</div>
+        ${renderTeam(match.away, "right")}
+      </div>
+    </div>
+    ${index < matches.length - 1 ? '<div class="schedule-divider"></div>' : ''}
+  `).join("");
+
+  d.innerHTML = `
+    <div class="schedule-card-head">
+      <div class="schedule-stage">${escapeHtml(roundLabel)}</div>
+      <div class="schedule-date">${escapeHtml(dateLabel)}</div>
+    </div>
+    <div class="schedule-card-list">${rowsHtml}</div>
+  `;
   return d;
 }
 
@@ -178,11 +435,11 @@ function renderTab(tabIdx){
   currentIndex = 0;
   track.innerHTML = "";
   round.cards.forEach(card=>{
-    track.appendChild(makeCard(card));
+    track.appendChild(makeCard(card, round.label));
   });
 
   const firstCard = round.cards[0];
-  cardW = firstCard ? (CARD_WIDTHS[firstCard.type] || 280) : 280;
+  cardW = firstCard ? getCardWidth(firstCard) : 280;
   renderDots(round.cards.length);
   updateCarousel();
 }
@@ -201,6 +458,7 @@ function renderDots(n){
 }
 
 function updateCarousel(){
+  syncRenderedCardWidths();
   const vpW = viewport.offsetWidth || 650;
   const cards = track.children;
   const n = cards.length;
@@ -211,10 +469,13 @@ function updateCarousel(){
     return;
   }
 
-  const visibleCount = Math.max(1, Math.floor((vpW + GAP) / (cardW + GAP)));
+  const gap = getTrackGap();
+  const firstCardWidth = cards[0] ? cards[0].getBoundingClientRect().width : cardW;
+  cardW = firstCardWidth || cardW;
+  const visibleCount = Math.max(1, Math.floor((vpW + gap) / (cardW + gap)));
   const maxIndex = Math.max(0, n - visibleCount);
   currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
-  track.style.transform = `translateX(-${currentIndex * (cardW + GAP)}px)`;
+  track.style.transform = `translateX(-${currentIndex * (cardW + gap)}px)`;
   btnLeft.disabled = currentIndex === 0;
   btnRight.disabled = currentIndex >= maxIndex;
   dotsEl.querySelectorAll(".dot").forEach((d, i)=>{
@@ -272,9 +533,123 @@ viewport.addEventListener("touchend", e=>{
   }
 });
 
+if(topPageBtn){
+  topPageBtn.addEventListener("click", event=>{
+    event.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+}
+
+if(mobileMenuToggle && mobileMenuPanel){
+  mobileMenuToggle.addEventListener("click", ()=>{
+    setMobileMenuOpen(!mobileMenu.classList.contains("is-open"));
+  });
+
+  mobileMenuPanel.querySelectorAll("a").forEach(link=>{
+    link.addEventListener("click", ()=>{
+      setMobileMenuOpen(false);
+    });
+  });
+}
+
+if(mobileMenuBackdrop){
+  mobileMenuBackdrop.addEventListener("click", ()=>{
+    setMobileMenuOpen(false);
+  });
+}
+
+document.addEventListener("keydown", event=>{
+  if(event.key === "Escape"){
+    setMobileMenuOpen(false);
+  }
+});
+
+window.addEventListener("resize", ()=>{
+  if(window.innerWidth > 900){
+    setMobileMenuOpen(false);
+  }
+});
+
 initRounds();
 window.addEventListener("resize", updateCarousel);
 </script>
+
+
+
+
+<!-- 載入 YouTube IFrame Player API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+let player;
+const videoId = 'tqwQQK54dgA';
+
+// 1. 確保 API 腳本載入
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        videoId: videoId,
+        playerVars: {
+            'autoplay': 1,
+            'mute': 1,
+            'controls': 0,
+            'loop': 1,
+            'playlist': videoId,
+            'modestbranding': 1,
+            'rel': 0,
+            'iv_load_policy': 3, // 隱藏影片註解
+            'origin': window.location.origin // 增加安全性來源檢查
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    // 解決 F5 黑畫面的關鍵：先靜音再播放
+    event.target.mute();
+    event.target.playVideo();
+}
+
+// 監控狀態，如果因為瀏覽器限制沒動，再次嘗試播放
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.UNSTARTED) {
+        event.target.playVideo();
+    }
+}
+
+// 監聽遮罩點擊
+document.getElementById('overlay').addEventListener('click', function() {
+    // 增加防錯：檢查 player 是否已定義且有 unMute 方法
+    if (player && typeof player.unMute === 'function') {
+        player.unMute();
+        player.setVolume(80);
+        
+        // 播放效果優化
+        this.style.display = 'none';
+        document.getElementById('player').style.pointerEvents = 'auto';
+        
+        console.log("F5 刷新後成功啟動聲音");
+    } else {
+        // 如果 API 還沒完全 Ready 就點擊，嘗試手動播放
+        console.log("Player not ready yet, retrying...");
+    }
+});
+
+// 針對某些瀏覽器 F5 沒反應的保險機制
+window.onload = function() {
+    if (window.YT && window.YT.Player) {
+        // 如果 API 已經加載但沒啟動，手動啟動
+        if (!player) onYouTubeIframeAPIReady();
+    }
+};
+    </script>
+
+
 
 </body>
 </html>
