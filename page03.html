@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FM 專屬活動三 | 全站續儲贈送彩金</title>
+  <style>
+    :root{
+      --bg:#eaf4fb;
+      --panel:#ffffffcc;
+      --panel2:#f7fbff;
+      --ink:#243b5a;
+      --muted:#64748b;
+      --blue:#2563eb;
+      --line:#dbe8f3;
+      --gold:#d9a77a;
+      --gold-dark:#bf8556;
+      --warning-bg:#fff4e8;
+      --warning:#9a5b22;
+      --shadow:0 22px 60px rgba(54,86,118,.16);
+      --soft-shadow:0 12px 32px rgba(54,86,118,.10);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.92), transparent 28%),
+        radial-gradient(circle at 88% 16%, rgba(197,224,244,.88), transparent 30%),
+        linear-gradient(180deg,#f7fbff 0%,var(--bg) 100%);
+      color:var(--ink);
+    }
+
+    .banner{
+      width: 100%;
+    }
+
+    .page{
+      width:min(1180px, calc(100% - 40px));
+      margin:36px auto 72px;
+    }
+
+    .top{
+      text-align:center;
+      margin-bottom:24px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      box-shadow:var(--soft-shadow);
+      color:var(--gold-dark);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.18em;
+    }
+
+    .top h1{
+      margin:16px 0 8px;
+      font-size:34px;
+      line-height:1.15;
+      font-weight:950;
+      letter-spacing:-.02em;
+    }
+
+    .top p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .editor{
+      display:grid;
+      grid-template-columns:1fr 180px;
+      gap:16px;
+      margin-bottom:28px;
+      padding:18px;
+      border-radius:28px;
+      background:rgba(255,255,255,.62);
+      border:1px solid rgba(255,255,255,.78);
+      box-shadow:var(--soft-shadow);
+    }
+
+    textarea{
+      width:100%;
+      min-height:230px;
+      resize:vertical;
+      border:1px solid #d7e5f0;
+      border-radius:20px;
+      padding:18px;
+      font:15px/1.75 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      color:#1f2937;
+      background:#fff;
+      outline:none;
+    }
+
+    textarea:focus{
+      border-color:#91b8db;
+      box-shadow:0 0 0 4px rgba(145,184,219,.25);
+    }
+
+    .editor-actions{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    button{
+      appearance:none;
+      border:0;
+      min-height:48px;
+      border-radius:999px;
+      padding:0 18px;
+      cursor:pointer;
+      font-weight:900;
+      color:#fff;
+      background:linear-gradient(135deg,#e4b78f,#c88e61);
+      box-shadow:0 12px 26px rgba(180,120,75,.26);
+    }
+
+    .secondary{
+      color:#33516f;
+      background:#fff;
+      box-shadow:var(--soft-shadow);
+    }
+
+    .hint{
+      font-size:12px;
+      line-height:1.7;
+      color:var(--muted);
+      margin:0;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      min-height:330px;
+      border-radius:36px;
+      padding:44px;
+      background:
+        radial-gradient(circle at 82% 26%, rgba(255,211,169,.55), transparent 22%),
+        radial-gradient(circle at 74% 76%, rgba(118,178,230,.26), transparent 28%),
+        linear-gradient(135deg,#ffffff 0%,#ecf6fe 48%,#dcecf7 100%);
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.82);
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      max-width:690px;
+    }
+
+    .hero-pill{
+      display:inline-flex;
+      align-items:center;
+      padding:9px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.78);
+      color:#34506f;
+      font-size:15px;
+      font-weight:800;
+      box-shadow:var(--soft-shadow);
+    }
+
+    .hero h1{
+      margin:26px 0 10px;
+      font-size:54px;
+      line-height:1.05;
+      font-weight:950;
+      letter-spacing:-.04em;
+      color:#263f63;
+    }
+
+    .hero h2{
+      margin:0 0 6px;
+      font-size:28px;
+      color:var(--blue);
+      font-weight:900;
+    }
+
+    .hero h3{
+      margin:0;
+      font-size:22px;
+      color:#263f63;
+      font-weight:850;
+    }
+
+    .time-card{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      width:max-content;
+      max-width:100%;
+      margin-top:32px;
+      padding:16px 20px;
+      border-radius:20px;
+      background:rgba(255,255,255,.74);
+      box-shadow:var(--soft-shadow);
+      color:#344a65;
+      font-weight:750;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:24px;
+      margin-top:24px;
+    }
+
+    .card{
+      border:1px solid rgba(255,255,255,.78);
+      background:var(--panel);
+      border-radius:28px;
+      box-shadow:var(--soft-shadow);
+      padding:28px;
+      backdrop-filter:blur(16px);
+    }
+
+    .card h2{
+      margin:0 0 12px;
+      font-size:22px;
+      font-weight:900;
+      color:#2a4568;
+    }
+
+    .card p{
+      margin:0;
+      color:#455a75;
+      line-height:1.85;
+      font-size:15px;
+    }
+
+    .warning{
+      background:var(--warning-bg);
+      border-color:#ffe0bd;
+    }
+
+    .warning h2,
+    .warning p{color:var(--warning)}
+
+    .section{margin-top:34px}
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:18px;
+      margin-bottom:16px;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:28px;
+      font-weight:950;
+      color:#2a4568;
+    }
+
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .promo-table{
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.9);
+      background:rgba(255,255,255,.76);
+      box-shadow:var(--soft-shadow);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      table-layout:fixed;
+    }
+
+    th{
+      background:#edf5fb;
+      color:#3b5574;
+      font-size:15px;
+      padding:18px 14px;
+      text-align:left;
+    }
+
+    td{
+      padding:20px 14px;
+      color:#344a65;
+      font-size:15px;
+      line-height:1.65;
+      border-top:1px solid var(--line);
+      vertical-align:top;
+    }
+
+    th:not(:last-child), td:not(:last-child){
+      border-right:1px solid var(--line);
+    }
+
+    .examples{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .example{
+      padding:20px;
+      border-radius:22px;
+      background:rgba(255,255,255,.72);
+      box-shadow:var(--soft-shadow);
+      color:#405774;
+      line-height:1.75;
+      font-size:15px;
+    }
+
+    .rules-wrap{
+      display:grid;
+      /* grid-template-columns:1fr 340px; */
+      gap:24px;
+      align-items:start;
+    }
+
+    .rules{
+      display:grid;
+      gap:12px;
+    }
+
+    .rule{
+      display:flex;
+      gap:12px;
+      padding:15px 16px;
+      border-radius:18px;
+      background:var(--panel2);
+      box-shadow:0 8px 22px rgba(54,86,118,.07);
+      color:#405774;
+      line-height:1.75;
+      font-size:15px;
+    }
+
+    .num{
+      flex:0 0 28px;
+      width:28px;
+      height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:#f0d0b2;
+      color:#7d4f2c;
+      font-weight:900;
+      font-size:15px;
+      margin-top:2px;
+    }
+
+    .cta-panel{
+      position:absolute;
+      right:42px;
+      top:calc(50% - 115px);
+      width:330px;
+      height:230px;
+      padding:26px;
+      border-radius:28px;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(217,167,122,.32), transparent 36%),
+        rgba(255,255,255,.76);
+      border:1px solid rgba(255,255,255,.86);
+      box-shadow:var(--soft-shadow);
+    }
+
+    .cta-panel h2{
+      margin:0 0 12px;
+      font-size:24px;
+      font-weight:950;
+    }
+
+    .cta-panel p{
+      margin:0 0 20px;
+      line-height:1.75;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .btn{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      width:100%;
+      height:50px;
+      border-radius:999px;
+      text-decoration:none;
+      background:#07b53b;
+      color:#fff;
+      font-weight:900;
+      box-shadow:0 12px 26px rgba(180,120,75,.26);
+    }
+
+    @media (max-width: 820px){
+      .page{
+        width:min(420px, calc(100% - 24px));
+        margin:18px auto 40px;
+      }
+
+      .top h1{font-size:26px}
+
+      .editor{
+        grid-template-columns:1fr;
+        border-radius:24px;
+      }
+
+      .editor-actions{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+      }
+
+      .hint{
+        grid-column:1 / -1;
+      }
+
+      .hero{
+        min-height:0;
+        padding:26px;
+        border-radius:30px;
+      }
+
+      .hero::after{display:none}
+      .hero h1{font-size:34px}
+      .hero h2{font-size:20px}
+      .hero h3{font-size:17px}
+
+      .time-card{
+        width:100%;
+        font-size:15px;
+        line-height:1.6;
+      }
+
+      .grid-2,
+      .examples,
+      .rules-wrap{
+        grid-template-columns:1fr;
+      }
+
+      .card{
+        padding:22px;
+        border-radius:24px;
+      }
+
+      .section-head{display:block}
+      .section-head h2{font-size:23px;margin-bottom:6px}
+
+      .promo-table{overflow-x:auto}
+      table{min-width:620px}
+      th,td{font-size:15px}
+
+      .rule{font-size:15px}
+      .cta-panel{position:static}
+    }
+  </style>
+</head>
+
+<body>
+  <img class="banner" src="./assets/page03.png">
+  <main class="page">
+    <section id="app"></section>
+  </main>
+
+  <script>
+    const defaultMarkdown = `# FM富馬 邀您參與世界盃
+## 專屬活動二:每日體育簽到彩金
+### 來富馬玩體育，每日投注，每日贈!
+
+活動時間: 6/11 00:00 - 7/19 23:59
+
+活動內容: FM富馬同歡世界盃，活動期間內，每日下注體育賽事達5000，即可獲得「體育簽到彩金」，1倍流水即可提領
+
+| 指定項目 | 每日贈送簽到彩金 | 提領需求 |
+|---|---:|---:|
+| 下注任一體育遊戲館，體育賽事，累計有效投注達5000 | 200 | 1倍 |
+
+申請方式: 告知客服申請 體育簽到彩金
+
+LINE客服申請
+
+活動規則
+
+1.會員每日需於任一體育遊戲館，下注體育賽事，累計體育館總有效投注達5000，即可於每日23:30前，向line客服獲得體育簽到彩金，超過23:30未向line客服提出申請，將被判定不符合申請資格，視同放棄。
+2.與客服提出申請當下，客服將查閱會員當日體育館當日有效投注須符合活動門檻才符合派彩資格，當日體育館有效投注必須是已結算之注單系統才會給予有效投注，體育平台賽事結算可能非當日比賽，或當日比賽完成但可能因體育平台原因無法立即結算注單，平台方最久可能需72小時內才會陸續結算等原因，系統無法給予有效投注，無法達成當日本站派彩資格，將不視為本公司問題，無法給予此活動派發資格做補償。
+3.體育簽到彩金不限制遊戲館，滿足一倍流水即可提領。
+4.嚴禁刷水、套利、無風險下注...等行為，一經查證我方將取消彩金申請相關權利。
+5.活動我方有最終解釋權，如有未盡說明事宜，將以官方說明為最終依據。`;
+
+    const app = document.getElementById("app");
+    function escapeHtml(value){
+      return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function parseMarkdown(markdown){
+      const lines = markdown.split(/\n/).map(line => line.trim()).filter(Boolean);
+
+      const data = {
+        title: "",
+        subtitle: "",
+        tagline: "",
+        time: "",
+        content: "",
+        warning: "",
+        table: [],
+        examples: [],
+        applyText: "",
+        serviceText: "",
+        rules: []
+      };
+
+      let tableRows = [];
+      let isExampleArea = false;
+
+      for(const line of lines){
+        if(line.startsWith("# ")){
+          data.title = line.replace("# ","").trim();
+          continue;
+        }
+
+        if(line.startsWith("## ")){
+          data.subtitle = line.replace("## ","").trim();
+          continue;
+        }
+
+        if(line.startsWith("### ")){
+          data.tagline = line.replace("### ","").trim();
+          continue;
+        }
+
+        if(line.startsWith("活動時間:")){
+          data.time = line;
+          continue;
+        }
+
+        if(line.startsWith("活動內容:")){
+          data.content = line.replace("活動內容:","").trim();
+          continue;
+        }
+
+        if(line.startsWith("|")){
+          if(!line.includes("---")){
+            tableRows.push(line.split("|").slice(1,-1).map(cell => cell.trim()));
+          }
+          continue;
+        }
+
+        if(line.startsWith("會員儲值前")){
+          data.warning = line;
+          continue;
+        }
+
+        if(line === "舉例"){
+          isExampleArea = true;
+          continue;
+        }
+
+        if(isExampleArea && (line.startsWith("A會員") || line.startsWith("B會員"))){
+          data.examples.push(line);
+          continue;
+        }
+
+        if(line.startsWith("申請方式:")){
+          data.applyText = line.replace("申請方式:","").trim();
+          isExampleArea = false;
+          continue;
+        }
+
+        if(line.startsWith("LINE客服申請")){
+          data.serviceText = line;
+          continue;
+        }
+
+        if(/^\d+\./.test(line)){
+          data.rules.push(line);
+        }
+      }
+
+      data.table = tableRows;
+      return data;
+    }
+
+    function renderTable(rows){
+      if(!rows.length) return "";
+      const [head, ...body] = rows;
+      return `
+        <div class="promo-table">
+          <table>
+            <thead>
+              <tr>${head.map(cell => `<th>${escapeHtml(cell)}</th>`).join("")}</tr>
+            </thead>
+            <tbody>
+              ${body.map(row => `
+                <tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderPage(){
+      const data = parseMarkdown(defaultMarkdown);
+
+      app.innerHTML = `
+        <section class="hero">
+          <div class="hero-content">
+            <div class="hero-pill">FM富馬｜世界盃期間限定</div>
+            <h1>${escapeHtml(data.title)}</h1>
+            <h2>${escapeHtml(data.subtitle)}</h2>
+            <h3>${escapeHtml(data.tagline)}</h3>
+            <div class="time-card">📅 ${escapeHtml(data.time)}</div>
+          </div>
+          <aside class="cta-panel">
+            <h2>申請方式</h2>
+            <p>${escapeHtml(data.applyText)}</p>
+            <a class="btn" href="#">${escapeHtml(data.serviceText || "LINE客服申請")}　→</a>
+          </aside>
+        </section>
+
+        <section class="grid-2">
+          <article class="card">
+            <h2>活動內容</h2>
+            <p>${escapeHtml(data.content)}</p>
+          </article>
+
+          <!--<article class="card warning">
+            <h2>重要申請門檻</h2>
+            <p>${escapeHtml(data.warning)}</p>
+          </article>-->
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>申請條件與比例</h2>
+              <p></p>
+            </div>
+          </div>
+          ${renderTable(data.table)}
+
+          <div class="examples">
+            ${data.examples.map(item => `<div class="example">${escapeHtml(item)}</div>`).join("")}
+          </div>
+        </section>
+
+        <section class="section rules-wrap">
+          <div>
+            <div class="section-head">
+              <div>
+                <h2>活動規則</h2>
+                <p></p>
+              </div>
+            </div>
+
+            <div class="rules">
+              ${data.rules.map((rule, index) => {
+                const cleanRule = rule.replace(/^\d+\./, "");
+                return `
+                  <div class="rule">
+                    <span class="num">${index + 1}</span>
+                    <span>${escapeHtml(cleanRule)}</span>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </div>
+
+          
+        </section>
+      `;
+    }
+    renderPage();
+  </script>
+</body>
+</html>
