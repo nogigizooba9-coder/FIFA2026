@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>熱門賽事輪播</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#f5f7fa;padding:2rem}
+.section{max-width:1200px;margin:0 auto;padding:2rem;background:linear-gradient(160deg,#e8f0fa 0%,#f0f4fb 60%,#e4ecf8 100%);border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+.header{text-align:center;margin-bottom:1.5rem}
+.header h1{font-size:28px;font-weight:600;color:#3a5a9a;letter-spacing:.05em;margin-bottom:0.5rem}
+.header p{font-size:14px;color:#7a96c4}
+.tabs-wrap{display:flex;justify-content:center;margin:1.5rem 0 2rem}
+.tabs{display:flex;gap:6px;background:rgba(255,255,255,0.7);border-radius:40px;padding:6px;border:0.5px solid rgba(150,180,230,0.3);box-shadow:0 2px 8px rgba(100,140,200,0.1)}
+.tab{padding:8px 20px;border-radius:30px;font-size:14px;color:#6a88b8;cursor:pointer;border:none;background:transparent;transition:all .25s;white-space:nowrap;font-weight:500}
+.tab:hover{color:#4a6898}
+.tab.active{background:#fff;color:#3a5a9a;box-shadow:0 2px 6px rgba(80,120,200,0.2)}
+.carousel-wrap{position:relative;padding:0 3rem}
+.carousel-viewport{overflow:hidden;border-radius:12px}
+.carousel-track{display:flex;gap:18px;transition:transform .4s cubic-bezier(.4,0,.2,1)}
+.match-card{flex-shrink:0;background:rgba(255,255,255,0.9);border:0.5px solid rgba(150,185,235,0.4);border-radius:14px;padding:1.5rem 1.25rem;text-align:center;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;box-shadow:0 2px 10px rgba(100,140,200,0.1);transition:transform .2s,box-shadow .2s}
+.match-card:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(100,140,200,0.15)}
+.card-league{font-size:13px;color:#7a96c4;font-weight:600}
+.card-date{font-size:12px;color:#a0b4d0}
+.card-matchup{display:flex;align-items:center;gap:14px;margin:8px 0}
+.flag{font-size:36px;line-height:1}
+.vs-text{font-size:14px;color:#aec0d8;font-weight:600;padding:0 6px}
+.team-name{font-size:13px;color:#5a78a8;margin-top:4px;font-weight:500}
+.team-block{display:flex;flex-direction:column;align-items:center;gap:4px}
+.arrow-btn{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.95);border:0.5px solid rgba(150,185,235,0.5);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#5a78b8;font-size:18px;z-index:10;transition:all .25s;box-shadow:0 2px 8px rgba(100,140,200,0.15)}
+.arrow-btn:hover:not(:disabled){background:#fff;box-shadow:0 4px 12px rgba(80,130,200,0.25);transform:translateY(-50%) scale(1.05)}
+.arrow-btn:disabled{opacity:0.25;cursor:not-allowed}
+.arrow-left{left:4px}
+.arrow-right{right:4px}
+.group-label{font-size:11px;font-weight:600;color:#8aabce;background:rgba(140,170,220,0.18);border-radius:12px;padding:3px 10px;margin-bottom:6px}
+.multi-match{display:flex;flex-direction:column;gap:8px;width:100%}
+.mini-match{display:flex;align-items:center;justify-content:center;gap:10px;padding:6px 0;border-top:0.5px solid rgba(150,185,235,0.25)}
+.mini-match:first-child{border-top:none}
+.mini-flag{font-size:22px;line-height:1}
+.mini-vs{font-size:11px;color:#aec0d8;font-weight:600}
+.mini-team{font-size:12px;color:#5a78a8;min-width:42px;font-weight:500}
+.mini-team.left{text-align:right}
+.mini-team.right{text-align:left}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:1.5rem}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(140,170,220,0.4);transition:all .3s;cursor:pointer}
+.dot:hover{background:rgba(140,170,220,0.6)}
+.dot.active{background:#7a9fd4;width:20px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<div class="section">
+  <div class="header">
+    <h1>熱門賽事</h1>
+    <p>嚴選頂級賽事 &nbsp;每天暢想不斷</p>
+  </div>
+
+  <div class="tabs-wrap">
+    <div class="tabs" id="tabsEl">
+      <button class="tab active" data-tab="0">小組賽</button>
+      <button class="tab" data-tab="1">32強</button>
+      <button class="tab" data-tab="2">16強</button>
+      <button class="tab" data-tab="3">半準決賽</button>
+      <button class="tab" data-tab="4">準決賽</button>
+      <button class="tab" data-tab="5">季軍賽</button>
+      <button class="tab" data-tab="6">決賽</button>
+    </div>
+  </div>
+
+  <div class="carousel-wrap" id="carouselWrap">
+    <button class="arrow-btn arrow-left" id="btnLeft" aria-label="向左" disabled><i class="ti ti-chevron-left"></i></button>
+    <div class="carousel-viewport" id="viewport">
+      <div class="carousel-track" id="track"></div>
+    </div>
+    <button class="arrow-btn arrow-right" id="btnRight" aria-label="向右"><i class="ti ti-chevron-right"></i></button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+// 完整賽事資料
+const ROUNDS = [
+  {
+    label:"小組賽",
+    cards:[
+      {type:"6",league:"歐洲冠軍聯賽 A-F組",date:"06/25 星期四 19:30",groups:[
+        {name:"A組",matches:[["🇪🇸","西班牙","🇩🇪","德國"],["🇯🇵","日本","🇧🇷","巴西"],["🇦🇺","澳洲","🇦🇷","阿根廷"]]},
+        {name:"B組",matches:[["🇫🇷","法國","🇵🇹","葡萄牙"],["🇳🇱","荷蘭","🇧🇪","比利時"],["🇲🇽","墨西哥","🇺🇸","美國"]]},
+        {name:"C組",matches:[["🇮🇹","義大利","🇬🇧","英格蘭"],["🇲🇦","摩洛哥","🇸🇳","塞內加爾"],["🇨🇷","哥斯大黎加","🇪🇨","厄瓜多"]]},
+        {name:"D組",matches:[["🇺🇾","烏拉圭","🇨🇱","智利"],["🇵🇱","波蘭","🇷🇸","塞爾維亞"],["🇨🇦","加拿大","🇰🇷","南韓"]]},
+        {name:"E組",matches:[["🇸🇦","沙烏地","🇮🇷","伊朗"],["🇦🇹","奧地利","🇸🇮","斯洛維尼亞"],["🇬🇭","迦納","🇨🇲","喀麥隆"]]},
+        {name:"F組",matches:[["🇩🇰","丹麥","🇸🇪","瑞典"],["🇨🇭","瑞士","🇨🇿","捷克"],["🇭🇷","克羅埃西亞","🇺🇦","烏克蘭"]]}
+      ]},
+      {type:"6",league:"歐洲冠軍聯賽 G-L組",date:"06/25 星期四 21:30",groups:[
+        {name:"G組",matches:[["🇷🇺","俄羅斯","🇹🇷","土耳其"],["🇬🇷","希臘","🇷🇴","羅馬尼亞"],["🇳🇴","挪威","🇫🇮","芬蘭"]]},
+        {name:"H組",matches:[["🇮🇪","愛爾蘭","🇸🇰","斯洛伐克"],["🇭🇺","匈牙利","🇧🇬","保加利亞"],["🇱🇹","立陶宛","🇱🇻","拉脫維亞"]]},
+        {name:"I組",matches:[["🇪🇪","愛沙尼亞","🇮🇸","冰島"],["🇦🇱","阿爾巴尼亞","🇲🇰","北馬其頓"],["🇲🇪","蒙特內哥羅","🇧🇦","波赫"]]},
+        {name:"J組",matches:[["🇬🇪","喬治亞","🇦🇲","亞美尼亞"],["🇦🇿","亞塞拜然","🇰🇿","哈薩克"],["🇺🇿","烏茲別克","🇰🇬","吉爾吉斯"]]},
+        {name:"K組",matches:[["🇹🇯","塔吉克","🇹🇲","土庫曼"],["🇦🇫","阿富汗","🇵🇰","巴基斯坦"],["🇮🇳","印度","🇧🇩","孟加拉"]]},
+        {name:"L組",matches:[["🇱🇰","斯里蘭卡","🇳🇵","尼泊爾"],["🇧🇹","不丹","🇲🇻","馬爾地夫"],["🇲🇲","緬甸","🇹🇭","泰國"]]}
+      ]},
+      {type:"6",league:"亞洲盃 M-R組",date:"06/26 星期五 18:00",groups:[
+        {name:"M組",matches:[["🇻🇳","越南","🇰🇭","柬埔寨"],["🇱🇦","寮國","🇲🇾","馬來西亞"],["🇸🇬","新加坡","🇮🇩","印尼"]]},
+        {name:"N組",matches:[["🇵🇭","菲律賓","🇧🇳","汶萊"],["🇹🇱","東帝汶","🇲🇳","蒙古"],["🇨🇳","中國","🇭🇰","香港"]]},
+        {name:"O組",matches:[["🇹🇼","台灣","🇲🇴","澳門"],["🇶🇦","卡達","🇰🇼","科威特"],["🇧🇭","巴林","🇴🇲","阿曼"]]},
+        {name:"P組",matches:[["🇦🇪","阿聯","🇾🇪","葉門"],["🇯🇴","約旦","🇱🇧","黎巴嫩"],["🇸🇾","敘利亞","🇮🇶","伊拉克"]]},
+        {name:"Q組",matches:[["🇪🇬","埃及","🇱🇾","利比亞"],["🇹🇳","突尼西亞","🇩🇿","阿爾及利亞"],["🇳🇬","奈及利亞","🇰🇪","肯亞"]]},
+        {name:"R組",matches:[["🇿🇦","南非","🇿🇼","辛巴威"],["🇿🇲","尚比亞","🇹🇿","坦尚尼亞"],["🇺🇬","烏干達","🇪🇹","衣索比亞"]]}
+      ]},
+      {type:"6",league:"非洲盃 S-X組",date:"06/26 星期五 20:00",groups:[
+        {name:"S組",matches:[["🇨🇮","象牙海岸","🇧🇯","貝南"],["🇧🇫","布吉納法索","🇲🇱","馬利"],["🇳🇪","尼日","🇹🇬","多哥"]]},
+        {name:"T組",matches:[["🇬🇦","加彭","🇨🇬","剛果"],["🇨🇩","剛果民主","🇨🇫","中非"],["🇹🇩","查德","🇸🇸","南蘇丹"]]},
+        {name:"U組",matches:[["🇸🇩","蘇丹","🇪🇷","厄利垂亞"],["🇩🇯","吉布地","🇸🇴","索馬利亞"],["🇷🇼","盧安達","🇧🇮","蒲隆地"]]},
+        {name:"V組",matches:[["🇲🇼","馬拉威","🇲🇿","莫三比克"],["🇦🇴","安哥拉","🇳🇦","納米比亞"],["🇧🇼","波札那","🇱🇸","賴索托"]]},
+        {name:"W組",matches:[["🇸🇿","史瓦帝尼","🇲🇬","馬達加斯加"],["🇲🇺","模里西斯","🇰🇲","葛摩"],["🇸🇨","塞席爾","🇨🇻","維德角"]]},
+        {name:"X組",matches:[["🇬🇼","幾內亞比索","🇬🇳","幾內亞"],["🇸🇱","獅子山","🇱🇷","賴比瑞亞"],["🇬🇲","甘比亞","🇸🇳","塞內加爾"]]}
+      ]},
+      {type:"6",league:"美洲盃 1-6組",date:"06/27 星期六 16:00",groups:[
+        {name:"1組",matches:[["🇨🇴","哥倫比亞","🇻🇪","委內瑞拉"],["🇪🇨","厄瓜多","🇵🇪","秘魯"],["🇧🇴","玻利維亞","🇵🇾","巴拉圭"]]},
+        {name:"2組",matches:[["🇬🇾","圭亞那","🇸🇷","蘇利南"],["🇬🇫","法屬圭亞那","🇹🇹","千里達"],["🇯🇲","牙買加","🇭🇹","海地"]]},
+        {name:"3組",matches:[["🇨🇺","古巴","🇧🇸","巴哈馬"],["🇧🇧","巴貝多","🇩🇴","多明尼加"],["🇵🇷","波多黎各","🇬🇹","瓜地馬拉"]]},
+        {name:"4組",matches:[["🇭🇳","宏都拉斯","🇸🇻","薩爾瓦多"],["🇳🇮","尼加拉瓜","🇵🇦","巴拿馬"],["🇧🇿","貝里斯","🇨🇦","加拿大"]]},
+        {name:"5組",matches:[["🇺🇸","美國","🇲🇽","墨西哥"],["🇨🇷","哥斯大黎加","🇦🇷","阿根廷"],["🇧🇷","巴西","🇺🇾","烏拉圭"]]},
+        {name:"6組",matches:[["🇨🇱","智利","🇵🇾","巴拉圭"],["🇧🇴","玻利維亞","🇪🇨","厄瓜多"],["🇵🇪","秘魯","🇨🇴","哥倫比亞"]]}
+      ]},
+      {type:"6",league:"大洋洲盃 7-12組",date:"06/27 星期六 18:00",groups:[
+        {name:"7組",matches:[["🇳🇿","紐西蘭","🇦🇺","澳洲"],["🇫🇯","斐濟","🇵🇬","巴布亞"],["🇸🇧","索羅門","🇻🇺","萬那杜"]]},
+        {name:"8組",matches:[["🇳🇨","新喀里多尼亞","🇹🇴","東加"],["🇼🇸","薩摩亞","🇦🇸","美屬薩摩亞"],["🇨🇰","庫克群島","🇵🇫","法屬玻里"]]},
+        {name:"9組",matches:[["🇰🇮","吉里巴斯","🇹🇻","吐瓦魯"],["🇳🇷","諾魯","🇵🇼","帛琉"],["🇫🇲","密克羅尼西亞","🇲🇭","馬紹爾"]]},
+        {name:"10組",matches:[["🇬🇺","關島","🇲🇵","北馬里亞納"],["🇻🇮","美屬維京","🇵🇷","波多黎各"],["🇧🇲","百慕達","🇰🇾","開曼群島"]]},
+        {name:"11組",matches:[["🇹🇨","土克凱可","🇻🇬","英屬維京"],["🇦🇮","安圭拉","🇲🇸","蒙哲臘"],["🇩🇲","多米尼克","🇱🇨","聖露西亞"]]},
+        {name:"12組",matches:[["🇻🇨","聖文森","🇬🇩","格瑞那達"],["🇧🇧","巴貝多","🇹🇹","千里達"],["🇸🇷","蘇利南","🇬🇾","圭亞那"]]}
+      ]},
+      {type:"6",league:"歐洲盃 Y-AD組",date:"06/28 星期日 19:00",groups:[
+        {name:"Y組",matches:[["🇱🇺","盧森堡","🇱🇮","列支敦斯登"],["🇲🇹","馬爾他","🇲🇩","摩爾多瓦"],["🇦🇩","安道爾","🇸🇲","聖馬利諾"]]},
+        {name:"Z組",matches:[["🇲🇨","摩納哥","🇻🇦","梵蒂岡"],["🇬🇮","直布羅陀","🇫🇴","法羅群島"],["🇬🇱","格陵蘭","🇮🇲","曼島"]]},
+        {name:"AA組",matches:[["🇯🇪","澤西","🇬🇬","根西"],["🇦🇽","奧蘭","🇸🇯","斯瓦巴"],["🇧🇻","布威島","🇭🇲","赫德島"]]},
+        {name:"AB組",matches:[["🇬🇸","南喬治亞","🇫🇰","福克蘭"],["🇵🇳","皮特凱恩","🇸🇭","聖赫勒拿"],["🇹🇦","特里斯坦","🇦🇨","阿森松"]]},
+        {name:"AC組",matches:[["🇨🇽","聖誕島","🇨🇨","可可斯"],["🇳🇫","諾福克","🇹🇰","托克勞"],["🇳🇺","紐埃","🇼🇫","瓦利斯"]]},
+        {name:"AD組",matches:[["🇵🇲","聖皮耶","🇧🇱","聖巴瑟米"],["🇲🇫","法屬聖馬丁","🇸🇽","荷屬聖馬丁"],["🇨🇼","庫拉索","🇦🇼","阿魯巴"]]}
+      ]},
+      {type:"6",league:"友誼賽 AE-AJ組",date:"06/28 星期日 21:00",groups:[
+        {name:"AE組",matches:[["🇧🇶","荷蘭加勒比","🇬🇵","瓜德羅普"],["🇲🇶","馬丁尼克","🇾🇹","馬約特"],["🇷🇪","留尼旺","🇬🇫","法屬圭亞那"]]},
+        {name:"AF組",matches:[["🇵🇫","法屬玻里","🇳🇨","新喀里多尼亞"],["🇼🇫","瓦利斯","🇹🇫","法屬南部"],["🇪🇭","西撒哈拉","🇮🇴","英屬印度洋"]]},
+        {name:"AG組",matches:[["🇻🇬","英屬維京","🇰🇾","開曼"],["🇲🇸","蒙哲臘","🇹🇨","土克凱可"],["🇦🇮","安圭拉","🇧🇲","百慕達"]]},
+        {name:"AH組",matches:[["🇫🇰","福克蘭","🇬🇸","南喬治亞"],["🇵🇳","皮特凱恩","🇸🇭","聖赫勒拿"],["🇹🇦","特里斯坦","🇦🇨","阿森松"]]},
+        {name:"AI組",matches:[["🇨🇽","聖誕島","🇨🇨","可可斯"],["🇳🇫","諾福克","🇭🇲","赫德島"],["🇧🇻","布威島","🇬🇱","格陵蘭"]]},
+        {name:"AJ組",matches:[["🇸🇯","斯瓦巴","🇦🇽","奧蘭"],["🇬🇬","根西","🇯🇪","澤西"],["🇮🇲","曼島","🇫🇴","法羅群島"]]}
+      ]},
+      {type:"6",league:"世界盃資格賽 AK-AP組",date:"06/29 星期一 17:00",groups:[
+        {name:"AK組",matches:[["🇪🇸","西班牙","🇵🇹","葡萄牙"],["🇫🇷","法國","🇩🇪","德國"],["🇮🇹","義大利","🇳🇱","荷蘭"]]},
+        {name:"AL組",matches:[["🇧🇪","比利時","🇬🇧","英格蘭"],["🇭🇷","克羅埃西亞","🇩🇰","丹麥"],["🇸🇪","瑞典","🇨🇭","瑞士"]]},
+        {name:"AM組",matches:[["🇦🇹","奧地利","🇨🇿","捷克"],["🇵🇱","波蘭","🇺🇦","烏克蘭"],["🇷🇸","塞爾維亞","🇷🇴","羅馬尼亞"]]},
+        {name:"AN組",matches:[["🇹🇷","土耳其","🇬🇷","希臘"],["🇧🇬","保加利亞","🇭🇺","匈牙利"],["🇸🇰","斯洛伐克","🇮🇪","愛爾蘭"]]},
+        {name:"AO組",matches:[["🇳🇴","挪威","🇫🇮","芬蘭"],["🇮🇸","冰島","🇱🇻","拉脫維亞"],["🇱🇹","立陶宛","🇪🇪","愛沙尼亞"]]},
+        {name:"AP組",matches:[["🇦🇱","阿爾巴尼亞","🇲🇰","北馬其頓"],["🇲🇪","蒙特內哥羅","🇧🇦","波赫"],["🇸🇮","斯洛維尼亞","🇷🇺","俄羅斯"]]}
+      ]},
+      {type:"6",league:"世界盃資格賽 AQ-AV組",date:"06/29 星期一 20:00",groups:[
+        {name:"AQ組",matches:[["🇧🇷","巴西","🇦🇷","阿根廷"],["🇺🇾","烏拉圭","🇨🇱","智利"],["🇨🇴","哥倫比亞","🇵🇪","秘魯"]]},
+        {name:"AR組",matches:[["🇪🇨","厄瓜多","🇻🇪","委內瑞拉"],["🇧🇴","玻利維亞","🇵🇾","巴拉圭"],["🇲🇽","墨西哥","🇺🇸","美國"]]},
+        {name:"AS組",matches:[["🇨🇦","加拿大","🇨🇷","哥斯大黎加"],["🇯🇲","牙買加","🇵🇦","巴拿馬"],["🇭🇳","宏都拉斯","🇸🇻","薩爾瓦多"]]},
+        {name:"AT組",matches:[["🇯🇵","日本","🇰🇷","南韓"],["🇦🇺","澳洲","🇸🇦","沙烏地"],["🇮🇷","伊朗","🇮🇶","伊拉克"]]},
+        {name:"AU組",matches:[["🇶🇦","卡達","🇦🇪","阿聯"],["🇴🇲","阿曼","🇯🇴","約旦"],["🇰🇼","科威特","🇧🇭","巴林"]]},
+        {name:"AV組",matches:[["🇨🇳","中國","🇻🇳","越南"],["🇹🇭","泰國","🇮🇩","印尼"],["🇲🇾","馬來西亞","🇸🇬","新加坡"]]}
+      ]},
+    ]
+  },
+  {
+    label:"32強",
+    cards:[
+      {type:"4",league:"歐洲冠軍聯賽",date:"06/27 星期六 19:30",groups:[
+        {name:"場次 1",matches:[["🇧🇷","巴西","🇩🇪","德國"]]},
+        {name:"場次 2",matches:[["🇫🇷","法國","🇦🇷","阿根廷"]]},
+        {name:"場次 3",matches:[["🇪🇸","西班牙","🇵🇹","葡萄牙"]]},
+        {name:"場次 4",matches:[["🇳🇱","荷蘭","🇮🇹","義大利"]]}
+      ]},
+      {type:"4",league:"英格蘭超級聯賽",date:"06/27 星期六 14:30",groups:[
+        {name:"場次 5",matches:[["🇬🇧","英格蘭","🇺🇾","烏拉圭"]]},
+        {name:"場次 6",matches:[["🇧🇪","比利時","🇯🇵","日本"]]},
+        {name:"場次 7",matches:[["🇰🇷","南韓","🇲🇽","墨西哥"]]},
+        {name:"場次 8",matches:[["🇦🇺","澳洲","🇨🇷","哥斯大黎加"]]}
+      ]},
+      {type:"4",league:"歐洲冠軍聯賽",date:"06/28 星期日 20:00",groups:[
+        {name:"場次 9",matches:[["🇺🇸","美國","🇸🇳","塞內加爾"]]},
+        {name:"場次 10",matches:[["🇨🇭","瑞士","🇩🇰","丹麥"]]},
+        {name:"場次 11",matches:[["🇭🇷","克羅埃西亞","🇸🇪","瑞典"]]},
+        {name:"場次 12",matches:[["🇵🇱","波蘭","🇲🇦","摩洛哥"]]}
+      ]},
+      {type:"4",league:"亞洲盃",date:"06/28 星期日 18:00",groups:[
+        {name:"場次 13",matches:[["🇮🇷","伊朗","🇸🇦","沙烏地"]]},
+        {name:"場次 14",matches:[["🇶🇦","卡達","🇦🇪","阿聯"]]},
+        {name:"場次 15",matches:[["🇮🇶","伊拉克","🇴🇲","阿曼"]]},
+        {name:"場次 16",matches:[["🇨🇳","中國","🇹🇭","泰國"]]}
+      ]},
+      {type:"4",league:"非洲盃",date:"06/29 星期一 17:00",groups:[
+        {name:"場次 17",matches:[["🇪🇬","埃及","🇳🇬","奈及利亞"]]},
+        {name:"場次 18",matches:[["🇿🇦","南非","🇨🇮","象牙海岸"]]},
+        {name:"場次 19",matches:[["🇰🇪","肯亞","🇬🇭","迦納"]]},
+        {name:"場次 20",matches:[["🇨🇲","喀麥隆","🇹🇳","突尼西亞"]]}
+      ]},
+      {type:"4",league:"美洲盃",date:"06/29 星期一 20:00",groups:[
+        {name:"場次 21",matches:[["🇨🇴","哥倫比亞","🇨🇱","智利"]]},
+        {name:"場次 22",matches:[["🇵🇪","秘魯","🇪🇨","厄瓜多"]]},
+        {name:"場次 23",matches:[["🇻🇪","委內瑞拉","🇧🇴","玻利維亞"]]},
+        {name:"場次 24",matches:[["🇵🇾","巴拉圭","🇵🇦","巴拿馬"]]}
+      ]},
+      {type:"4",league:"大洋洲盃",date:"06/30 星期二 16:00",groups:[
+        {name:"場次 25",matches:[["🇳🇿","紐西蘭","🇫🇯","斐濟"]]},
+        {name:"場次 26",matches:[["🇵🇬","巴布亞","🇸🇧","索羅門"]]},
+        {name:"場次 27",matches:[["🇻🇺","萬那杜","🇳🇨","新喀里多尼亞"]]},
+        {name:"場次 28",matches:[["🇹🇴","東加","🇼🇸","薩摩亞"]]}
+      ]},
+      {type:"4",league:"友誼賽",date:"06/30 星期二 19:00",groups:[
+        {name:"場次 29",matches:[["🇹🇷","土耳其","🇬🇷","希臘"]]},
+        {name:"場次 30",matches:[["🇷🇴","羅馬尼亞","🇧🇬","保加利亞"]]},
+        {name:"場次 31",matches:[["🇭🇺","匈牙利","🇸🇰","斯洛伐克"]]},
+        {name:"場次 32",matches:[["🇨🇿","捷克","🇦🇹","奧地利"]]}
+      ]},
+      {type:"4",league:"世界盃資格賽",date:"07/01 星期三 18:00",groups:[
+        {name:"場次 33",matches:[["🇷🇺","俄羅斯","🇺🇦","烏克蘭"]]},
+        {name:"場次 34",matches:[["🇳🇴","挪威","🇫🇮","芬蘭"]]},
+        {name:"場次 35",matches:[["🇮🇸","冰島","🇱🇻","拉脫維亞"]]},
+        {name:"場次 36",matches:[["🇱🇹","立陶宛","🇪🇪","愛沙尼亞"]]}
+      ]},
+      {type:"4",league:"世界盃資格賽",date:"07/01 星期三 21:00",groups:[
+        {name:"場次 37",matches:[["🇦🇱","阿爾巴尼亞","🇲🇰","北馬其頓"]]},
+        {name:"場次 38",matches:[["🇲🇪","蒙特內哥羅","🇧🇦","波赫"]]},
+        {name:"場次 39",matches:[["🇷🇸","塞爾維亞","🇸🇮","斯洛維尼亞"]]},
+        {name:"場次 40",matches:[["🇮🇪","愛爾蘭","🇨🇾","賽普勒斯"]]}
+      ]},
+    ]
+  },
+  {
+    label:"16強",
+    cards:[
+      {type:"2",league:"歐洲冠軍聯賽",date:"06/29 星期一 19:30",groups:[
+        {name:"場次 A",matches:[["🇧🇷","巴西","🇫🇷","法國"]]},
+        {name:"場次 B",matches:[["🇩🇪","德國","🇦🇷","阿根廷"]]}
+      ]},
+      {type:"2",league:"英格蘭超級聯賽",date:"06/29 星期一 21:00",groups:[
+        {name:"場次 C",matches:[["🇪🇸","西班牙","🇮🇹","義大利"]]},
+        {name:"場次 D",matches:[["🇵🇹","葡萄牙","🇳🇱","荷蘭"]]}
+      ]},
+      {type:"2",league:"亞太區邀請賽",date:"06/30 星期二 18:00",groups:[
+        {name:"場次 E",matches:[["🇯🇵","日本","🇰🇷","南韓"]]},
+        {name:"場次 F",matches:[["🇦🇺","澳洲","🇸🇦","沙烏地"]]}
+      ]},
+      {type:"2",league:"歐洲冠軍聯賽",date:"06/30 星期二 21:00",groups:[
+        {name:"場次 G",matches:[["🇧🇪","比利時","🇩🇰","丹麥"]]},
+        {name:"場次 H",matches:[["🇭🇷","克羅埃西亞","🇺🇾","烏拉圭"]]}
+      ]},
+      {type:"2",league:"非洲盃",date:"07/01 星期三 17:00",groups:[
+        {name:"場次 I",matches:[["🇪🇬","埃及","🇿🇦","南非"]]},
+        {name:"場次 J",matches:[["🇳🇬","奈及利亞","🇨🇮","象牙海岸"]]}
+      ]},
+      {type:"2",league:"美洲盃",date:"07/01 星期三 20:00",groups:[
+        {name:"場次 K",matches:[["🇨🇴","哥倫比亞","🇵🇪","秘魯"]]},
+        {name:"場次 L",matches:[["🇨🇱","智利","🇪🇨","厄瓜多"]]}
+      ]},
+      {type:"2",league:"大洋洲盃",date:"07/02 星期四 16:00",groups:[
+        {name:"場次 M",matches:[["🇳🇿","紐西蘭","🇵🇬","巴布亞"]]},
+        {name:"場次 N",matches:[["🇫🇯","斐濟","🇸🇧","索羅門"]]}
+      ]},
+      {type:"2",league:"友誼賽",date:"07/02 星期四 19:00",groups:[
+        {name:"場次 O",matches:[["🇹🇷","土耳其","🇷🇴","羅馬尼亞"]]},
+        {name:"場次 P",matches:[["🇬🇷","希臘","🇧🇬","保加利亞"]]}
+      ]},
+      {type:"2",league:"世界盃資格賽",date:"07/03 星期五 18:00",groups:[
+        {name:"場次 Q",matches:[["🇷🇺","俄羅斯","🇳🇴","挪威"]]},
+        {name:"場次 R",matches:[["🇺🇦","烏克蘭","🇫🇮","芬蘭"]]}
+      ]},
+      {type:"2",league:"世界盃資格賽",date:"07/03 星期五 21:00",groups:[
+        {name:"場次 S",matches:[["🇦🇱","阿爾巴尼亞","🇲🇪","蒙特內哥羅"]]},
+        {name:"場次 T",matches:[["🇲🇰","北馬其頓","🇧🇦","波赫"]]}
+      ]},
+    ]
+  },
+  {
+    label:"半準決賽",
+    cards:[
+      {type:"2",league:"歐洲冠軍聯賽",date:"07/01 星期三 20:00",groups:[
+        {name:"上半區",matches:[["🇧🇷","巴西","🇩🇪","德國"]]},
+        {name:"下半區",matches:[["🇫🇷","法國","🇦🇷","阿根廷"]]}
+      ]},
+      {type:"2",league:"英格蘭超級聯賽",date:"07/01 星期三 22:00",groups:[
+        {name:"上半區",matches:[["🇪🇸","西班牙","🇵🇹","葡萄牙"]]},
+        {name:"下半區",matches:[["🇮🇹","義大利","🇳🇱","荷蘭"]]}
+      ]},
+      {type:"2",league:"亞洲盃",date:"07/02 星期四 18:00",groups:[
+        {name:"上半區",matches:[["🇯🇵","日本","🇦🇺","澳洲"]]},
+        {name:"下半區",matches:[["🇰🇷","南韓","🇸🇦","沙烏地"]]}
+      ]},
+      {type:"2",league:"非洲盃",date:"07/02 星期四 20:00",groups:[
+        {name:"上半區",matches:[["🇪🇬","埃及","🇳🇬","奈及利亞"]]},
+        {name:"下半區",matches:[["🇿🇦","南非","🇨🇮","象牙海岸"]]}
+      ]},
+      {type:"2",league:"美洲盃",date:"07/03 星期五 19:00",groups:[
+        {name:"上半區",matches:[["🇨🇴","哥倫比亞","🇨🇱","智利"]]},
+        {name:"下半區",matches:[["🇵🇪","秘魯","🇪🇨","厄瓜多"]]}
+      ]},
+      {type:"2",league:"大洋洲盃",date:"07/03 星期五 16:00",groups:[
+        {name:"上半區",matches:[["🇳🇿","紐西蘭","🇫🇯","斐濟"]]},
+        {name:"下半區",matches:[["🇵🇬","巴布亞","🇸🇧","索羅門"]]}
+      ]},
+      {type:"2",league:"友誼賽",date:"07/04 星期六 18:00",groups:[
+        {name:"上半區",matches:[["🇹🇷","土耳其","🇬🇷","希臘"]]},
+        {name:"下半區",matches:[["🇷🇴","羅馬尼亞","🇧🇬","保加利亞"]]}
+      ]},
+      {type:"2",league:"世界盃資格賽",date:"07/04 星期六 20:00",groups:[
+        {name:"上半區",matches:[["🇷🇺","俄羅斯","🇺🇦","烏克蘭"]]},
+        {name:"下半區",matches:[["🇳🇴","挪威","🇫🇮","芬蘭"]]}
+      ]},
+      {type:"2",league:"世界盃資格賽",date:"07/05 星期日 18:00",groups:[
+        {name:"上半區",matches:[["🇦🇱","阿爾巴尼亞","🇲🇪","蒙特內哥羅"]]},
+        {name:"下半區",matches:[["🇲🇰","北馬其頓","🇧🇦","波赫"]]}
+      ]},
+      {type:"2",league:"友誼賽",date:"07/05 星期日 20:00",groups:[
+        {name:"上半區",matches:[["🇭🇺","匈牙利","🇨🇿","捷克"]]},
+        {name:"下半區",matches:[["🇸🇰","斯洛伐克","🇦🇹","奧地利"]]}
+      ]},
+    ]
+  },
+  {
+    label:"準決賽",
+    cards:[
+      {type:"1",league:"歐洲冠軍聯賽",date:"07/02 星期四 20:00",groups:[
+        {name:"準決賽一",matches:[["🇧🇷","巴西","🇫🇷","法國"]]}
+      ]},
+      {type:"1",league:"英格蘭超級聯賽",date:"07/03 星期五 20:00",groups:[
+        {name:"準決賽二",matches:[["🇩🇪","德國","🇦🇷","阿根廷"]]}
+      ]},
+      {type:"1",league:"亞洲盃",date:"07/04 星期六 18:00",groups:[
+        {name:"準決賽一",matches:[["🇯🇵","日本","🇰🇷","南韓"]]}
+      ]},
+      {type:"1",league:"非洲盃",date:"07/04 星期六 20:00",groups:[
+        {name:"準決賽二",matches:[["🇪🇬","埃及","🇿🇦","南非"]]}
+      ]},
+      {type:"1",league:"美洲盃",date:"07/05 星期日 19:00",groups:[
+        {name:"準決賽一",matches:[["🇨🇴","哥倫比亞","🇵🇪","秘魯"]]}
+      ]},
+      {type:"1",league:"大洋洲盃",date:"07/05 星期日 16:00",groups:[
+        {name:"準決賽二",matches:[["🇳🇿","紐西蘭","🇵🇬","巴布亞"]]}
+      ]},
+      {type:"1",league:"友誼賽",date:"07/06 星期一 18:00",groups:[
+        {name:"準決賽一",matches:[["🇹🇷","土耳其","🇷🇴","羅馬尼亞"]]}
+      ]},
+      {type:"1",league:"世界盃資格賽",date:"07/06 星期一 20:00",groups:[
+        {name:"準決賽二",matches:[["🇷🇺","俄羅斯","🇳🇴","挪威"]]}
+      ]},
+      {type:"1",league:"世界盃資格賽",date:"07/07 星期二 18:00",groups:[
+        {name:"準決賽一",matches:[["🇦🇱","阿爾巴尼亞","🇲🇰","北馬其頓"]]}
+      ]},
+      {type:"1",league:"友誼賽",date:"07/07 星期二 20:00",groups:[
+        {name:"準決賽二",matches:[["🇭🇺","匈牙利","🇸🇰","斯洛伐克"]]}
+      ]},
+    ]
+  },
+  {
+    label:"季軍賽",
+    cards:[
+      {type:"1",league:"歐洲冠軍聯賽",date:"07/05 星期日 16:00",groups:[
+        {name:"季軍爭奪",matches:[["🇫🇷","法國","🇩🇪","德國"]]}
+      ]},
+      {type:"1",league:"英格蘭超級聯賽",date:"07/06 星期一 16:00",groups:[
+        {name:"季軍爭奪",matches:[["🇪🇸","西班牙","🇵🇹","葡萄牙"]]}
+      ]},
+      {type:"1",league:"亞洲盃",date:"07/07 星期二 16:00",groups:[
+        {name:"季軍爭奪",matches:[["🇦🇺","澳洲","🇸🇦","沙烏地"]]}
+      ]},
+      {type:"1",league:"非洲盃",date:"07/08 星期三 16:00",groups:[
+        {name:"季軍爭奪",matches:[["🇳🇬","奈及利亞","🇨🇮","象牙海岸"]]}
+      ]},
+      {type:"1",league:"美洲盃",date:"07/09 星期四 16:00",groups:[
+        {name:"季軍爭奪",matches:[["🇨🇱","智利","🇪🇨","厄瓜多"]]}
+      ]},
+      {type:"1",league:"大洋洲盃",date:"07/10 星期五 14:00",groups:[
+        {name:"季軍爭奪",matches:[["🇫🇯","斐濟","🇸🇧","索羅門"]]}
+      ]},
+      {type:"1",league:"友誼賽",date:"07/11 星期六 16:00",groups:[
+        {name:"季軍爭奪",matches:[["🇬🇷","希臘","🇧🇬","保加利亞"]]}
+      ]},
+      {type:"1",league:"世界盃資格賽",date:"07/12 星期日 16:00",groups:[
+        {name:"季軍爭奪",matches:[["🇺🇦","烏克蘭","🇫🇮","芬蘭"]]}
+      ]},
+      {type:"1",league:"世界盃資格賽",date:"07/13 星期一 16:00",groups:[
+        {name:"季軍爭奪",matches:[["🇲🇪","蒙特內哥羅","🇧🇦","波赫"]]}
+      ]},
+      {type:"1",league:"友誼賽",date:"07/14 星期二 16:00",groups:[
+        {name:"季軍爭奪",matches:[["🇨🇿","捷克","🇦🇹","奧地利"]]}
+      ]},
+    ]
+  },
+  {
+    label:"決賽",
+    cards:[
+      {type:"1",league:"歐洲冠軍聯賽",date:"07/06 星期一 20:00",groups:[
+        {name:"決賽",matches:[["🇧🇷","巴西","🇦🇷","阿根廷"]]}
+      ]},
+      {type:"1",league:"英格蘭超級聯賽",date:"07/07 星期二 20:00",groups:[
+        {name:"決賽",matches:[["🇮🇹","義大利","🇳🇱","荷蘭"]]}
+      ]},
+      {type:"1",league:"亞洲盃",date:"07/08 星期三 20:00",groups:[
+        {name:"決賽",matches:[["🇯🇵","日本","🇰🇷","南韓"]]}
+      ]},
+      {type:"1",league:"非洲盃",date:"07/09 星期四 20:00",groups:[
+        {name:"決賽",matches:[["🇪🇬","埃及","🇿🇦","南非"]]}
+      ]},
+      {type:"1",league:"美洲盃",date:"07/10 星期五 20:00",groups:[
+        {name:"決賽",matches:[["🇨🇴","哥倫比亞","🇵🇪","秘魯"]]}
+      ]},
+      {type:"1",league:"大洋洲盃",date:"07/11 星期六 18:00",groups:[
+        {name:"決賽",matches:[["🇳🇿","紐西蘭","🇵🇬","巴布亞"]]}
+      ]},
+      {type:"1",league:"友誼賽",date:"07/12 星期日 20:00",groups:[
+        {name:"決賽",matches:[["🇹🇷","土耳其","🇷🇴","羅馬尼亞"]]}
+      ]},
+      {type:"1",league:"世界盃資格賽",date:"07/13 星期一 20:00",groups:[
+        {name:"決賽",matches:[["🇷🇺","俄羅斯","🇳🇴","挪威"]]}
+      ]},
+      {type:"1",league:"世界盃資格賽",date:"07/14 星期二 20:00",groups:[
+        {name:"決賽",matches:[["🇦🇱","阿爾巴尼亞","🇲🇰","北馬其頓"]]}
+      ]},
+      {type:"1",league:"友誼賽",date:"07/15 星期三 20:00",groups:[
+        {name:"決賽",matches:[["🇭🇺","匈牙利","🇸🇰","斯洛伐克"]]}
+      ]},
+    ]
+  }
+];
+
+const CARD_WIDTHS = {"1":240,"2":260,"3":300,"4":340,"6":420};
+let currentTab = 0;
+let currentIndex = 0;
+let cardW = 240;
+const GAP = 18;
+
+const track = document.getElementById("track");
+const viewport = document.getElementById("viewport");
+const btnLeft = document.getElementById("btnLeft");
+const btnRight = document.getElementById("btnRight");
+const dotsEl = document.getElementById("dots");
+const tabsEl = document.getElementById("tabsEl");
+
+function makeCard(card){
+  const d = document.createElement("div");
+  const w = CARD_WIDTHS[card.type] || 280;
+  d.className = "match-card";
+  d.style.width = w+"px";
+  
+  let html = `<div class="card-league">${card.league}</div><div class="card-date">${card.date}</div>`;
+  
+  if(card.type === "1"){
+    const g = card.groups[0];
+    const m = g.matches[0];
+    html += `<div class="card-matchup">
+      <div class="team-block"><div class="flag">${m[0]}</div><div class="team-name">${m[1]}</div></div>
+      <div class="vs-text">VS</div>
+      <div class="team-block"><div class="flag">${m[2]}</div><div class="team-name">${m[3]}</div></div>
+    </div>`;
+  } else if(card.type === "2"){
+    html += `<div class="multi-match" style="margin-top:8px">`;
+    card.groups.forEach(g=>{
+      html += `<div class="group-label">${g.name}</div>`;
+      g.matches.forEach(m=>{
+        html += `<div class="mini-match">
+          <span class="mini-team left">${m[1]}</span>
+          <span class="mini-flag">${m[0]}</span>
+          <span class="mini-vs">vs</span>
+          <span class="mini-flag">${m[2]}</span>
+          <span class="mini-team right">${m[3]}</span>
+        </div>`;
+      });
+    });
+    html += `</div>`;
+  } else {
+    html += `<div class="multi-match" style="margin-top:6px">`;
+    card.groups.forEach(g=>{
+      html += `<div style="display:flex;align-items:center;gap:5px;margin-top:5px;flex-wrap:wrap;justify-content:center">
+        <div class="group-label">${g.name}</div>`;
+      g.matches.forEach(m=>{
+        html += `<div class="mini-match" style="width:100%">
+          <span class="mini-team left" style="font-size:11px">${m[1]}</span>
+          <span class="mini-flag" style="font-size:18px">${m[0]}</span>
+          <span class="mini-vs">vs</span>
+          <span class="mini-flag" style="font-size:18px">${m[2]}</span>
+          <span class="mini-team right" style="font-size:11px">${m[3]}</span>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+  }
+  
+  d.innerHTML = html;
+  return d;
+}
+
+function renderTab(tabIdx){
+  currentIndex = 0;
+  track.innerHTML = "";
+  const round = ROUNDS[tabIdx];
+  round.cards.forEach(card=>{
+    track.appendChild(makeCard(card));
+  });
+  cardW = CARD_WIDTHS[round.cards[0].type] || 280;
+  renderDots(round.cards.length);
+  updateCarousel();
+}
+
+function renderDots(n){
+  dotsEl.innerHTML = "";
+  for(let i=0;i<n;i++){
+    const d = document.createElement("div");
+    d.className = "dot" + (i===0?" active":"");
+    d.onclick = ()=>{currentIndex=i;updateCarousel();}
+    dotsEl.appendChild(d);
+  }
+}
+
+function updateCarousel(){
+  const vpW = viewport.offsetWidth || 650;
+  const cards = track.children;
+  const n = cards.length;
+  const maxIndex = Math.max(0, n - Math.floor((vpW + GAP) / (cardW + GAP)));
+  currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+  track.style.transform = `translateX(-${currentIndex * (cardW + GAP)}px)`;
+  btnLeft.disabled = currentIndex === 0;
+  btnRight.disabled = currentIndex >= maxIndex;
+  dotsEl.querySelectorAll(".dot").forEach((d,i)=>{
+    d.classList.toggle("active", i === currentIndex);
+  });
+}
+
+btnLeft.onclick = ()=>{currentIndex--;updateCarousel();}
+btnRight.onclick = ()=>{currentIndex++;updateCarousel();}
+
+tabsEl.querySelectorAll(".tab").forEach(btn=>{
+  btn.onclick = ()=>{
+    tabsEl.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    currentTab = +btn.dataset.tab;
+    renderTab(currentTab);
+  }
+});
+
+let touchStartX = 0;
+viewport.addEventListener("touchstart",e=>{touchStartX=e.touches[0].clientX},{passive:true});
+viewport.addEventListener("touchend",e=>{
+  const dx = touchStartX - e.changedTouches[0].clientX;
+  if(Math.abs(dx)>50){dx>0?currentIndex++:currentIndex--;updateCarousel();}
+});
+
+renderTab(0);
+window.addEventListener("resize", updateCarousel);
+</script>
+
+</body>
+</html>
