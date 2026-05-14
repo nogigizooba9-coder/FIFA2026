@@ -1,0 +1,699 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FM 專屬活動三 | 全站續儲贈送彩金</title>
+  <style>
+    :root{
+      --bg:#eaf4fb;
+      --panel:#ffffffcc;
+      --panel2:#f7fbff;
+      --ink:#243b5a;
+      --muted:#64748b;
+      --blue:#2563eb;
+      --line:#dbe8f3;
+      --gold:#d9a77a;
+      --gold-dark:#bf8556;
+      --warning-bg:#fff4e8;
+      --warning:#9a5b22;
+      --shadow:0 22px 60px rgba(54,86,118,.16);
+      --soft-shadow:0 12px 32px rgba(54,86,118,.10);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.92), transparent 28%),
+        radial-gradient(circle at 88% 16%, rgba(197,224,244,.88), transparent 30%),
+        linear-gradient(180deg,#f7fbff 0%,var(--bg) 100%);
+      color:var(--ink);
+    }
+
+    .banner{
+      width: 100%;
+    }
+
+    .page{
+      width:min(1180px, calc(100% - 40px));
+      margin:36px auto 72px;
+    }
+
+    .top{
+      text-align:center;
+      margin-bottom:24px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      padding:8px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      box-shadow:var(--soft-shadow);
+      color:var(--gold-dark);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.18em;
+    }
+
+    .top h1{
+      margin:16px 0 8px;
+      font-size:34px;
+      line-height:1.15;
+      font-weight:950;
+      letter-spacing:-.02em;
+    }
+
+    .top p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .editor{
+      display:grid;
+      grid-template-columns:1fr 180px;
+      gap:16px;
+      margin-bottom:28px;
+      padding:18px;
+      border-radius:28px;
+      background:rgba(255,255,255,.62);
+      border:1px solid rgba(255,255,255,.78);
+      box-shadow:var(--soft-shadow);
+    }
+
+    textarea{
+      width:100%;
+      min-height:230px;
+      resize:vertical;
+      border:1px solid #d7e5f0;
+      border-radius:20px;
+      padding:18px;
+      font:15px/1.75 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+      color:#1f2937;
+      background:#fff;
+      outline:none;
+    }
+
+    textarea:focus{
+      border-color:#91b8db;
+      box-shadow:0 0 0 4px rgba(145,184,219,.25);
+    }
+
+    .editor-actions{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    button{
+      appearance:none;
+      border:0;
+      min-height:48px;
+      border-radius:999px;
+      padding:0 18px;
+      cursor:pointer;
+      font-weight:900;
+      color:#fff;
+      background:linear-gradient(135deg,#e4b78f,#c88e61);
+      box-shadow:0 12px 26px rgba(180,120,75,.26);
+    }
+
+    .secondary{
+      color:#33516f;
+      background:#fff;
+      box-shadow:var(--soft-shadow);
+    }
+
+    .hint{
+      font-size:12px;
+      line-height:1.7;
+      color:var(--muted);
+      margin:0;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      min-height:330px;
+      border-radius:36px;
+      padding:44px;
+      background:
+        radial-gradient(circle at 82% 26%, rgba(255,211,169,.55), transparent 22%),
+        radial-gradient(circle at 74% 76%, rgba(118,178,230,.26), transparent 28%),
+        linear-gradient(135deg,#ffffff 0%,#ecf6fe 48%,#dcecf7 100%);
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.82);
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      max-width:690px;
+    }
+
+    .hero-pill{
+      display:inline-flex;
+      align-items:center;
+      padding:9px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.78);
+      color:#34506f;
+      font-size:15px;
+      font-weight:800;
+      box-shadow:var(--soft-shadow);
+    }
+
+    .hero h1{
+      margin:26px 0 10px;
+      font-size:54px;
+      line-height:1.05;
+      font-weight:950;
+      letter-spacing:-.04em;
+      color:#263f63;
+    }
+
+    .hero h2{
+      margin:0 0 6px;
+      font-size:28px;
+      color:var(--blue);
+      font-weight:900;
+    }
+
+    .hero h3{
+      margin:0;
+      font-size:22px;
+      color:#263f63;
+      font-weight:850;
+    }
+
+    .time-card{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      width:max-content;
+      max-width:100%;
+      margin-top:32px;
+      padding:16px 20px;
+      border-radius:20px;
+      background:rgba(255,255,255,.74);
+      box-shadow:var(--soft-shadow);
+      color:#344a65;
+      font-weight:750;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin-top:24px;
+    }
+
+    .card{
+      border:1px solid rgba(255,255,255,.78);
+      background:var(--panel);
+      border-radius:28px;
+      box-shadow:var(--soft-shadow);
+      padding:28px;
+      backdrop-filter:blur(16px);
+    }
+
+    .card h2{
+      margin:0 0 12px;
+      font-size:22px;
+      font-weight:900;
+      color:#2a4568;
+    }
+
+    .card p{
+      margin:0;
+      color:#455a75;
+      line-height:1.85;
+      font-size:15px;
+    }
+
+    .warning{
+      background:var(--warning-bg);
+      border-color:#ffe0bd;
+    }
+
+    .warning h2,
+    .warning p{color:var(--warning)}
+
+    .section{margin-top:34px}
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:18px;
+      margin-bottom:16px;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:28px;
+      font-weight:950;
+      color:#2a4568;
+    }
+
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .promo-table{
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.9);
+      background:rgba(255,255,255,.76);
+      box-shadow:var(--soft-shadow);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      table-layout:fixed;
+    }
+
+    th{
+      background:#edf5fb;
+      color:#3b5574;
+      font-size:15px;
+      padding:18px 14px;
+      text-align:left;
+    }
+
+    td{
+      padding:20px 14px;
+      color:#344a65;
+      font-size:15px;
+      line-height:1.65;
+      border-top:1px solid var(--line);
+      vertical-align:top;
+    }
+
+    th:not(:last-child), td:not(:last-child){
+      border-right:1px solid var(--line);
+    }
+
+    .examples{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .example{
+      padding:20px;
+      border-radius:22px;
+      background:rgba(255,255,255,.72);
+      box-shadow:var(--soft-shadow);
+      color:#405774;
+      line-height:1.75;
+      font-size:15px;
+    }
+
+    .rules-wrap{
+      display:grid;
+      /* grid-template-columns:1fr 340px; */
+      gap:24px;
+      align-items:start;
+    }
+
+    .rules{
+      display:grid;
+      gap:12px;
+    }
+
+    .rule{
+      display:flex;
+      gap:12px;
+      padding:15px 16px;
+      border-radius:18px;
+      background:var(--panel2);
+      box-shadow:0 8px 22px rgba(54,86,118,.07);
+      color:#405774;
+      line-height:1.75;
+      font-size:15px;
+    }
+
+    .num{
+      flex:0 0 28px;
+      width:28px;
+      height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:#f0d0b2;
+      color:#7d4f2c;
+      font-weight:900;
+      font-size:15px;
+      margin-top:2px;
+    }
+
+    .cta-panel{
+      position:absolute;
+      right:42px;
+      top:calc(50% - 115px);
+      width:330px;
+      height:230px;
+      padding:26px;
+      border-radius:28px;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(217,167,122,.32), transparent 36%),
+        rgba(255,255,255,.76);
+      border:1px solid rgba(255,255,255,.86);
+      box-shadow:var(--soft-shadow);
+    }
+
+    .cta-panel h2{
+      margin:0 0 12px;
+      font-size:24px;
+      font-weight:950;
+    }
+
+    .cta-panel p{
+      margin:0 0 20px;
+      line-height:1.75;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .btn{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      width:100%;
+      height:50px;
+      border-radius:999px;
+      text-decoration:none;
+      background:#07b53b;
+      color:#fff;
+      font-weight:900;
+      box-shadow:0 12px 26px rgba(180,120,75,.26);
+    }
+
+    @media (max-width: 820px){
+      .page{
+        width:min(420px, calc(100% - 24px));
+        margin:18px auto 40px;
+      }
+
+      .top h1{font-size:26px}
+
+      .editor{
+        grid-template-columns:1fr;
+        border-radius:24px;
+      }
+
+      .editor-actions{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+      }
+
+      .hint{
+        grid-column:1 / -1;
+      }
+
+      .hero{
+        min-height:0;
+        padding:26px;
+        border-radius:30px;
+      }
+
+      .hero::after{display:none}
+      .hero h1{font-size:34px}
+      .hero h2{font-size:20px}
+      .hero h3{font-size:17px}
+
+      .time-card{
+        width:100%;
+        font-size:15px;
+        line-height:1.6;
+      }
+
+      .grid-2,
+      .examples,
+      .rules-wrap{
+        grid-template-columns:1fr;
+      }
+
+      .card{
+        padding:22px;
+        border-radius:24px;
+      }
+
+      .section-head{display:block}
+      .section-head h2{font-size:23px;margin-bottom:6px}
+
+      .promo-table{overflow-x:auto}
+      table{min-width:620px}
+      th,td{font-size:15px}
+
+      .rule{font-size:15px}
+      .cta-panel{position:static}
+    }
+  </style>
+</head>
+
+<body>
+  <img class="banner" src="./page04.png">
+  <main class="page">
+    <section id="app"></section>
+  </main>
+
+  <script>
+    const defaultMarkdown = `# FM富馬 邀您參與世界盃
+## 專屬活動三:全站續儲贈送彩金
+### 新會員 想加入 趁現在!~
+
+活動時間: 6/11 00:00 - 7/19 23:59
+
+活動內容: FM 富馬邀您共享世界盃期間，活動期間內，全體會員，凡會員是"續儲(非首儲)"皆可享有一次領取此活動機會，儲值後，未下注前，將可申請續儲彩金
+
+| 申請條件 | 續儲彩金比例 | 需求流水 | 贈送彩金上限 |
+|---|---:|---:|---:|
+| 儲值後，未投注前 贈送彩金選任例一擇一申請 | 5% | 本+彩5倍 | 5,888 |
+| "首筆儲值不適用" | 8% | 本+彩8倍 | 8,888 |
+
+會員儲值前，帳上額度需已清零，或提領出去，帳上餘額低於100，才能再次儲值，才得以申請本活動，如非此狀況，則需請會員帳上現有額度清零後再次儲值前來申請
+
+舉例
+
+A會員 儲值金額 10000  選擇5%比例，可獲得500續儲彩金，需求流水為 (10000+500)*5 =52500 完成有效投注52500即可提領
+
+B會員 儲值金額為10000 選擇8%比例，可獲得800續儲彩金，需求流水為 (10000+800)*8 =86400 完成有效投注86400即可提領
+
+申請方式: 告知客服申請 全站續儲彩金
+
+LINE客服申請
+
+活動規則
+
+1.活動期間內，凡會員是"續儲(非首儲)" ，儲值成功，且未下注，即可向LINE客服申請續儲彩金，贈送比例二擇一申請。
+2.會員儲值前，帳上額度需已清零，或提領出去，帳上餘額低於100，才能再次儲值，才得以申請本活動，如非此狀況，則需請會員帳上現有額度清零後再次儲值前來申請，活動期間內，全體會員限定享有一次此活動，不可重複申請。
+3.如提出申請前已下注，將不符合領取資格，視同放棄，無法後續申請。
+4.此活動不適用在會員帳號創帳以來的"首筆儲值"，不可參與本活動。
+5.續儲可多筆儲值，30分鐘內之儲值，且都未下注，儲值金額可整合一起總金額來申請續儲彩來計算贈送比例，贈送比例不得超過贈送彩金上限 (請跟客服主動告知)
+6.嚴禁刷水、套利、無風險下注...等行為，一經查證我方將取消優惠或索回已支付的全部優惠紅利，包含盈利金額將回收，退還本金，列入高風險名單不予往來。
+7.本活動不支持下注，"彩票" "棋牌" "電競"遊戲，產生之有效投注，系統不予計算。
+8.FM富馬娛樂城保留對活動的最終解釋權，以及在無通知的情況下修改、終止活動的權利，適用於所有優惠。`;
+
+    const app = document.getElementById("app");
+    function escapeHtml(value){
+      return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function parseMarkdown(markdown){
+      const lines = markdown.split(/\n/).map(line => line.trim()).filter(Boolean);
+
+      const data = {
+        title: "",
+        subtitle: "",
+        tagline: "",
+        time: "",
+        content: "",
+        warning: "",
+        table: [],
+        examples: [],
+        applyText: "",
+        serviceText: "",
+        rules: []
+      };
+
+      let tableRows = [];
+      let isExampleArea = false;
+
+      for(const line of lines){
+        if(line.startsWith("# ")){
+          data.title = line.replace("# ","").trim();
+          continue;
+        }
+
+        if(line.startsWith("## ")){
+          data.subtitle = line.replace("## ","").trim();
+          continue;
+        }
+
+        if(line.startsWith("### ")){
+          data.tagline = line.replace("### ","").trim();
+          continue;
+        }
+
+        if(line.startsWith("活動時間:")){
+          data.time = line;
+          continue;
+        }
+
+        if(line.startsWith("活動內容:")){
+          data.content = line.replace("活動內容:","").trim();
+          continue;
+        }
+
+        if(line.startsWith("|")){
+          if(!line.includes("---")){
+            tableRows.push(line.split("|").slice(1,-1).map(cell => cell.trim()));
+          }
+          continue;
+        }
+
+        if(line.startsWith("會員儲值前")){
+          data.warning = line;
+          continue;
+        }
+
+        if(line === "舉例"){
+          isExampleArea = true;
+          continue;
+        }
+
+        if(isExampleArea && (line.startsWith("A會員") || line.startsWith("B會員"))){
+          data.examples.push(line);
+          continue;
+        }
+
+        if(line.startsWith("申請方式:")){
+          data.applyText = line.replace("申請方式:","").trim();
+          isExampleArea = false;
+          continue;
+        }
+
+        if(line.startsWith("LINE客服申請")){
+          data.serviceText = line;
+          continue;
+        }
+
+        if(/^\d+\./.test(line)){
+          data.rules.push(line);
+        }
+      }
+
+      data.table = tableRows;
+      return data;
+    }
+
+    function renderTable(rows){
+      if(!rows.length) return "";
+      const [head, ...body] = rows;
+      return `
+        <div class="promo-table">
+          <table>
+            <thead>
+              <tr>${head.map(cell => `<th>${escapeHtml(cell)}</th>`).join("")}</tr>
+            </thead>
+            <tbody>
+              ${body.map(row => `
+                <tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderPage(){
+      const data = parseMarkdown(defaultMarkdown);
+
+      app.innerHTML = `
+        <section class="hero">
+          <div class="hero-content">
+            <div class="hero-pill">FM富馬｜世界盃期間限定</div>
+            <h1>${escapeHtml(data.title)}</h1>
+            <h2>${escapeHtml(data.subtitle)}</h2>
+            <h3>${escapeHtml(data.tagline)}</h3>
+            <div class="time-card">📅 ${escapeHtml(data.time)}</div>
+          </div>
+          <aside class="cta-panel">
+            <h2>申請方式</h2>
+            <p>${escapeHtml(data.applyText)}</p>
+            <a class="btn" href="#">${escapeHtml(data.serviceText || "LINE客服申請")}　→</a>
+          </aside>
+        </section>
+
+        <section class="grid-2">
+          <article class="card">
+            <h2>活動內容</h2>
+            <p>${escapeHtml(data.content)}</p>
+          </article>
+
+          <article class="card warning">
+            <h2>重要申請門檻</h2>
+            <p>${escapeHtml(data.warning)}</p>
+          </article>
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>申請條件與比例</h2>
+              <p></p>
+            </div>
+          </div>
+          ${renderTable(data.table)}
+
+          <div class="examples">
+            ${data.examples.map(item => `<div class="example">${escapeHtml(item)}</div>`).join("")}
+          </div>
+        </section>
+
+        <section class="section rules-wrap">
+          <div>
+            <div class="section-head">
+              <div>
+                <h2>活動規則</h2>
+                <p></p>
+              </div>
+            </div>
+
+            <div class="rules">
+              ${data.rules.map((rule, index) => {
+                const cleanRule = rule.replace(/^\d+\./, "");
+                return `
+                  <div class="rule">
+                    <span class="num">${index + 1}</span>
+                    <span>${escapeHtml(cleanRule)}</span>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </div>
+
+          
+        </section>
+      `;
+    }
+    renderPage();
+  </script>
+</body>
+</html>
