@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FM 專屬活動三 | 全站續儲贈送彩金</title>
+  <title>FM 專屬活動二 | 世足下注簽到彩金</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="./css/index.css">
   <style>
     :root{
       --bg:#eaf4fb;
@@ -462,8 +464,67 @@
   </style>
 </head>
 
-<body>
-  <img class="banner" src="./assets/page03.png">
+<body id="pageTop">
+
+  <a href="#pageTop" class="toppage" aria-label="回到頁面頂端">
+    <img src="./img/top.png" alt="" srcset="">
+  </a>
+
+  <div class="mobilemenu" id="mobileMenu">
+    <button class="mobilemenu-backdrop" id="mobileMenuBackdrop" type="button" aria-label="關閉選單"></button>
+    <div class="mobilemenu-bar">
+      <a href="./index.html" class="mobilemenu-logo">
+        <img src="./img/logo.png" alt="FM 富馬">
+      </a>
+      <button
+        class="mobilemenu-toggle"
+        id="mobileMenuToggle"
+        type="button"
+        aria-label="開啟選單"
+        aria-expanded="false"
+        aria-controls="mobileMenuPanel"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobilemenu-panel" id="mobileMenuPanel">
+      <nav class="mobilemenu-links" aria-label="手機版主選單">
+        <a href="./index.html">賽事排程</a>
+        <a href="./page02.html">競猜預測贈彩金</a>
+        <a href="./page03.html">下注世足簽到彩金</a>
+        <a href="./page04.html">全站續儲贈彩金</a>
+        <a href="#">投注排名直播抽獎</a>
+      </nav>
+      <div class="mobilemenu-actions">
+        <a href="" class="ibtn-1">前往FM富馬首頁</a>
+        <a href="" class="ibtn-2">LINE 客服</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- top -->
+  <div class="pcmenu">
+    <div class="menu-a">
+      <a href="./index.html" class="noline">
+        <img src="./img/logo.png" alt="" srcset="">
+      </a>
+      <a href="./index.html">賽事排程</a>
+      <a href="./page02.html">競猜預測贈彩金</a>
+      <a href="./page03.html">下注世足簽到彩金</a>
+      <a href="./page04.html">全站續儲贈彩金</a>
+      <a href="#">投注排名直播抽獎</a>
+    </div>
+    <div class="menu-b">
+      <a href="" class="ibtn-1">前往FM富馬首頁</a>
+      <a href="" class="ibtn-2">LINE 客服</a>
+    </div>
+  </div> 
+  <picture>
+    <source media="(max-width: 820px)" srcset="./assets/page03_mb.png">
+    <img class="banner" src="./assets/page03.png" alt="">
+  </picture>
   <main class="page">
     <section id="app"></section>
   </main>
@@ -682,6 +743,48 @@ LINE客服申請
       `;
     }
     renderPage();
+
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+    const mobileMenuPanel = document.getElementById("mobileMenuPanel");
+    const mobileMenuBackdrop = document.getElementById("mobileMenuBackdrop");
+
+    function setMobileMenuOpen(isOpen){
+      if(!mobileMenu || !mobileMenuToggle || !mobileMenuPanel) return;
+      mobileMenu.classList.toggle("is-open", isOpen);
+      mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+      mobileMenuToggle.setAttribute("aria-label", isOpen ? "關閉選單" : "開啟選單");
+      document.body.classList.toggle("mobilemenu-open", isOpen);
+    }
+
+    if(mobileMenuToggle && mobileMenuPanel){
+      mobileMenuToggle.addEventListener("click", ()=>{
+        setMobileMenuOpen(!mobileMenu.classList.contains("is-open"));
+      });
+      mobileMenuPanel.querySelectorAll("a").forEach(link=>{
+        link.addEventListener("click", ()=>{ setMobileMenuOpen(false); });
+      });
+    }
+
+    if(mobileMenuBackdrop){
+      mobileMenuBackdrop.addEventListener("click", ()=>{ setMobileMenuOpen(false); });
+    }
+
+    document.addEventListener("keydown", event=>{
+      if(event.key === "Escape") setMobileMenuOpen(false);
+    });
+
+    window.addEventListener("resize", ()=>{
+      if(window.innerWidth > 900) setMobileMenuOpen(false);
+    });
+
+    const topPageBtn = document.querySelector(".toppage");
+    if(topPageBtn){
+      topPageBtn.addEventListener("click", event=>{
+        event.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
   </script>
 </body>
 </html>

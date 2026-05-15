@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FM 專屬活動三 | 全站續儲贈送彩金</title>
+  <title>FM 專屬活動一 | 競猜活動</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="./css/index.css">
-  <style>
+    <style>
     :root{
       --bg:#eaf4fb;
       --panel:#ffffffcc;
@@ -210,7 +210,7 @@
 
     .grid-2{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:1fr auto;
       gap:24px;
       margin-top:24px;
     }
@@ -345,6 +345,20 @@
       font-size:15px;
     }
 
+    .rule strong,
+    .md-bold{
+      font-weight:950;
+    }
+
+    .md-red{
+      color:#e00000;
+    }
+
+    .md-red-bold{
+      color:#e00000;
+      font-weight:950;
+    }
+
     .num{
       flex:0 0 28px;
       width:28px;
@@ -473,7 +487,7 @@
   <div class="mobilemenu" id="mobileMenu">
     <button class="mobilemenu-backdrop" id="mobileMenuBackdrop" type="button" aria-label="關閉選單"></button>
     <div class="mobilemenu-bar">
-      <a href="#" class="mobilemenu-logo">
+      <a href="./index.html" class="mobilemenu-logo">
         <img src="./img/logo.png" alt="FM 富馬">
       </a>
       <button
@@ -507,7 +521,7 @@
   <!-- top -->
   <div class="pcmenu">
     <div class="menu-a">
-      <a href="./index.html" class="noline">
+      <a href="#" class="noline">
         <img src="./img/logo.png" alt="" srcset="">
       </a>
       <a href="./index.html">賽事排程</a>
@@ -522,49 +536,92 @@
     </div>
   </div> 
   <picture>
-    <source media="(max-width: 820px)" srcset="./assets/page04_mb.png">
-    <img class="banner" src="./assets/page04.png" alt="">
+    <source media="(max-width: 820px)" srcset="./assets/page02_mb.png">
+    <img class="banner" src="./assets/page02.png" alt="">
   </picture>
   <main class="page">
     <section id="app"></section>
   </main>
 
   <script>
+    //Markdown
     const defaultMarkdown = `# FM富馬 邀您參與世界盃
-## 專屬活動三:全站續儲贈送彩金
-### 新會員 想加入 趁現在!~
+## 專屬活動一:世界盃競猜預測
+### 投出您的理想冠軍
 
-活動時間: 6/11 00:00 - 7/19 23:59
+開放預測日期: 6/1起 ~ 2026/6/27 23:59:59
 
-活動內容: FM 富馬邀您共享世界盃期間，活動期間內，全體會員，凡會員是"續儲(非首儲)"皆可享有一次領取此活動機會，儲值後，未下注前，將可申請續儲彩金
+活動內容: 2026年世界盃已擴編成48支隊伍參賽。本活動邀請您填寫預測八強、四強、冠軍三項預測，每項預測成功皆有贈送彩金。
 
-| 申請條件 | 續儲彩金比例 | 需求流水 | 贈送彩金上限 |
+預測活動 競猜填寫表: https://forms.gle/LEqzjLKMwmJPUyhW9
+預測活動 回傳表: https://docs.google.com/spreadsheets/d/1n_WceXrFBP3oO9Ea7V7UmpT9hYLRCn_UCuSFxeY6tpE/edit?resourcekey=&gid=524381490#gid=524381490
+
+#### 參賽隊伍
+| 組別 | 參賽隊伍 |
+|---|---|
+| A組 | 墨西哥、南非、南韓、捷克 |
+| B組 | 加拿大、波士尼亞與赫塞哥維納、卡達、瑞士 |
+| C組 | 巴西、摩洛哥、海地、蘇格蘭 |
+| D組 | 美國、巴拉圭、澳洲、土耳其 |
+| E組 | 德國、古拉索、象牙海岸、厄瓜多 |
+| F組 | 荷蘭、日本、瑞典、突尼西亞 |
+| G組 | 比利時、埃及、伊朗、紐西蘭 |
+| H組 | 西班牙、維德角、沙烏地阿拉伯、烏拉圭 |
+| I組 | 法國、塞內加爾、伊拉克、挪威 |
+| J組 | 阿根廷、阿爾及利亞、奧地利、約旦 |
+| K組 | 葡萄牙、剛果民主共和國、烏茲別克、哥倫比亞 |
+| L組 | 英格蘭、克羅埃西亞、迦納、巴拿馬 |
+
+48強小組賽：6/11 ～ 6/27，產生32強。
+32強：6/28 ～ 7/3，產生16強。
+16強：7/4 ～ 7/7，產生8強。
+8強：7/9 ～ 7/11，產生4強。
+4強準決賽：7/14 ～ 7/15，產生2強。
+冠軍決賽：7/19，產生冠軍。
+
+預測表單填寫時間: 6/1起至6/27 23:59截止，於截止日期後新增之紀錄將視同無效。不支持重複填寫，如重複填寫之會員，一率以最初填寫表單為主，其餘視同無效。
+
+#### 預測8強贈送彩金
+| 預測項目 | 預測成功 幾個隊伍 | 贈送彩金 | 彩金流水 |
 |---|---:|---:|---:|
-| 儲值後，未投注前 贈送彩金選任例一擇一申請 | 5% | 本+彩5倍 | 5,888 |
-| "首筆儲值不適用" | 8% | 本+彩8倍 | 8,888 |
+| 預測8強 | 8 | 5888 | 1倍 |
+| 預測8強 | 7 | 3888 | 1倍 |
+| 預測8強 | 6 | 1888 | 1倍 |
+| 預測8強 | 5 | 588 | 1倍 |
+| 預測8強 | 4 | 388 | 1倍 |
+| 預測8強 | 3 | 288 | 1倍 |
+| 預測8強 | 2 | 188 | 1倍 |
 
-會員儲值前，帳上額度需已清零，或提領出去，帳上餘額低於100，才能再次儲值，才得以申請本活動，如非此狀況，則需請會員帳上現有額度清零後再次儲值前來申請
+#### 預測4強贈送彩金
+| 預測項目 | 預測成功 幾個隊伍 | 贈送彩金 | 彩金流水 |
+|---|---:|---:|---:|
+| 預測4強 | 4 | 8888 | 1倍 |
+| 預測4強 | 3 | 1888 | 1倍 |
+| 預測4強 | 2 | 888 | 1倍 |
 
-舉例
+#### 預測冠軍贈送彩金
+| 預測項目 | 預測成功 幾個隊伍 | 贈送彩金 | 彩金流水 |
+|---|---:|---:|---:|
+| 預測冠軍 | 1 | 1888 | 1倍 |
 
-A會員 儲值金額 10000  選擇5%比例，可獲得500續儲彩金，需求流水為 (10000+500)*5 =52500 完成有效投注52500即可提領
-
-B會員 儲值金額為10000 選擇8%比例，可獲得800續儲彩金，需求流水為 (10000+800)*8 =86400 完成有效投注86400即可提領
-
-申請方式: 告知客服申請 全站續儲彩金
+申請方式: 告知客服申請 競猜名單彩金
 
 LINE客服申請
 
 活動規則
 
-1.活動期間內，凡會員是"續儲(非首儲)" ，儲值成功，且未下注，即可向LINE客服申請續儲彩金，贈送比例二擇一申請。
-2.會員儲值前，帳上額度需已清零，或提領出去，帳上餘額低於100，才能再次儲值，才得以申請本活動，如非此狀況，則需請會員帳上現有額度清零後再次儲值前來申請，活動期間內，全體會員限定享有一次此活動，不可重複申請。
-3.如提出申請前已下注，將不符合領取資格，視同放棄，無法後續申請。
-4.此活動不適用在會員帳號創帳以來的"首筆儲值"，不可參與本活動。
-5.續儲可多筆儲值，30分鐘內之儲值，且都未下注，儲值金額可整合一起總金額來申請續儲彩來計算贈送比例，贈送比例不得超過贈送彩金上限 (請跟客服主動告知)
-6.嚴禁刷水、套利、無風險下注...等行為，一經查證我方將取消優惠或索回已支付的全部優惠紅利，包含盈利金額將回收，退還本金，列入高風險名單不予往來。
-7.本活動不支持下注，"彩票" "棋牌" "電競"遊戲，產生之有效投注，系統不予計算。
-8.FM富馬娛樂城保留對活動的最終解釋權，以及在無通知的情況下修改、終止活動的權利，適用於所有優惠。`;
+1.領取條件:於FM富馬娛樂城6/1-7/31 [red]全體資金內累計有效下注達指定門檻5000[/red]，並填寫預測隊伍活動，預測8強、4強、冠軍，三項預測項目可同時參與預測，預測成功，可同時獲獎。
+2.會員可聯繫LINE客服查詢是否符合報名資格，符合條件之會員，客服將會提供報名申請單給會員填寫（表單內容請正確填寫）。
+3.預測表單填寫時間:6/1起至6/27 23:59截止，於截止日期後新增之紀錄將視同無效。
+4.競猜得獎名單將於7/20 20:00前公布於此活動頁面，需等待公告釋出即可時間放送彩金申請，[red]請會員於7/31前洽詢官方LINE客服申請派彩，如逾期申請將視同放棄[/red]。
+5.如會員填寫之表單有預測成功於得獎名單內，但會員[red]未於活動期間內6/1-7/31，全體資金內累計有效下注達5000，將無法派發彩金，會員可最晚於7/31 23:59前補足有效投注[/red]，再次洽詢客服補申請派發彩金，超過時限申請將視同放棄。
+6.**每個富馬會員帳號僅限填寫一次一個預測表單，若有重複填寫會員帳號之情形，一率以最初填寫表單為主，其餘視同無效。**
+
+競猜預測成功 獲獎名單
+
+八強競猜獎金名單：敬請期待
+四強競猜獎金名單：敬請期待
+冠軍競猜獎金名單：敬請期待`;
 
     const app = document.getElementById("app");
     function escapeHtml(value){
@@ -576,6 +633,13 @@ LINE客服申請
         .replaceAll("'","&#039;");
     }
 
+    function renderInline(value){
+      return escapeHtml(value)
+        .replace(/\[red-bold\]([\s\S]*?)\[\/red-bold\]/g, '<strong class="md-red-bold">$1</strong>')
+        .replace(/\[red\]([\s\S]*?)\[\/red\]/g, '<span class="md-red">$1</span>')
+        .replace(/\*\*([\s\S]*?)\*\*/g, '<strong class="md-bold">$1</strong>');
+    }
+
     function parseMarkdown(markdown){
       const lines = markdown.split(/\n/).map(line => line.trim()).filter(Boolean);
 
@@ -584,19 +648,34 @@ LINE客服申請
         subtitle: "",
         tagline: "",
         time: "",
-        content: "",
+        contentLines: [],
         warning: "",
-        table: [],
-        examples: [],
+        tables: [],
         applyText: "",
         serviceText: "",
-        rules: []
+        rules: [],
+        awardTables: [
+          { title: "八強競猜獎金名單", rows: [] },
+          { title: "四強競猜獎金名單", rows: [] },
+          { title: "冠軍競猜獎金名單", rows: [] }
+        ]
       };
 
-      let tableRows = [];
-      let isExampleArea = false;
+      let tableTitle = "";
+      let currentTable = null;
+      let isRulesArea = false;
+      let isAwardArea = false;
+
+      function closeTable(){
+        if(currentTable && currentTable.rows.length){
+          data.tables.push(currentTable);
+        }
+        currentTable = null;
+      }
 
       for(const line of lines){
+        if(!line.startsWith("|")) closeTable();
+
         if(line.startsWith("# ")){
           data.title = line.replace("# ","").trim();
           continue;
@@ -612,41 +691,23 @@ LINE客服申請
           continue;
         }
 
-        if(line.startsWith("活動時間:")){
+        if(line.startsWith("#### ")){
+          tableTitle = line.replace("#### ","").trim();
+          continue;
+        }
+
+        if(line.startsWith("活動時間:") || line.startsWith("開放預測日期:")){
           data.time = line;
           continue;
         }
 
         if(line.startsWith("活動內容:")){
-          data.content = line.replace("活動內容:","").trim();
-          continue;
-        }
-
-        if(line.startsWith("|")){
-          if(!line.includes("---")){
-            tableRows.push(line.split("|").slice(1,-1).map(cell => cell.trim()));
-          }
-          continue;
-        }
-
-        if(line.startsWith("會員儲值前")){
-          data.warning = line;
-          continue;
-        }
-
-        if(line === "舉例"){
-          isExampleArea = true;
-          continue;
-        }
-
-        if(isExampleArea && (line.startsWith("A會員") || line.startsWith("B會員"))){
-          data.examples.push(line);
+          data.contentLines.push(line.replace("活動內容:","").trim());
           continue;
         }
 
         if(line.startsWith("申請方式:")){
           data.applyText = line.replace("申請方式:","").trim();
-          isExampleArea = false;
           continue;
         }
 
@@ -655,12 +716,40 @@ LINE客服申請
           continue;
         }
 
+        if(line === "活動規則"){
+          isRulesArea = true;
+          continue;
+        }
+
+        if(line === "競猜預測成功 獲獎名單"){
+          isAwardArea = true;
+          continue;
+        }
+
+        if(isAwardArea) continue;
+
+        if(line.startsWith("|")){
+          if(!currentTable){
+            currentTable = { title: tableTitle, rows: [] };
+            tableTitle = "";
+          }
+          if(!line.includes("---")){
+            currentTable.rows.push(line.split("|").slice(1,-1).map(cell => cell.trim()));
+          }
+          continue;
+        }
+
         if(/^\d+\./.test(line)){
           data.rules.push(line);
+          continue;
         }
+
+        data.contentLines.push(line);
       }
 
-      data.table = tableRows;
+      closeTable();
+      data.table = data.tables[0]?.rows || [];
+      data.content = data.contentLines.join("\n");
       return data;
     }
 
@@ -681,6 +770,15 @@ LINE客服申請
           </table>
         </div>
       `;
+    }
+
+    function renderTables(tables){
+      return tables.map(item => `
+        <div style="margin-top:18px">
+          ${item.title ? `<h3 style="margin:0 0 10px;color:#2a4568;font-size:20px;font-weight:950">${escapeHtml(item.title)}</h3>` : ""}
+          ${renderTable(item.rows)}
+        </div>
+      `).join("");
     }
 
     function renderPage(){
@@ -705,27 +803,23 @@ LINE客服申請
         <section class="grid-2">
           <article class="card">
             <h2>活動內容</h2>
-            <p>${escapeHtml(data.content)}</p>
+            <p>${escapeHtml(data.content).replaceAll("\n", "<br>")}</p>
           </article>
 
-          <article class="card warning">
+          <!--<article class="card warning">
             <h2>重要申請門檻</h2>
             <p>${escapeHtml(data.warning)}</p>
-          </article>
+          </article>-->
         </section>
 
         <section class="section">
           <div class="section-head">
             <div>
-              <h2>申請條件與比例</h2>
+              <h2>競猜預測活動資料</h2>
               <p></p>
             </div>
           </div>
-          ${renderTable(data.table)}
-
-          <div class="examples">
-            ${data.examples.map(item => `<div class="example">${escapeHtml(item)}</div>`).join("")}
-          </div>
+          ${renderTables(data.tables)}
         </section>
 
         <section class="section rules-wrap">
@@ -743,7 +837,7 @@ LINE客服申請
                 return `
                   <div class="rule">
                     <span class="num">${index + 1}</span>
-                    <span>${escapeHtml(cleanRule)}</span>
+                    <span>${renderInline(cleanRule)}</span>
                   </div>
                 `;
               }).join("")}
@@ -751,6 +845,37 @@ LINE客服申請
           </div>
 
           
+        </section>
+
+        <section class="section">
+          <div class="section-head">
+            <div>
+              <h2>競猜預測成功 獲獎名單</h2>
+            </div>
+          </div>
+          <div style="margin-bottom:8px;color:#455a75;font-size:15px;line-height:2">
+            <div>申請方式：告知客服申請 競猜名單彩金</div>
+            <div><a href="#" style="display:inline-flex;align-items:center;padding:8px 18px;border-radius:8px;background:#07b53b;color:#fff;font-weight:900;text-decoration:none">LINE客服申請</a></div>
+            <div style="color:#e00000;font-weight:700">於名單內之會員，請於7/13 23:59前向LINE客服領取，逾期視同放棄。</div>
+          </div>
+          ${data.awardTables.map(t => `
+            <div style="margin-top:24px">
+              <h3 style="margin:0 0 10px;color:#2a4568;font-size:20px;font-weight:950">${escapeHtml(t.title)}</h3>
+              <div class="promo-table">
+                <table>
+                  <thead>
+                    <tr><th>會員帳號</th><th>預測隊伍</th><th>成功預測組數</th><th>贈送彩金</th></tr>
+                  </thead>
+                  <tbody>
+                    ${t.rows.length
+                      ? t.rows.map(row => `<tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")
+                      : `<tr><td colspan="4" style="text-align:center;color:#64748b;padding:28px 0">敬請期待</td></tr>`
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `).join("")}
         </section>
       `;
     }
@@ -798,5 +923,6 @@ LINE客服申請
       });
     }
   </script>
+
 </body>
 </html>
