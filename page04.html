@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FM 專屬活動三 | 全站續儲贈送彩金</title>
+  <title>FM 專屬活動三 | 全站續儲贈彩金</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="./css/index.css">
   <style>
@@ -345,6 +345,20 @@
       font-size:15px;
     }
 
+    .rule strong,
+    .md-bold{
+      font-weight:950;
+    }
+
+    .md-red{
+      color:#e00000;
+    }
+
+    .md-red-bold{
+      color:#e00000;
+      font-weight:950;
+    }
+
     .num{
       flex:0 0 28px;
       width:28px;
@@ -495,7 +509,7 @@
         <a href="./page02.html">競猜預測贈彩金</a>
         <a href="./page03.html">下注世足簽到彩金</a>
         <a href="./page04.html">全站續儲贈彩金</a>
-        <a href="#">投注排名直播抽獎</a>
+        <a href="./page05.html">全民直播抽獎</a>
       </nav>
       <div class="mobilemenu-actions">
         <a href="" class="ibtn-1">前往FM富馬首頁</a>
@@ -514,7 +528,7 @@
       <a href="./page02.html">競猜預測贈彩金</a>
       <a href="./page03.html">下注世足簽到彩金</a>
       <a href="./page04.html">全站續儲贈彩金</a>
-      <a href="#">投注排名直播抽獎</a>
+      <a href="./page05.html">全民直播抽獎</a>
     </div>
     <div class="menu-b">
       <a href="" class="ibtn-1">前往FM富馬首頁</a>
@@ -531,7 +545,7 @@
 
   <script>
     const defaultMarkdown = `# FM富馬 邀您參與世界盃
-## 專屬活動三:全站續儲贈送彩金
+## 專屬活動三:全站續儲贈彩金
 ### 新會員 想加入 趁現在!~
 
 活動時間: 6/11 00:00 - 7/19 23:59
@@ -540,7 +554,7 @@
 
 | 申請條件 | 續儲彩金比例 | 需求流水 | 贈送彩金上限 |
 |---|---:|---:|---:|
-| 儲值後，未投注前 贈送彩金選任例一擇一申請 | 5% | 本+彩5倍 | 5,888 |
+| 儲值後，未投注前 贈送比例二擇一申請 | 5% | 本+彩5倍 | 5,888 |
 | "首筆儲值不適用" | 8% | 本+彩8倍 | 8,888 |
 
 會員儲值前，帳上額度需已清零，或提領出去，帳上餘額低於100，才能再次儲值，才得以申請本活動，如非此狀況，則需請會員帳上現有額度清零後再次儲值前來申請
@@ -574,6 +588,13 @@ LINE客服申請
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
+    }
+
+    function renderInline(value){
+      return escapeHtml(value)
+        .replace(/\[red-bold\]([\s\S]*?)\[\/red-bold\]/g, '<strong class="md-red-bold">$1</strong>')
+        .replace(/\[red\]([\s\S]*?)\[\/red\]/g, '<span class="md-red">$1</span>')
+        .replace(/\*\*([\s\S]*?)\*\*/g, '<strong class="md-bold">$1</strong>');
     }
 
     function parseMarkdown(markdown){
@@ -705,7 +726,7 @@ LINE客服申請
         <section class="grid-2">
           <article class="card">
             <h2>活動內容</h2>
-            <p>${escapeHtml(data.content)}</p>
+            <p>${renderInline(data.content).replaceAll("\n", "<br>")}</p>
           </article>
 
           <article class="card warning">
@@ -743,7 +764,7 @@ LINE客服申請
                 return `
                   <div class="rule">
                     <span class="num">${index + 1}</span>
-                    <span>${escapeHtml(cleanRule)}</span>
+                    <span>${renderInline(cleanRule)}</span>
                   </div>
                 `;
               }).join("")}

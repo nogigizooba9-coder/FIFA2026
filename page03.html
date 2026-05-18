@@ -345,6 +345,20 @@
       font-size:15px;
     }
 
+    .rule strong,
+    .md-bold{
+      font-weight:950;
+    }
+
+    .md-red{
+      color:#e00000;
+    }
+
+    .md-red-bold{
+      color:#e00000;
+      font-weight:950;
+    }
+
     .num{
       flex:0 0 28px;
       width:28px;
@@ -495,7 +509,7 @@
         <a href="./page02.html">競猜預測贈彩金</a>
         <a href="./page03.html">下注世足簽到彩金</a>
         <a href="./page04.html">全站續儲贈彩金</a>
-        <a href="#">投注排名直播抽獎</a>
+        <a href="./page05.html">全民直播抽獎</a>
       </nav>
       <div class="mobilemenu-actions">
         <a href="" class="ibtn-1">前往FM富馬首頁</a>
@@ -514,7 +528,7 @@
       <a href="./page02.html">競猜預測贈彩金</a>
       <a href="./page03.html">下注世足簽到彩金</a>
       <a href="./page04.html">全站續儲贈彩金</a>
-      <a href="#">投注排名直播抽獎</a>
+      <a href="./page05.html">全民直播抽獎</a>
     </div>
     <div class="menu-b">
       <a href="" class="ibtn-1">前往FM富馬首頁</a>
@@ -549,7 +563,7 @@ LINE客服申請
 活動規則
 
 1.會員每日需於任一體育遊戲館，下注體育賽事，累計體育館總有效投注達5000，即可於每日23:30前，向line客服獲得體育簽到彩金，超過23:30未向line客服提出申請，將被判定不符合申請資格，視同放棄。
-2.與客服提出申請當下，客服將查閱會員當日體育館當日有效投注須符合活動門檻才符合派彩資格，當日體育館有效投注必須是已結算之注單系統才會給予有效投注，體育平台賽事結算可能非當日比賽，或當日比賽完成但可能因體育平台原因無法立即結算注單，平台方最久可能需72小時內才會陸續結算等原因，系統無法給予有效投注，無法達成當日本站派彩資格，將不視為本公司問題，無法給予此活動派發資格做補償。
+2.與客服提出申請當下，客服將查閱會員當日體育館當日有效投注須符合活動門檻才符合派彩資格，當日體育館有效投注必須是已結算之注單系統才會給予有效投注，體育平台賽事結算可能非當日比賽，或當日比賽完成但可能因體育平台原因無法立即結算注單，平台方最久可能需72小時內才會陸續結算等原因，系統無法給予有效投注，無法達成當日本活動資格，將不視為本公司問題，無法給予此活動派發資格做補償。
 3.體育簽到彩金不限制遊戲館，滿足一倍流水即可提領。
 4.嚴禁刷水、套利、無風險下注...等行為，一經查證我方將取消彩金申請相關權利。
 5.活動我方有最終解釋權，如有未盡說明事宜，將以官方說明為最終依據。`;
@@ -562,6 +576,13 @@ LINE客服申請
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
+    }
+
+    function renderInline(value){
+      return escapeHtml(value)
+        .replace(/\[red-bold\]([\s\S]*?)\[\/red-bold\]/g, '<strong class="md-red-bold">$1</strong>')
+        .replace(/\[red\]([\s\S]*?)\[\/red\]/g, '<span class="md-red">$1</span>')
+        .replace(/\*\*([\s\S]*?)\*\*/g, '<strong class="md-bold">$1</strong>');
     }
 
     function parseMarkdown(markdown){
@@ -693,7 +714,7 @@ LINE客服申請
         <section class="grid-2">
           <article class="card">
             <h2>活動內容</h2>
-            <p>${escapeHtml(data.content)}</p>
+            <p>${renderInline(data.content).replaceAll("\n", "<br>")}</p>
           </article>
 
           <!--<article class="card warning">
@@ -731,7 +752,7 @@ LINE客服申請
                 return `
                   <div class="rule">
                     <span class="num">${index + 1}</span>
-                    <span>${escapeHtml(cleanRule)}</span>
+                    <span>${renderInline(cleanRule)}</span>
                   </div>
                 `;
               }).join("")}

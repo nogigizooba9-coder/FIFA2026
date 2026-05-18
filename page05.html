@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FM 專屬活動四 | 全民直播抽獎</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <style>
+    :root{
+      --bg:#eaf4fb;
+      --panel:#ffffffcc;
+      --panel2:#f7fbff;
+      --ink:#243b5a;
+      --muted:#64748b;
+      --blue:#2563eb;
+      --line:#dbe8f3;
+      --gold:#d9a77a;
+      --gold-dark:#bf8556;
+      --warning-bg:#fff4e8;
+      --warning:#9a5b22;
+      --shadow:0 22px 60px rgba(54,86,118,.16);
+      --soft-shadow:0 12px 32px rgba(54,86,118,.10);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","Microsoft JhengHei",Arial,sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.92), transparent 28%),
+        radial-gradient(circle at 88% 16%, rgba(197,224,244,.88), transparent 30%),
+        linear-gradient(180deg,#f7fbff 0%,var(--bg) 100%);
+      color:var(--ink);
+    }
+
+    .banner{ width:100%; }
+
+    .page{
+      width:min(1180px, calc(100% - 40px));
+      margin:36px auto 72px;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      min-height:330px;
+      border-radius:36px;
+      padding:44px;
+      background:
+        radial-gradient(circle at 82% 26%, rgba(255,211,169,.55), transparent 22%),
+        radial-gradient(circle at 74% 76%, rgba(118,178,230,.26), transparent 28%),
+        linear-gradient(135deg,#ffffff 0%,#ecf6fe 48%,#dcecf7 100%);
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,.82);
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:1;
+      max-width:690px;
+    }
+
+    .hero-pill{
+      display:inline-flex;
+      align-items:center;
+      padding:9px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.78);
+      color:#34506f;
+      font-size:15px;
+      font-weight:800;
+      box-shadow:var(--soft-shadow);
+    }
+
+    .hero h1{
+      margin:26px 0 10px;
+      font-size:54px;
+      line-height:1.05;
+      font-weight:950;
+      letter-spacing:-.04em;
+      color:#263f63;
+    }
+
+    .hero h2{
+      margin:0 0 6px;
+      font-size:28px;
+      color:var(--blue);
+      font-weight:900;
+    }
+
+    .hero h3{
+      margin:0;
+      font-size:18px;
+      color:#263f63;
+      font-weight:800;
+      line-height:1.6;
+    }
+
+    .time-card{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      width:max-content;
+      max-width:100%;
+      margin-top:32px;
+      padding:16px 20px;
+      border-radius:20px;
+      background:rgba(255,255,255,.74);
+      box-shadow:var(--soft-shadow);
+      color:#344a65;
+      font-weight:750;
+    }
+
+    .cta-panel{
+      position:absolute;
+      right:42px;
+      top:calc(50% - 115px);
+      width:330px;
+      height:230px;
+      padding:26px;
+      border-radius:28px;
+      background:
+        radial-gradient(circle at 80% 0%, rgba(217,167,122,.32), transparent 36%),
+        rgba(255,255,255,.76);
+      border:1px solid rgba(255,255,255,.86);
+      box-shadow:var(--soft-shadow);
+    }
+
+    .cta-panel h2{
+      margin:0 0 12px;
+      font-size:24px;
+      font-weight:950;
+    }
+
+    .cta-panel p{
+      margin:0 0 20px;
+      line-height:1.75;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .btn{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      width:100%;
+      height:50px;
+      border-radius:999px;
+      text-decoration:none;
+      background:#07b53b;
+      color:#fff;
+      font-weight:900;
+      box-shadow:0 12px 26px rgba(180,120,75,.26);
+    }
+
+    .section{ margin-top:34px }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:18px;
+      margin-bottom:16px;
+    }
+
+    .section-head h2{
+      margin:0;
+      font-size:28px;
+      font-weight:950;
+      color:#2a4568;
+    }
+
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .card{
+      border:1px solid rgba(255,255,255,.78);
+      background:var(--panel);
+      border-radius:28px;
+      box-shadow:var(--soft-shadow);
+      padding:28px;
+      backdrop-filter:blur(16px);
+    }
+
+    .card h2{
+      margin:0 0 12px;
+      font-size:22px;
+      font-weight:900;
+      color:#2a4568;
+    }
+
+    .card p{
+      margin:0;
+      color:#455a75;
+      line-height:1.85;
+      font-size:15px;
+    }
+
+    /* 流程步驟 */
+    .steps{
+      display:grid;
+      grid-template-columns:1fr auto 1fr auto 1fr;
+      align-items:center;
+      gap:16px;
+      padding:32px 28px;
+      border-radius:28px;
+      background:rgba(255,255,255,.76);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow:var(--soft-shadow);
+    }
+
+    .step{
+      text-align:center;
+    }
+
+    .step-num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#e4b78f,#c88e61);
+      color:#fff;
+      font-size:20px;
+      font-weight:950;
+      margin-bottom:12px;
+      box-shadow:0 8px 18px rgba(180,120,75,.28);
+    }
+
+    .step-title{
+      font-size:16px;
+      font-weight:900;
+      color:#263f63;
+      margin-bottom:6px;
+    }
+
+    .step-desc{
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.65;
+    }
+
+    .step-arrow{
+      font-size:28px;
+      color:#c4d8ea;
+      font-weight:900;
+      text-align:center;
+    }
+
+    /* 獎品表格 */
+    .promo-table{
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.9);
+      background:rgba(255,255,255,.76);
+      box-shadow:var(--soft-shadow);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      table-layout:fixed;
+    }
+
+    th{
+      background:#edf5fb;
+      color:#3b5574;
+      font-size:15px;
+      padding:18px 14px;
+      text-align:left;
+    }
+
+    td{
+      padding:16px 14px;
+      color:#344a65;
+      font-size:15px;
+      line-height:1.55;
+      border-top:1px solid var(--line);
+      vertical-align:middle;
+    }
+
+    th:not(:last-child), td:not(:last-child){
+      border-right:1px solid var(--line);
+    }
+
+    .total-row td{
+      background:#edf5fb;
+      font-weight:900;
+      color:#2a4568;
+    }
+
+    /* 活動規則 */
+    .rules-wrap{
+      display:grid;
+      gap:24px;
+      align-items:start;
+    }
+
+    .rules{ display:grid; gap:12px; }
+
+    .rule{
+      display:flex;
+      gap:12px;
+      padding:15px 16px;
+      border-radius:18px;
+      background:var(--panel2);
+      box-shadow:0 8px 22px rgba(54,86,118,.07);
+      color:#405774;
+      line-height:1.75;
+      font-size:15px;
+    }
+
+    .num{
+      flex:0 0 28px;
+      width:28px;
+      height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:#f0d0b2;
+      color:#7d4f2c;
+      font-weight:900;
+      font-size:15px;
+      margin-top:2px;
+    }
+
+    .md-bold{ font-weight:950; }
+    .md-red{ color:#e00000; }
+    .md-red-bold{ color:#e00000; font-weight:950; }
+    .md-green{ color:#07b53b; }
+
+    /* 獎品展示 */
+    .showcase-banner{
+      background: linear-gradient(180deg,#eef5ff 0%,#eff5fc 48%,#edf5ff 100%);
+      border: 1px solid rgba(181,201,233,0.55);
+      box-shadow: 0 18px 38px rgba(119,152,211,0.12);
+      border-radius: 22px;
+      padding: 2.4rem 1.6rem 2rem;
+    }
+
+    .showcase-banner-head{
+      margin-bottom:20px;
+    }
+
+    .showcase-banner-head h2{
+      margin:0 0 4px;
+      font-size:28px;
+      font-weight:950;
+      color:#2a4568;
+    }
+
+    .showcase-banner-head p{
+      margin:0;
+      font-size:15px;
+      color:var(--muted);
+    }
+
+    .prize-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:16px;
+    }
+
+    .prize-card{
+      background:var(--panel2);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      text-align:center;
+      box-shadow:0 6px 18px rgba(54,86,118,.07);
+    }
+
+    .prize-card-img{
+      width:100%;
+      aspect-ratio:1 / 1;
+      border-radius:12px;
+      background:#edf5fb;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:10px;
+      overflow:hidden;
+    }
+
+    .prize-card-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border-radius:12px;
+    }
+
+    .prize-card-img-placeholder{
+      font-size:32px;
+    }
+
+    .prize-card-name{
+      font-size:13px;
+      font-weight:800;
+      color:#2a4568;
+      line-height:1.5;
+      margin-bottom:4px;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+
+    .prize-card-qty{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    @media (max-width:820px){
+      .showcase-banner{ padding:16px; border-radius:20px; }
+      .showcase-banner-head h2{ font-size:20px; }
+      .prize-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:10px; }
+      .prize-card{ padding:12px; }
+      .prize-card-name{ font-size:12px; }
+      .prize-card-img-placeholder{ font-size:26px; }
+    }
+
+    @media (max-width:820px){
+      .page{
+        width:min(420px, calc(100% - 24px));
+        margin:18px auto 40px;
+      }
+
+      .hero{
+        min-height:0;
+        padding:26px;
+        border-radius:30px;
+      }
+
+      .hero h1{ font-size:34px }
+      .hero h2{ font-size:20px }
+      .hero h3{ font-size:15px }
+
+      .time-card{
+        width:100%;
+        font-size:15px;
+        line-height:1.6;
+      }
+
+      .steps{
+        grid-template-columns:1fr;
+        gap:8px;
+        padding:24px;
+      }
+
+      .step-arrow{ transform:rotate(90deg) }
+
+      .section-head{ display:block }
+      .section-head h2{ font-size:23px; margin-bottom:6px }
+
+      .promo-table{ overflow-x:auto }
+      table{ min-width:620px }
+      th, td{ font-size:14px }
+
+      .rule{ font-size:15px }
+      .cta-panel{ position:static; width:100%; height:auto; margin-top:28px }
+
+      .card{ padding:22px; border-radius:24px }
+    }
+  </style>
+</head>
+
+<body id="pageTop">
+
+  <a href="#pageTop" class="toppage" aria-label="回到頁面頂端">
+    <img src="./img/top.png" alt="" srcset="">
+  </a>
+
+  <div class="mobilemenu" id="mobileMenu">
+    <button class="mobilemenu-backdrop" id="mobileMenuBackdrop" type="button" aria-label="關閉選單"></button>
+    <div class="mobilemenu-bar">
+      <a href="./index.html" class="mobilemenu-logo">
+        <img src="./img/logo.png" alt="FM 富馬">
+      </a>
+      <button
+        class="mobilemenu-toggle"
+        id="mobileMenuToggle"
+        type="button"
+        aria-label="開啟選單"
+        aria-expanded="false"
+        aria-controls="mobileMenuPanel"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobilemenu-panel" id="mobileMenuPanel">
+      <nav class="mobilemenu-links" aria-label="手機版主選單">
+        <a href="./index.html">賽事排程</a>
+        <a href="./page02.html">競猜預測贈彩金</a>
+        <a href="./page03.html">下注世足簽到彩金</a>
+        <a href="./page04.html">全站續儲贈彩金</a>
+        <a href="./page05.html">全民直播抽獎</a>
+      </nav>
+      <div class="mobilemenu-actions">
+        <a href="" class="ibtn-1">前往FM富馬首頁</a>
+        <a href="" class="ibtn-2">LINE 客服</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- top -->
+  <div class="pcmenu">
+    <div class="menu-a">
+      <a href="./index.html" class="noline">
+        <img src="./img/logo.png" alt="" srcset="">
+      </a>
+      <a href="./index.html">賽事排程</a>
+      <a href="./page02.html">競猜預測贈彩金</a>
+      <a href="./page03.html">下注世足簽到彩金</a>
+      <a href="./page04.html">全站續儲贈彩金</a>
+      <a href="./page05.html">全民直播抽獎</a>
+    </div>
+    <div class="menu-b">
+      <a href="" class="ibtn-1">前往FM富馬首頁</a>
+      <a href="" class="ibtn-2">LINE 客服</a>
+    </div>
+  </div>
+
+  <picture>
+    <source media="(max-width: 820px)" srcset="./assets/page05_mb.png">
+    <img class="banner" src="./assets/page05.png" alt="">
+  </picture>
+
+  <main class="page">
+    <section id="app"></section>
+  </main>
+
+  <script>
+    const prizes = [
+      { name:"iphone 17 pro max 256g",           qty:5,  price:43900,  total:219500, icon:"📱" },
+      { name:"RAZER 雷蛇x BLACKPINK 聯名套組－Enki X電競椅＋ORNATA V3 TKL鍵盤＋DeathAdder Essential滑鼠＋Gigantus V2鼠墊", qty:5, price:24000, total:120000, icon:"🎮" },
+      { name:"Apple 蘋果AirPods Max 2",           qty:5,  price:19000,  total:95000,  icon:"🎧" },
+      { name:"LG 樂金 寵物版加強淨化循環扇空氣清淨機（PuriCare360°/AS651DSS0/過敏源剋星）", qty:5, price:16900, total:84500, icon:"💨" },
+      { name:"Nintendo Switch 2 (NS2) 瑪利歐賽車世界 主機組合", qty:5, price:16000, total:80000, icon:"🕹️" },
+      { name:"Samsung 三星S32FM703UC FollowMe移動式 AI智慧聯網螢幕（32型/4K/60Hz/4ms/HDMI/喇叭/VA/Type-C）", qty:5, price:13500, total:67500, icon:"🖥️" },
+      { name:"SONY 索尼WH-1000XM6 旗艦無線降噪耳機",          qty:5,  price:13500,  total:67500,  icon:"🎵" },
+      { name:"Apple 蘋果iPad A16（11代）128G WiFi",             qty:5,  price:10500,  total:52500,  icon:"📲" },
+      { name:"飛利浦全自動義式咖啡機（EP2224/10）",             qty:5,  price:10000,  total:50000,  icon:"☕" },
+      { name:"7-11禮卷 10,000",                                  qty:5,  price:10000,  total:50000,  icon:"🎁" },
+      { name:"7-11禮卷 5,000",                                   qty:5,  price:5000,   total:25000,  icon:"🎁" },
+      { name:"FM彩金 3,888",                                     qty:5,  price:3888,   total:19440,  icon:"💰" },
+      { name:"FM彩金 2,888",                                     qty:20, price:2888,   total:57760,  icon:"💰" },
+      { name:"FM彩金 1,888",                                     qty:20, price:1888,   total:37760,  icon:"💰" },
+      { name:"FM彩金 888",                                       qty:20, price:888,    total:17760,  icon:"💰" },
+    ];
+
+    const rules = [
+      "會員需於 6/11 00:00 - 7/19 23:59活動期間內，於FM富馬本站累計儲值50,000，即可享有抽獎資格。",
+      "符合抽獎資格（活動期間內6/11 00:00 - 7/19 23:59 累計儲值滿50,000）之會員，請主動於7/24 23:59前聯繫LINE客服索取抽獎序號。",
+      "抽獎序號領取期限：7/24 23:59前，聯繫LINE客服索取抽獎序號，7/24 23:59前尚未聯繫LINE客服索取到抽獎序號者，視同放棄權益。",
+      "直播抽獎時間：7/25 20:00 線上直播，請會員透過直播連結前往觀看。",
+      "直播抽獎得獎者名單：直播結束時，將會於7/21 12:00後將得獎者抽獎序號於得獎名單上公告，也可於名單上確認抽獎編號是否得獎，得獎者請於2026/8/5前，聯繫LINE客服領取獎品，逾期領取視同放棄。",
+      "**領獎規範需知：**\n[red]*領取實體商品者:需提供寄件資料[/red]\n【收件者姓名】\n【收件者電話】\n【收件者郵遞區號】\n【收件者地址】\n此次活動商品由物流公司直送，會聯絡收件者所提供之手機電話進行聯繫，\n如商品因得獎者所提供電話或地址填寫錯誤導致商品寄送失敗退回，將視同會員放棄領獎資格，不作補寄、補償等。\n[red]*領取彩金者:[/red]向客服領取，客服當下將彩金直接派發至會員帳號上，1倍流水即可提領。\n[red]請於2026/8/5日前[/red]，聯繫[green]LINE客服[/green]領取獎品，逾期領取視同放棄。",
+      "嚴禁刷水、套利、無風險下注等行為，一經查證我方將取消優惠或索回已支付的全部優惠紅利，包含盈利金額將回收，退還本金，並且取消領獎資格，列入高風險名單不予往來。",
+      "FM富馬娛樂城保留對活動的最終解釋權，以及在無通知的情況下修改、終止活動的權利，適用於所有優惠。",
+    ];
+
+    function fmt(n){ return n.toLocaleString("zh-TW"); }
+
+    function escapeHtml(v){
+      return String(v ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    const grandTotal = prizes.reduce((s, p) => s + p.total, 0);
+
+    const app = document.getElementById("app");
+    app.innerHTML = `
+      <section class="hero">
+        <div class="hero-content">
+          <div class="hero-pill">FM富馬｜世界盃期間限定</div>
+          <h1>FM富馬 邀您參與世界盃</h1>
+          <h2>專屬活動四：全民直播抽獎</h2>
+          <h3>齊聚富馬世界盃同歡慶，全民直播抽獎<br>贈送總額百萬獎品、彩金 等你領！</h3>
+          <div class="time-card">📅 活動時間：6/11 00:00 - 7/19 23:59</div>
+        </div>
+        <aside class="cta-panel">
+          <h2>申請方式</h2>
+          <p>向<span class="md-green">LINE客服</span>索取抽獎序號<br>7/24 23:59 截止</p>
+          <a class="btn" href="#">LINE 客服申請　→</a>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>活動內容</h2>
+            <p>凡活動期間內於FM富馬累計儲值達50,000，即可享有抽獎資格，價值總額百萬好禮等你帶回家！</p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">①</div>
+            <div class="step-title">期間儲值</div>
+            <div class="step-desc"><strong style="color:#e00000;font-size:22px">50,000</strong><br>累計儲值統計區間<br>6/11 00:00 - 7/19 23:59</div>
+          </div>
+          <div class="step-arrow">›</div>
+          <div class="step">
+            <div class="step-num">②</div>
+            <div class="step-title">達成儲值門檻者<br>領取抽獎序號</div>
+            <div class="step-desc"><strong>向LINE客服領取抽獎序號</strong><br>7/24 23:59前<br>向<span class="md-green">line客服</span>索取</div>
+          </div>
+          <div class="step-arrow">›</div>
+          <div class="step">
+            <div class="step-num">③</div>
+            <div class="step-title">參與直播抽獎</div>
+            <div class="step-desc"><a href="#"><strong>直播連結</strong></a><br>7/25 20:00<br>線上直播</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="showcase-banner">
+        <div class="showcase-banner-head">
+          <h2>齊聚富馬世界盃同歡慶</h2>
+          <p>百萬獎項等你領！</p>
+        </div>
+        <div class="prize-grid">
+          ${prizes.map(p => `
+            <div class="prize-card">
+              <div class="prize-card-img">
+                <span class="prize-card-img-placeholder">${p.icon}</span>
+              </div>
+              <div class="prize-card-name">${escapeHtml(p.name)}</div>
+              <div class="prize-card-qty">${p.qty} 份</div>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>獎品列表</h2>
+            <p>總獎品價值 NT$ ${fmt(grandTotal)}</p>
+          </div>
+        </div>
+        <div class="promo-table">
+          <table>
+            <colgroup>
+              <col style="width:46%">
+              <col style="width:10%">
+              <col style="width:22%">
+              <col style="width:12%">
+              <col style="width:10%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>商品名稱</th>
+                <th>數量</th>
+                <th>得獎名單</th>
+                <th>單價</th>
+                <th>小計</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${prizes.map(p => `
+                <tr>
+                  <td>${escapeHtml(p.name)}</td>
+                  <td style="text-align:center">${p.qty} 份</td>
+                  <td style="text-align:center;color:#64748b">敬請期待</td>
+                  <td style="text-align:right">$${fmt(p.price)}</td>
+                  <td style="text-align:right">$${fmt(p.total)}</td>
+                </tr>
+              `).join("")}
+              <tr class="total-row">
+                <td colspan="4" style="text-align:right">獎品總額</td>
+                <td style="text-align:right">$${fmt(grandTotal)}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <h2>得獎名單</h2>
+            <p>直播結束後公布，得獎者請於 2026/8/5 前聯繫LINE客服領取</p>
+          </div>
+        </div>
+        <div class="card" style="text-align:center;padding:40px;color:#64748b;font-size:16px">
+          🎉 得獎序號名單將於 7/25 20:00 直播後公告，敬請期待
+        </div>
+      </section>
+
+      <section class="section rules-wrap">
+        <div>
+          <div class="section-head">
+            <div>
+              <h2>活動規則</h2>
+              <p></p>
+            </div>
+          </div>
+          <div class="rules">
+            ${rules.map((rule, i) => `
+              <div class="rule">
+                <span class="num">${i + 1}</span>
+                <span>${escapeHtml(rule).replaceAll("&#10;", "<br>").replaceAll("\n", "<br>").replace(/\*\*([\s\S]*?)\*\*/g, '<strong class="md-bold">$1</strong>').replace(/\[red\]([\s\S]*?)\[\/red\]/g, '<span class="md-red">$1</span>').replace(/\[green\]([\s\S]*?)\[\/green\]/g, '<span class="md-green">$1</span>')}</span>
+              </div>
+            `).join("")}
+          </div>
+        </div>
+      </section>
+    `;
+
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+    const mobileMenuPanel = document.getElementById("mobileMenuPanel");
+    const mobileMenuBackdrop = document.getElementById("mobileMenuBackdrop");
+
+    function setMobileMenuOpen(isOpen){
+      if(!mobileMenu || !mobileMenuToggle || !mobileMenuPanel) return;
+      mobileMenu.classList.toggle("is-open", isOpen);
+      mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+      mobileMenuToggle.setAttribute("aria-label", isOpen ? "關閉選單" : "開啟選單");
+      document.body.classList.toggle("mobilemenu-open", isOpen);
+    }
+
+    if(mobileMenuToggle && mobileMenuPanel){
+      mobileMenuToggle.addEventListener("click", ()=>{
+        setMobileMenuOpen(!mobileMenu.classList.contains("is-open"));
+      });
+      mobileMenuPanel.querySelectorAll("a").forEach(link=>{
+        link.addEventListener("click", ()=>{ setMobileMenuOpen(false); });
+      });
+    }
+
+    if(mobileMenuBackdrop){
+      mobileMenuBackdrop.addEventListener("click", ()=>{ setMobileMenuOpen(false); });
+    }
+
+    document.addEventListener("keydown", event=>{
+      if(event.key === "Escape") setMobileMenuOpen(false);
+    });
+
+    window.addEventListener("resize", ()=>{
+      if(window.innerWidth > 900) setMobileMenuOpen(false);
+    });
+
+    const topPageBtn = document.querySelector(".toppage");
+    if(topPageBtn){
+      topPageBtn.addEventListener("click", event=>{
+        event.preventDefault();
+        window.scrollTo({ top:0, behavior:"smooth" });
+      });
+    }
+  </script>
+
+</body>
+</html>
