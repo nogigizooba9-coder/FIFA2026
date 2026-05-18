@@ -396,7 +396,8 @@
     }
 
     .prize-card-img-placeholder{
-      font-size:32px;
+      font-size:40px;
+      color:#5a85b0;
     }
 
     .prize-card-name{
@@ -507,7 +508,7 @@
         <a href="" class="ibtn-1">前往FM富馬首頁</a>
         <a href="" class="ibtn-2">LINE 客服</a>
       </div>
-    </div>
+    </div>  
   </div>
 
   <!-- top -->
@@ -539,21 +540,21 @@
 
   <script>
     const prizes = [
-      { name:"iphone 17 pro max 256g",           qty:5,  price:43900,  total:219500, icon:"📱" },
-      { name:"RAZER 雷蛇x BLACKPINK 聯名套組－Enki X電競椅＋ORNATA V3 TKL鍵盤＋DeathAdder Essential滑鼠＋Gigantus V2鼠墊", qty:5, price:24000, total:120000, icon:"🎮" },
-      { name:"Apple 蘋果AirPods Max 2",           qty:5,  price:19000,  total:95000,  icon:"🎧" },
-      { name:"LG 樂金 寵物版加強淨化循環扇空氣清淨機（PuriCare360°/AS651DSS0/過敏源剋星）", qty:5, price:16900, total:84500, icon:"💨" },
-      { name:"Nintendo Switch 2 (NS2) 瑪利歐賽車世界 主機組合", qty:5, price:16000, total:80000, icon:"🕹️" },
-      { name:"Samsung 三星S32FM703UC FollowMe移動式 AI智慧聯網螢幕（32型/4K/60Hz/4ms/HDMI/喇叭/VA/Type-C）", qty:5, price:13500, total:67500, icon:"🖥️" },
-      { name:"SONY 索尼WH-1000XM6 旗艦無線降噪耳機",          qty:5,  price:13500,  total:67500,  icon:"🎵" },
-      { name:"Apple 蘋果iPad A16（11代）128G WiFi",             qty:5,  price:10500,  total:52500,  icon:"📲" },
-      { name:"飛利浦全自動義式咖啡機（EP2224/10）",             qty:5,  price:10000,  total:50000,  icon:"☕" },
-      { name:"7-11禮卷 10,000",                                  qty:5,  price:10000,  total:50000,  icon:"🎁" },
-      { name:"7-11禮卷 5,000",                                   qty:5,  price:5000,   total:25000,  icon:"🎁" },
-      { name:"FM彩金 3,888",                                     qty:5,  price:3888,   total:19440,  icon:"💰" },
-      { name:"FM彩金 2,888",                                     qty:20, price:2888,   total:57760,  icon:"💰" },
-      { name:"FM彩金 1,888",                                     qty:20, price:1888,   total:37760,  icon:"💰" },
-      { name:"FM彩金 888",                                       qty:20, price:888,    total:17760,  icon:"💰" },
+      { name:"iphone 17 pro max 256g",           qty:5,  price:43900,  total:219500, img:"./assets/iphone17.webp" },
+      { name:"RAZER 雷蛇x BLACKPINK 聯名套組－Enki X電競椅＋ORNATA V3 TKL鍵盤＋DeathAdder Essential滑鼠＋Gigantus V2鼠墊", qty:5, price:24000, total:120000, img:"./assets/razer.webp" },
+      { name:"Apple 蘋果AirPods Max 2",           qty:5,  price:19000,  total:95000,  img:"./assets/airpods_max2.webp" },
+      { name:"LG 樂金 寵物版加強淨化循環扇空氣清淨機（PuriCare360°/AS651DSS0/過敏源剋星）", qty:5, price:16900, total:84500, img:"./assets/LG.webp" },
+      { name:"Nintendo Switch 2 (NS2) 瑪利歐賽車世界 主機組合", qty:5, price:16000, total:80000, img:"./assets/switch2.webp" },
+      { name:"Samsung 三星S32FM703UC FollowMe移動式 AI智慧聯網螢幕（32型/4K/60Hz/4ms/HDMI/喇叭/VA/Type-C）", qty:5, price:13500, total:67500, img:"./assets/samsung.webp" },
+      { name:"SONY 索尼WH-1000XM6 旗艦無線降噪耳機",          qty:5,  price:13500,  total:67500,  img:"./assets/sony.webp" },
+      { name:"Apple 蘋果iPad A16（11代）128G WiFi",             qty:5,  price:10500,  total:52500,  img:"./assets/ipad_a16.webp" },
+      { name:"飛利浦全自動義式咖啡機（EP2224/10）",             qty:5,  price:10000,  total:50000,  img:"./assets/EP2224.png" },
+      { name:"7-11禮卷 10,000",                                  qty:5,  price:10000,  total:50000,  img:"./assets/w1.jpg" },
+      { name:"7-11禮卷 5,000",                                   qty:5,  price:5000,   total:25000,  img:"./assets/k5.jpg" },
+      { name:"FM彩金 3,888",                                     qty:5,  price:3888,   total:19440,  img:"./assets/fm3888.jpg" },
+      { name:"FM彩金 2,888",                                     qty:20, price:2888,   total:57760,  img:"./assets/fm2888.jpg" },
+      { name:"FM彩金 1,888",                                     qty:20, price:1888,   total:37760,  img:"./assets/fm1888.jpg" },
+      { name:"FM彩金 888",                                       qty:20, price:888,    total:17760,  img:"./assets/fm888.jpg" },
     ];
 
     const rules = [
@@ -634,7 +635,7 @@
           ${prizes.map(p => `
             <div class="prize-card">
               <div class="prize-card-img">
-                <span class="prize-card-img-placeholder">${p.icon}</span>
+                <img src="${p.img}" alt="${escapeHtml(p.name)}">
               </div>
               <div class="prize-card-name">${escapeHtml(p.name)}</div>
               <div class="prize-card-qty">${p.qty} 份</div>
@@ -662,10 +663,10 @@
             <thead>
               <tr>
                 <th>商品名稱</th>
-                <th>數量</th>
+                <th>獎品數量</th>
                 <th>得獎名單</th>
-                <th>單價</th>
-                <th>小計</th>
+                <th>獎品單價</th>
+                <th>獎品總價</th>
               </tr>
             </thead>
             <tbody>
@@ -673,7 +674,7 @@
                 <tr>
                   <td>${escapeHtml(p.name)}</td>
                   <td style="text-align:center">${p.qty} 份</td>
-                  <td style="text-align:center;color:#64748b">敬請期待</td>
+                  <td style="text-align:center;color:#64748b">待公布</td>
                   <td style="text-align:right">$${fmt(p.price)}</td>
                   <td style="text-align:right">$${fmt(p.total)}</td>
                 </tr>
