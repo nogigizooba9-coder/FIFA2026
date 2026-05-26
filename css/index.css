@@ -82,6 +82,13 @@ a, a:hover{
     color: unset;
 }
 
+.menu-a .on{
+    background-color: #004fab;
+    border-radius: 50px;
+    color: #fff;
+    padding: 5px 30px;
+}
+
 
 .indexbody{
     width: 100%;
