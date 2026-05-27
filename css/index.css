@@ -84,9 +84,25 @@ a, a:hover{
 
 .menu-a .on{
     background-color: #004fab;
-    border-radius: 50px;
+    border-radius: 15px;
     color: #fff;
-    padding: 5px 30px;
+}
+
+.menu-a a{
+    flex-direction: column;
+    margin-bottom: 3px;
+    background-color: #c6e1ff;
+    border-radius: 15px;
+    padding: 5px 25px;
+    margin-right: 10px;
+}
+
+.menu-a .noline{
+    background-color: transparent;
+}
+
+.m-box1{
+    display: none;
 }
 
 
@@ -100,11 +116,10 @@ a, a:hover{
 
 .pcmenu{
     width: 100%;
-    height: 95px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 5%;
+    padding: 10px 5%;
 }
 
 .menu-a{
@@ -120,7 +135,6 @@ a, a:hover{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 25px;
     transition: all 0.3s ease 0s;
     border-bottom: transparent 2px solid;
 }
@@ -271,6 +285,16 @@ a, a:hover{
     bottom: 20px;
     right: 20px;
     z-index: 10;
+}
+
+.toppage-2{
+    width: 92px;
+    height: 91px;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 10;
+    display: none;
 }
 
 @media (max-width: 900px){
@@ -557,6 +581,17 @@ a, a:hover{
         background: url(./../img/m-index-banner.webp) center center / 100% 100%;
     }
 
+    .toppage-2{
+        width: 50px;
+        height: 50px;
+        display: flex;
+    }
+
+    .toppage-2 img{
+        width: 50px;
+        height: 50px;
+    }
+
     .toppage{
         width: 50px;
         height: 50px;
@@ -602,5 +637,37 @@ a, a:hover{
         width:50px;
         height:50px;
         border-radius:16px;
+    }
+
+    .m-box1{
+        display: flex;
+        background-color: #fafcff;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 10px 3px;
+    }
+
+    .m-box1 a{
+        flex-direction: column;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        line-height: 18px;
+        padding: 5px 5px;
+    }
+
+    .m-box1 a.on{
+        background-color: #004fab;
+        border-radius: 15px;
+        color: #fff;
+    }
+
+    .m-box1 a img{
+        width: 40px;
+        height: 40px;
+        margin-bottom: 5px;
     }
 }

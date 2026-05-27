@@ -6,8 +6,21 @@
 <title>熱門賽事輪播</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 <link rel="stylesheet" href="./css/index.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2DVNE4WSEH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2DVNE4WSEH');
+</script>
 </head>
 <body id="pageTop">
+
+  <a href="https://line.me/ti/p/~@636dcdpl" class="toppage-2" aria-label="LINE客服" target="_blank">
+    <img src="./img/LINE-1.png" alt="" srcset="">
+  </a>
 
   <a href="#pageTop" class="toppage" aria-label="回到頁面頂端">
     <img src="./img/top.png" alt="" srcset="">
@@ -50,20 +63,28 @@
   <!-- top -->
   <div class="pcmenu">
     <div class="menu-a">
-      <a href="#" class="noline">
+      <a href="./index.html" class="noline">
         <img src="./img/logo.png" alt="" srcset="">
       </a>
-      <a href="./index.html" class="on">賽事排程</a>
-      <a href="./page02.html">競猜預測贈彩金</a>
-      <a href="./page03.html">下注世足簽到彩金</a>
-      <a href="./page04.html">全站續儲贈彩金</a>
-      <a href="./page05.html">全民直播抽獎</a>
+      <a href="./index.html" class="on"><img src="./img/i-icon-1.png" alt="">賽事排程</a>
+      <a href="./page02.html"><img src="./img/i-icon-2.png" alt="">競猜預測贈彩金</a>
+      <a href="./page03.html"><img src="./img/i-icon-3.png" alt="">下注世足簽到彩金</a>
+      <a href="./page04.html"><img src="./img/i-icon-4.png" alt="">全站續儲贈彩金</a>
+      <a href="./page05.html"><img src="./img/i-icon-5.png" alt="">全民直播抽獎</a>
     </div>
     <div class="menu-b">
       <a href="https://www.fuma888.com/" class="ibtn-1" target="_blank">前往FM富馬首頁</a>
       <a href="https://line.me/ti/p/~@636dcdpl" class="ibtn-2" target="_blank">LINE 客服</a>
     </div>
   </div> 
+
+  <div class="m-box1">
+      <a href="./index.html" class="on"><img src="./img/i-icon-1.png" alt="">世足賽事<br>排程</a>
+      <a href="./page02.html"><img src="./img/i-icon-2.png" alt="">競猜預測<br>贈彩金</a>
+      <a href="./page03.html"><img src="./img/i-icon-3.png" alt="">下注世足<br>簽到彩金</a>
+      <a href="./page04.html"><img src="./img/i-icon-4.png" alt="">全站續儲<br>贈彩金</a>
+      <a href="./page05.html"><img src="./img/i-icon-5.png" alt="">全民直播<br>抽獎</a>
+  </div>
 
 
   <img class="pc-index-banner" alt="">
@@ -83,7 +104,7 @@
       <div class="video-wrapper">
         <!-- 點擊遮罩 -->
         <div class="click-overlay" id="overlay"></div>
-        <!-- API 會把這個 div 替換成 iframe -->
+        <!-- YouTube 影片會顯示在這裡，iframe 由下方 JS 動態建立 -->
         <div id="player"></div>
       </div>
     </div>
@@ -583,7 +604,11 @@ window.addEventListener("resize", updateCarousel);
 
     <script>
 let player;
-const videoId = 'tqwQQK54dgA';
+// 要換影片請改這裡：
+// 把 YouTube 網址中 `v=` 後面的那串 ID 換掉即可
+// 例如：https://www.youtube.com/watch?v=tqwQQK54dgA
+// 這支影片的 ID 就是 `tqwQQK54dgA`
+const videoId = 'V2ceYbfx9R8';
 
 // 1. 確保 API 腳本載入
 function onYouTubeIframeAPIReady() {
@@ -594,6 +619,7 @@ function onYouTubeIframeAPIReady() {
             'mute': 1,
             'controls': 0,
             'loop': 1,
+            // 影片循環播放時，playlist 也要帶同一個 videoId
             'playlist': videoId,
             'modestbranding': 1,
             'rel': 0,
