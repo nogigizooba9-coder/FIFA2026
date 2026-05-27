@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DVNE4WSEH"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2DVNE4WSEH');
+</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FM 專屬活動二 | 世足下注簽到彩金</title>
@@ -277,6 +286,12 @@
       box-shadow:var(--soft-shadow);
     }
 
+    .table-blue{border:2px solid #3b8fd4}
+    .table-blue th{background:#3b8fd4;color:#fff}
+    .table-blue td{background:#fff}
+    .table-blue td[data-col="0"]{background:#d6ebf7;color:#2a4568}
+    .table-blue th,.table-blue td{border-color:#3b8fd4 !important}
+
     table{
       width:100%;
       border-collapse:collapse;
@@ -288,7 +303,7 @@
       color:#3b5574;
       font-size:15px;
       padding:18px 14px;
-      text-align:left;
+      text-align:center;
     }
 
     td{
@@ -297,7 +312,8 @@
       font-size:15px;
       line-height:1.65;
       border-top:1px solid var(--line);
-      vertical-align:top;
+      text-align:center;
+      vertical-align:middle;
     }
 
     th:not(:last-child), td:not(:last-child){
@@ -468,9 +484,12 @@
       .section-head{display:block}
       .section-head h2{font-size:23px;margin-bottom:6px}
 
-      .promo-table{overflow-x:auto}
-      table{min-width:620px}
-      th,td{font-size:15px}
+      .promo-table{overflow-x:visible}
+      table{min-width:0;table-layout:fixed;width:100%}
+      th,td{font-size:12px;padding:10px 8px}
+      th:nth-child(1),td:nth-child(1){width:50%}
+      th:nth-child(2),td:nth-child(2){width:30%}
+      th:nth-child(3),td:nth-child(3){width:20%}
 
       .rule{font-size:15px}
       .cta-panel{position:static}
@@ -677,14 +696,14 @@ LINE客服申請
       if(!rows.length) return "";
       const [head, ...body] = rows;
       return `
-        <div class="promo-table">
+        <div class="promo-table table-blue">
           <table>
             <thead>
               <tr>${head.map(cell => `<th>${escapeHtml(cell)}</th>`).join("")}</tr>
             </thead>
             <tbody>
               ${body.map(row => `
-                <tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
+                <tr>${row.map((cell, c) => `<td data-col="${c}" data-label="${escapeHtml(head[c])}">${escapeHtml(cell)}</td>`).join("")}</tr>
               `).join("")}
             </tbody>
           </table>
@@ -707,7 +726,7 @@ LINE客服申請
           <aside class="cta-panel">
             <h2>申請方式</h2>
             <p>${escapeHtml(data.applyText)}</p>
-            <a class="btn" href="https://line.me/ti/p/~@636dcdpl" target="_blank">${escapeHtml(data.serviceText || "LINE客服申請")}　→</a>
+            <a class="btn" href="https://line.me/ti/p/~@636dcdpl" target="_blank">${escapeHtml(data.serviceText || "LINE客服申請")}</a>
           </aside>
         </section>
 

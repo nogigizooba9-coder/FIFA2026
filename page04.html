@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DVNE4WSEH"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2DVNE4WSEH');
+</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FM 專屬活動三 | 全站續儲贈彩金</title>
@@ -277,6 +286,12 @@
       box-shadow:var(--soft-shadow);
     }
 
+    .table-blue{border:2px solid #3b8fd4}
+    .table-blue th{background:#3b8fd4;color:#fff}
+    .table-blue td{background:#fff}
+    .table-blue td[data-col="0"]{background:#d6ebf7;color:#2a4568}
+    .table-blue th,.table-blue td{border-color:#3b8fd4 !important}
+
     table{
       width:100%;
       border-collapse:collapse;
@@ -288,7 +303,7 @@
       color:#3b5574;
       font-size:15px;
       padding:18px 14px;
-      text-align:left;
+      text-align:center;
     }
 
     td{
@@ -297,7 +312,8 @@
       font-size:15px;
       line-height:1.65;
       border-top:1px solid var(--line);
-      vertical-align:top;
+      text-align:center;
+      vertical-align:middle;
     }
 
     th:not(:last-child), td:not(:last-child){
@@ -468,9 +484,13 @@
       .section-head{display:block}
       .section-head h2{font-size:23px;margin-bottom:6px}
 
-      .promo-table{overflow-x:auto}
-      table{min-width:620px}
-      th,td{font-size:15px}
+      .promo-table{overflow-x:visible}
+      table{min-width:0;table-layout:fixed;width:100%}
+      th,td{font-size:12px;padding:10px 8px}
+      th:nth-child(1),td:nth-child(1){width:40%}
+      th:nth-child(2),td:nth-child(2){width:20%}
+      th:nth-child(3),td:nth-child(3){width:20%}
+      th:nth-child(4),td:nth-child(4){width:20%}
 
       .rule{font-size:15px}
       .cta-panel{position:static}
@@ -554,7 +574,7 @@
 
 | 申請條件 | 續儲彩金比例 | 需求流水 | 贈送彩金上限 |
 |---|---:|---:|---:|
-| 儲值後，未投注前 贈送比例二擇一申請 | 5% | 本+彩5倍 | 5,888 |
+| 儲值後，未投注前[br]贈送比例二擇一申請 | 5% | 本+彩5倍 | 5,888 |
 | "首筆儲值不適用" | 8% | 本+彩8倍 | 8,888 |
 
 會員儲值前，帳上額度需已清零，或提領出去，帳上餘額低於100，才能再次儲值，才得以申請本活動，如非此狀況，則需請會員帳上現有額度清零後再次儲值前來申請
@@ -688,16 +708,34 @@ LINE客服申請
     function renderTable(rows){
       if(!rows.length) return "";
       const [head, ...body] = rows;
+
+      let bodyHtml = "";
+      if(body.length === 2){
+        const cellHtml = t => escapeHtml(t).replace(/\[br\]/g, "<br>");
+      const mergedText = cellHtml(body[0][0]) + "<br>" + cellHtml(body[1][0]);
+        bodyHtml = `
+          <tr>
+            <td data-col="0" rowspan="2" style="text-align:center;vertical-align:middle">${mergedText}</td>
+            ${body[0].slice(1).map((cell, i) => `<td data-col="${i+1}">${escapeHtml(cell)}</td>`).join("")}
+          </tr>
+          <tr>
+            ${body[1].slice(1).map((cell, i) => `<td data-col="${i+1}">${escapeHtml(cell)}</td>`).join("")}
+          </tr>
+        `;
+      } else {
+        bodyHtml = body.map(row => `
+          <tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
+        `).join("");
+      }
+
       return `
-        <div class="promo-table">
+        <div class="promo-table table-blue">
           <table>
             <thead>
               <tr>${head.map(cell => `<th>${escapeHtml(cell)}</th>`).join("")}</tr>
             </thead>
             <tbody>
-              ${body.map(row => `
-                <tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
-              `).join("")}
+              ${bodyHtml}
             </tbody>
           </table>
         </div>
@@ -719,7 +757,7 @@ LINE客服申請
           <aside class="cta-panel">
             <h2>申請方式</h2>
             <p>${escapeHtml(data.applyText)}</p>
-            <a class="btn" href="https://line.me/ti/p/~@636dcdpl" target="_blank">${escapeHtml(data.serviceText || "LINE客服申請")}　→</a>
+            <a class="btn" href="https://line.me/ti/p/~@636dcdpl" target="_blank">${escapeHtml(data.serviceText || "LINE客服申請")}</a>
           </aside>
         </section>
 

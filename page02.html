@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DVNE4WSEH"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2DVNE4WSEH');
+</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FM 專屬活動一 | 競猜活動</title>
@@ -141,7 +150,7 @@
     .hero{
       position:relative;
       overflow:hidden;
-      min-height:330px;
+      min-height:420px;
       border-radius:36px;
       padding:44px;
       background:
@@ -277,6 +286,25 @@
       box-shadow:var(--soft-shadow);
     }
 
+    .table-blue{
+      border:2px solid #3b8fd4;
+    }
+    .table-blue th{
+      background:#3b8fd4;
+      color:#fff;
+    }
+    .table-blue td{
+      background:#fff;
+    }
+    .table-blue td[data-col="0"]{
+      background:#d6ebf7;
+      color:#2a4568;
+    }
+    .table-blue th,
+    .table-blue td{
+      border-color:#3b8fd4 !important;
+    }
+
     table{
       width:100%;
       border-collapse:collapse;
@@ -288,7 +316,7 @@
       color:#3b5574;
       font-size:15px;
       padding:18px 14px;
-      text-align:left;
+      text-align:center;
     }
 
     td{
@@ -297,7 +325,8 @@
       font-size:15px;
       line-height:1.65;
       border-top:1px solid var(--line);
-      vertical-align:top;
+      text-align:center;
+      vertical-align:middle;
     }
 
     th:not(:last-child), td:not(:last-child){
@@ -376,10 +405,11 @@
     .cta-panel{
       position:absolute;
       right:42px;
-      top:calc(50% - 115px);
+      top:50%;
+      transform:translateY(-50%);
       width:330px;
-      height:230px;
-      padding:26px;
+      height:auto;
+      padding:22px;
       border-radius:28px;
       background:
         radial-gradient(circle at 80% 0%, rgba(217,167,122,.32), transparent 36%),
@@ -389,16 +419,16 @@
     }
 
     .cta-panel h2{
-      margin:0 0 12px;
-      font-size:24px;
+      margin:0 0 8px;
+      font-size:20px;
       font-weight:950;
     }
 
     .cta-panel p{
-      margin:0 0 20px;
+      margin:0 0 12px;
       line-height:1.75;
       color:var(--muted);
-      font-size:15px;
+      font-size:14px;
     }
 
     .btn{
@@ -413,6 +443,12 @@
       color:#fff;
       font-weight:900;
       box-shadow:0 12px 26px rgba(180,120,75,.26);
+    }
+
+    .btn-form{
+      background:#2563eb;
+      box-shadow:0 12px 26px rgba(37,99,235,.26);
+      margin-top:10px;
     }
 
     @media (max-width: 820px){
@@ -468,12 +504,64 @@
       .section-head{display:block}
       .section-head h2{font-size:23px;margin-bottom:6px}
 
-      .promo-table{overflow-x:auto}
-      table{min-width:620px}
-      th,td{font-size:15px}
+      .promo-table:not(.table-groups){overflow-x:auto}
+      table{min-width:0}
+      th,td{font-size:13px}
+
+      .table-groups table thead{display:none}
+      .table-groups table tbody tr{
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        gap:6px;
+        padding:10px 14px;
+        margin-bottom:0;
+        border-radius:0;
+        border:none;
+        border-bottom:1px solid var(--line);
+        overflow:visible;
+      }
+      .table-groups table tbody tr:last-child{
+        border-bottom:none;
+      }
+      .table-groups table tbody td{
+        display:inline;
+        border:none !important;
+        padding:0;
+        text-align:left;
+        font-size:14px;
+      }
+      .table-groups table tbody td::before{display:none}
+      .table-groups table tbody td:first-child{
+        color:#fff;
+        font-weight:700;
+        border-radius:6px;
+        padding:2px 8px;
+        font-size:13px;
+        flex-shrink:0;
+      }
+      .table-groups table tbody tr:nth-child(1)  td:first-child{background:#e53935;border-color:#e53935 !important}
+      .table-groups table tbody tr:nth-child(2)  td:first-child{background:#fb8c00;border-color:#fb8c00 !important}
+      .table-groups table tbody tr:nth-child(3)  td:first-child{background:#039be5;border-color:#039be5 !important}
+      .table-groups table tbody tr:nth-child(4)  td:first-child{background:#43a047;border-color:#43a047 !important}
+      .table-groups table tbody tr:nth-child(5)  td:first-child{background:#00897b;border-color:#00897b !important}
+      .table-groups table tbody tr:nth-child(6)  td:first-child{background:#1e88e5;border-color:#1e88e5 !important}
+      .table-groups table tbody tr:nth-child(7)  td:first-child{background:#8e24aa;border-color:#8e24aa !important}
+      .table-groups table tbody tr:nth-child(8)  td:first-child{background:#d81b60;border-color:#d81b60 !important}
+      .table-groups table tbody tr:nth-child(9)  td:first-child{background:#00acc1;border-color:#00acc1 !important}
+      .table-groups table tbody tr:nth-child(10) td:first-child{background:#f4511e;border-color:#f4511e !important}
+      .table-groups table tbody tr:nth-child(11) td:first-child{background:#546e7a;border-color:#546e7a !important}
+      .table-groups table tbody tr:nth-child(12) td:first-child{background:#6d4c41;border-color:#6d4c41 !important}
+      .table-groups table tbody td:first-child::before{
+        display:inline;
+        content:"組別: ";
+        font-weight:700;
+        margin-right:0;
+        color:#fff;
+      }
 
       .rule{font-size:15px}
-      .cta-panel{position:static}
+      .cta-panel{position:static;transform:none;width:100%;margin-top:24px}
     }
   </style>
 </head>
@@ -752,18 +840,47 @@ LINE客服申請
       return data;
     }
 
-    function renderTable(rows){
+    function renderTable(rows, extraClass = ""){
       if(!rows.length) return "";
       const [head, ...body] = rows;
+      const cols = head.length;
+      const rowCount = body.length;
+
+      // 計算各欄 rowspan（連續相同值自動合併）
+      const spans = Array.from({length: rowCount}, () => Array(cols).fill(1));
+      const skip  = Array.from({length: rowCount}, () => Array(cols).fill(false));
+      for(let c = 0; c < cols; c++){
+        let r = 0;
+        while(r < rowCount){
+          let n = 1;
+          while(r + n < rowCount && body[r + n][c] === body[r][c]) n++;
+          if(n > 1){
+            spans[r][c] = n;
+            for(let s = 1; s < n; s++) skip[r + s][c] = true;
+          }
+          r += n;
+        }
+      }
+
       return `
-        <div class="promo-table">
+        <div class="promo-table ${extraClass}">
           <table>
             <thead>
               <tr>${head.map(cell => `<th>${escapeHtml(cell)}</th>`).join("")}</tr>
             </thead>
             <tbody>
-              ${body.map(row => `
-                <tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>
+              ${body.map((row, r) => `
+                <tr>${row.map((cell, c) => {
+                  if(skip[r][c]) return "";
+                  const spanAttr = spans[r][c] > 1 ? ` rowspan="${spans[r][c]}"` : "";
+                  // 若此欄不是最後欄，但後面所有欄在這列都被 skip，補回 border-right
+                  const isLastCol = c === cols - 1;
+                  const nextAllSkipped = !isLastCol && Array.from({length: cols - c - 1}, (_, i) => c + 1 + i).every(nc => skip[r][nc]);
+                  const extraBorder = (!isLastCol && nextAllSkipped) ? ";border-right:1px solid var(--line)" : "";
+                  const merged = spans[r][c] > 1;
+                  const styleStr = (merged || extraBorder) ? ` style="text-align:center;vertical-align:middle${extraBorder}"` : "";
+                  return `<td data-label="${escapeHtml(head[c])}" data-col="${c}"${spanAttr}${styleStr}>${escapeHtml(cell)}</td>`;
+                }).join("")}</tr>
               `).join("")}
             </tbody>
           </table>
@@ -775,7 +892,7 @@ LINE客服申請
       return tables.map(item => `
         <div style="margin-top:18px">
           ${item.title ? `<h3 style="margin:0 0 10px;color:#2a4568;font-size:20px;font-weight:950">${escapeHtml(item.title)}</h3>` : ""}
-          ${renderTable(item.rows)}
+          ${renderTable(item.rows, item.title === "參賽隊伍" ? "table-groups table-blue" : "table-blue")}
         </div>
       `).join("");
     }
@@ -793,9 +910,17 @@ LINE客服申請
             <div class="time-card">📅 ${escapeHtml(data.time)}</div>
           </div>
           <aside class="cta-panel">
-            <h2>申請方式</h2>
-            <p>${escapeHtml(data.applyText)}</p>
-            <a class="btn" href="https://line.me/ti/p/~@636dcdpl" target="_blank">${escapeHtml(data.serviceText || "LINE客服申請")}　→</a>
+            <div>
+              <h2>申請方式</h2>
+              <p>${escapeHtml(data.applyText)}</p>
+              <a class="btn" href="https://line.me/ti/p/~@636dcdpl" target="_blank">${escapeHtml(data.serviceText || "LINE客服申請")}</a>
+            </div>
+            <hr style="border:none;border-top:1px solid rgba(0,0,0,.08);margin:18px 0">
+            <div>
+              <h2>競猜預測</h2>
+              <p>填寫您的預測隊伍</p>
+              <a class="btn btn-form" href="https://docs.google.com/forms/d/e/1FAIpQLSejItb9ZsCsCDSVzqUqxQXghtjZCdSm8QGMEdNLBtu9Y2sVyA/viewform" target="_blank">預測填寫表單</a>
+            </div>
           </aside>
         </section>
 
@@ -860,14 +985,14 @@ LINE客服申請
           ${data.awardTables.map(t => `
             <div style="margin-top:24px">
               <h3 style="margin:0 0 10px;color:#2a4568;font-size:20px;font-weight:950">${escapeHtml(t.title)}</h3>
-              <div class="promo-table">
+              <div class="promo-table table-blue">
                 <table>
                   <thead>
                     <tr><th>會員帳號</th><th>預測隊伍</th><th>成功預測組數</th><th>贈送彩金</th></tr>
                   </thead>
                   <tbody>
                     ${t.rows.length
-                      ? t.rows.map(row => `<tr>${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")
+                      ? t.rows.map(row => `<tr>${row.map((cell, c) => `<td data-col="${c}">${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")
                       : `<tr><td colspan="4" style="text-align:center;color:#64748b;padding:28px 0">敬請期待</td></tr>`
                     }
                   </tbody>

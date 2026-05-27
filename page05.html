@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DVNE4WSEH"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2DVNE4WSEH');
+</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FM 專屬活動四 | 全民直播抽獎</title>
@@ -262,6 +271,12 @@
       box-shadow:var(--soft-shadow);
     }
 
+    .table-blue{border:2px solid #3b8fd4}
+    .table-blue th{background:#3b8fd4;color:#fff}
+    .table-blue td{background:#fff}
+    .table-blue td[data-col="0"]{background:#d6ebf7;color:#2a4568}
+    .table-blue th,.table-blue td{border-color:#3b8fd4 !important}
+
     table{
       width:100%;
       border-collapse:collapse;
@@ -273,7 +288,7 @@
       color:#3b5574;
       font-size:15px;
       padding:18px 14px;
-      text-align:left;
+      text-align:center;
     }
 
     td{
@@ -282,6 +297,7 @@
       font-size:15px;
       line-height:1.55;
       border-top:1px solid var(--line);
+      text-align:center;
       vertical-align:middle;
     }
 
@@ -459,9 +475,38 @@
       .section-head{ display:block }
       .section-head h2{ font-size:23px; margin-bottom:6px }
 
-      .promo-table{ overflow-x:auto }
-      table{ min-width:620px }
+      .promo-table{ overflow-x:visible }
+      table{ display:block; width:100%; min-width:0 }
       th, td{ font-size:14px }
+      table thead{ display:none }
+      table tbody{ display:block; width:100% }
+      table tbody tr{
+        display:block;
+        border-bottom:1px solid #3b8fd4;
+      }
+      table tbody tr:last-child{ border-bottom:none }
+      table tbody td{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        border-right:none !important;
+        text-align:right;
+        padding:10px 14px;
+      }
+      table tbody td::before{
+        content:attr(data-label);
+        font-weight:700;
+        color:#3b5574;
+        flex-shrink:0;
+        margin-right:12px;
+        text-align:left;
+      }
+      table tbody td:first-child{ border-top:none }
+      table tbody td[colspan]{
+        justify-content:flex-end;
+        font-weight:900;
+      }
+      table tbody td[colspan]::before{ display:none }
 
       .rule{ font-size:15px }
       .cta-panel{ position:static; width:100%; height:auto; margin-top:28px }
@@ -594,7 +639,7 @@
         <aside class="cta-panel">
           <h2>申請方式</h2>
           <p>向<span class="md-green">LINE客服</span>索取抽獎序號<br>7/24 23:59 截止</p>
-          <a class="btn" href="https://line.me/ti/p/~@636dcdpl" target="_blank">LINE客服申請　→</a>
+          <a class="btn" href="https://line.me/ti/p/~@636dcdpl" target="_blank">LINE客服申請</a>
         </aside>
       </section>
 
@@ -651,7 +696,7 @@
             <p>總獎品價值 NT$ ${fmt(grandTotal)}</p>
           </div>
         </div>
-        <div class="promo-table">
+        <div class="promo-table table-blue">
           <table>
             <colgroup>
               <col style="width:46%">
@@ -672,16 +717,16 @@
             <tbody>
               ${prizes.map(p => `
                 <tr>
-                  <td>${escapeHtml(p.name)}</td>
-                  <td style="text-align:center">${p.qty} 份</td>
-                  <td style="text-align:center;color:#64748b">待公布</td>
-                  <td style="text-align:right">$${fmt(p.price)}</td>
-                  <td style="text-align:right">$${fmt(p.total)}</td>
+                  <td data-col="0" data-label="商品名稱" style="vertical-align:middle;text-align:center">${escapeHtml(p.name)}</td>
+                  <td data-label="獎品數量" style="text-align:center;vertical-align:middle">${p.qty} 份</td>
+                  <td data-label="得獎名單" style="text-align:center;vertical-align:middle;color:#64748b">待公布</td>
+                  <td data-label="獎品單價" style="text-align:center;vertical-align:middle">$${fmt(p.price)}</td>
+                  <td data-label="獎品總價" style="text-align:center;vertical-align:middle">$${fmt(p.total)}</td>
                 </tr>
               `).join("")}
               <tr class="total-row">
-                <td colspan="4" style="text-align:right">獎品總額</td>
-                <td style="text-align:right">$${fmt(grandTotal)}</td>
+                <td colspan="4" style="text-align:right;vertical-align:middle">獎品總額</td>
+                <td style="text-align:center;vertical-align:middle">$${fmt(grandTotal)}</td>
               </tr>
             </tbody>
           </table>
