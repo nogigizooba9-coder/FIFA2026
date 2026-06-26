@@ -325,7 +325,7 @@ function getTrackGap(){
 }
 
 function isGroupDayCard(card, roundLabel){
-  return roundLabel === "小組賽" && card.layout === "group-day";
+  return card.layout === "group-day";
 }
 
 function getGroupDayCardMinHeight(matchCount){
@@ -510,8 +510,8 @@ function initRounds(){
   }
 
   renderTabs();
-  setActiveTab(0);
-  renderTab(0);
+  setActiveTab(1);
+  renderTab(1);
 }
 
 btnLeft.onclick = ()=>{
