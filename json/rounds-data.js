@@ -1299,15 +1299,148 @@ window.ROUNDS_DATA = [
     "label": "16強",
     "cards": [
       {
+        "layout": "group-day",
         "type": "1",
-        "league": "待定",
-        "date": "待定",
+        "league": "16強",
+        "date": "7月5日",
         "times": [
-          "03:00"
+          "上午1:00"
         ],
         "groups": [
           {
             "name": "場次 1",
+            "matches": [
+              [
+                "🇨🇦",
+                "加拿大",
+                "🇲🇦",
+                "摩洛哥"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "group-day",
+        "type": "1",
+        "league": "16強",
+        "date": "7月5日",
+        "times": [
+          "上午5:00"
+        ],
+        "groups": [
+          {
+            "name": "場次 2",
+            "matches": [
+              [
+                "🇵🇾",
+                "巴拉圭",
+                "🇫🇷",
+                "法國"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "group-day",
+        "type": "1",
+        "league": "16強",
+        "date": "7月6日",
+        "times": [
+          "上午4:00"
+        ],
+        "groups": [
+          {
+            "name": "場次 3",
+            "matches": [
+              [
+                "🇧🇷",
+                "巴西",
+                "🇳🇴",
+                "挪威"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "group-day",
+        "type": "1",
+        "league": "16強",
+        "date": "7月6日",
+        "times": [
+          "上午8:00"
+        ],
+        "groups": [
+          {
+            "name": "場次 4",
+            "matches": [
+              [
+                "🇲🇽",
+                "墨西哥",
+                "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+                "英格蘭"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "group-day",
+        "type": "1",
+        "league": "16強",
+        "date": "7月7日",
+        "times": [
+          "上午3:00"
+        ],
+        "groups": [
+          {
+            "name": "場次 5",
+            "matches": [
+              [
+                "🇵🇹",
+                "葡萄牙",
+                "🇪🇸",
+                "西班牙"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "group-day",
+        "type": "1",
+        "league": "16強",
+        "date": "7月7日",
+        "times": [
+          "上午8:00"
+        ],
+        "groups": [
+          {
+            "name": "場次 6",
+            "matches": [
+              [
+                "🇺🇸",
+                "美國",
+                "🇧🇪",
+                "比利時"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "group-day",
+        "type": "1",
+        "league": "16強",
+        "date": "7月8日",
+        "times": [
+          "上午2:00"
+        ],
+        "groups": [
+          {
+            "name": "場次 7",
             "matches": [
               [
                 "🏳️",
@@ -1320,19 +1453,20 @@ window.ROUNDS_DATA = [
         ]
       },
       {
+        "layout": "group-day",
         "type": "1",
-        "league": "待定",
-        "date": "待定",
+        "league": "16強",
+        "date": "7月8日",
         "times": [
-          "03:00"
+          "上午4:00"
         ],
         "groups": [
           {
-            "name": "場次 2",
+            "name": "場次 8",
             "matches": [
               [
-                "🏳️",
-                "待定",
+                "🇨🇭",
+                "瑞士",
                 "🏳️",
                 "待定"
               ]
