@@ -1440,15 +1440,38 @@ window.ROUNDS_DATA = [
     "label": "半準決賽",
     "cards": [
       {
+        "layout": "group-day",
         "type": "1",
-        "league": "待定",
-        "date": "待定",
+        "league": "半準決賽",
+        "date": "7月10日",
         "times": [
-          "03:00"
+          "上午4:00"
         ],
         "groups": [
           {
             "name": "場次 1",
+            "matches": [
+              [
+                "🇫🇷",
+                "法國",
+                "🇲🇦",
+                "摩洛哥"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "group-day",
+        "type": "1",
+        "league": "半準決賽",
+        "date": "7月11日",
+        "times": [
+          "上午3:00"
+        ],
+        "groups": [
+          {
+            "name": "場次 2",
             "matches": [
               [
                 "🏳️",
@@ -1461,15 +1484,38 @@ window.ROUNDS_DATA = [
         ]
       },
       {
+        "layout": "group-day",
         "type": "1",
-        "league": "待定",
-        "date": "待定",
+        "league": "半準決賽",
+        "date": "7月12日",
         "times": [
-          "03:00"
+          "上午5:00"
         ],
         "groups": [
           {
-            "name": "場次 2",
+            "name": "場次 3",
+            "matches": [
+              [
+                "🇳🇴",
+                "挪威",
+                "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+                "英格蘭"
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "group-day",
+        "type": "1",
+        "league": "半準決賽",
+        "date": "7月12日",
+        "times": [
+          "上午9:00"
+        ],
+        "groups": [
+          {
+            "name": "場次 4",
             "matches": [
               [
                 "🏳️",
