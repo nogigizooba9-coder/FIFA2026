@@ -1485,11 +1485,12 @@ window.ROUNDS_DATA = [
       },
       {
         "layout": "group-day",
-        "type": "1",
+        "type": "2",
         "league": "半準決賽",
         "date": "7月12日",
         "times": [
-          "上午5:00"
+          "上午5:00",
+          "上午9:00"
         ],
         "groups": [
           {
@@ -1502,26 +1503,15 @@ window.ROUNDS_DATA = [
                 "英格蘭"
               ]
             ]
-          }
-        ]
-      },
-      {
-        "layout": "group-day",
-        "type": "1",
-        "league": "半準決賽",
-        "date": "7月12日",
-        "times": [
-          "上午9:00"
-        ],
-        "groups": [
+          },
           {
             "name": "場次 4",
             "matches": [
               [
-                "🏳️",
-                "待定",
-                "🏳️",
-                "待定"
+                "🇦🇷",
+                "阿根廷",
+                "🇨🇭",
+                "瑞士"
               ]
             ]
           }
