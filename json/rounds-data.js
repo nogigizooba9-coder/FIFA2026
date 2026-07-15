@@ -1572,40 +1572,20 @@ window.ROUNDS_DATA = [
     "label": "季軍賽",
     "cards": [
       {
+        "layout": "group-day",
         "type": "1",
-        "league": "待定",
-        "date": "待定",
+        "league": "季軍賽",
+        "date": "7月19日",
         "times": [
-          "03:00"
+          "上午5:00"
         ],
         "groups": [
           {
             "name": "場次 1",
             "matches": [
               [
-                "🏳️",
-                "待定",
-                "🏳️",
-                "待定"
-              ]
-            ]
-          }
-        ]
-      },
-      {
-        "type": "1",
-        "league": "待定",
-        "date": "待定",
-        "times": [
-          "03:00"
-        ],
-        "groups": [
-          {
-            "name": "場次 2",
-            "matches": [
-              [
-                "🏳️",
-                "待定",
+                "🇫🇷",
+                "法國",
                 "🏳️",
                 "待定"
               ]
@@ -1619,40 +1599,20 @@ window.ROUNDS_DATA = [
     "label": "決賽",
     "cards": [
       {
+        "layout": "group-day",
         "type": "1",
-        "league": "待定",
-        "date": "待定",
+        "league": "決賽",
+        "date": "7月20日",
         "times": [
-          "03:00"
+          "上午3:00"
         ],
         "groups": [
           {
             "name": "場次 1",
             "matches": [
               [
-                "🏳️",
-                "待定",
-                "🏳️",
-                "待定"
-              ]
-            ]
-          }
-        ]
-      },
-      {
-        "type": "1",
-        "league": "待定",
-        "date": "待定",
-        "times": [
-          "03:00"
-        ],
-        "groups": [
-          {
-            "name": "場次 2",
-            "matches": [
-              [
-                "🏳️",
-                "待定",
+                "🇪🇸",
+                "西班牙",
                 "🏳️",
                 "待定"
               ]
