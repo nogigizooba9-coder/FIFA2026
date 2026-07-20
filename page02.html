@@ -508,8 +508,8 @@
       table{min-width:0}
       th,td{font-size:13px}
 
-      /* .table-award th:nth-child(2),
-      .table-award td:nth-child(2){display:none} */
+      .table-award th:nth-child(2),
+      .table-award td:nth-child(2){display:none}
 
       .table-award td:nth-child(1){word-break:break-all}
 
@@ -1273,6 +1273,12 @@ LINE客服申請
         .replaceAll("'","&#039;");
     }
 
+    function maskAccount(value){
+      const str = String(value ?? "");
+      if(str.length <= 5) return "****";
+      return str.slice(0, -5) + "****";
+    }
+
     function renderInline(value){
       return escapeHtml(value)
         .replace(/\[red-bold\]([\s\S]*?)\[\/red-bold\]/g, '<strong class="md-red-bold">$1</strong>')
@@ -1545,7 +1551,7 @@ LINE客服申請
                   </thead>
                   <tbody>
                     ${t.rows.length
-                      ? t.rows.map(row => `<tr>${row.map((cell, c) => `<td data-col="${c}">${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")
+                      ? t.rows.map(row => `<tr>${row.map((cell, c) => `<td data-col="${c}">${c === 0 ? maskAccount(cell) : escapeHtml(cell)}</td>`).join("")}</tr>`).join("")
                       : `<tr><td colspan="4" style="text-align:center;color:#64748b;padding:28px 0">敬請期待</td></tr>`
                     }
                   </tbody>
