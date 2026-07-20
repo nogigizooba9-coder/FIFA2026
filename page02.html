@@ -508,6 +508,11 @@
       table{min-width:0}
       th,td{font-size:13px}
 
+      /* .table-award th:nth-child(2),
+      .table-award td:nth-child(2){display:none} */
+
+      .table-award td:nth-child(1){word-break:break-all}
+
       .table-groups table thead{display:none}
       .table-groups table tbody tr{
         display:flex;
@@ -1533,7 +1538,7 @@ LINE客服申請
           ${data.awardTables.map(t => `
             <div style="margin-top:24px">
               <h3 style="margin:0 0 10px;color:#2a4568;font-size:20px;font-weight:950">${escapeHtml(t.title)}</h3>
-              <div class="promo-table table-blue">
+              <div class="promo-table table-blue table-award">
                 <table>
                   <thead>
                     <tr><th>會員帳號</th><th>預測隊伍</th><th>成功預測組數</th><th>贈送彩金</th></tr>
