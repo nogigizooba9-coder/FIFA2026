@@ -650,9 +650,9 @@
     <section id="app"></section>
   </main>
 
-  <!-- <script src="./json/award8.js"></script> -->
-  <!-- <script src="./json/award4.js"></script> -->
-  <!-- <script src="./json/awardChampion.js"></script> -->
+  <script src="./json/award8.js"></script>
+  <script src="./json/award4.js"></script>
+  <script src="./json/awardChampion.js"></script>
   <script>
     //Markdown
     const defaultMarkdown = `# FM富馬 邀您參與世界盃
@@ -732,11 +732,11 @@ LINE客服申請
 四強競猜獎金名單：敬請期待
 冠軍競猜獎金名單：敬請期待`;
 
-    const award8Rows = [];
+    const award8Rows = window.AWARD8_ROWS || [];
 
-    const award4Rows = [];
+    const award4Rows = window.AWARD4_ROWS || [];
 
-    const awardChampionRows = [];
+    const awardChampionRows = window.AWARDCHAMPION_ROWS || [];
 
     const app = document.getElementById("app");
     function escapeHtml(value){
@@ -746,12 +746,6 @@ LINE客服申請
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
-    }
-
-    function maskAccount(value){
-      const str = String(value ?? "");
-      if(str.length <= 5) return "****";
-      return str.slice(0, -5) + "****";
     }
 
     function renderInline(value){
@@ -1026,7 +1020,7 @@ LINE客服申請
                   </thead>
                   <tbody>
                     ${t.rows.length
-                      ? t.rows.map(row => `<tr>${row.map((cell, c) => `<td data-col="${c}">${c === 0 ? maskAccount(cell) : escapeHtml(cell)}</td>`).join("")}</tr>`).join("")
+                      ? t.rows.map(row => `<tr>${row.map((cell, c) => `<td data-col="${c}">${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")
                       : `<tr><td colspan="4" style="text-align:center;color:#64748b;padding:28px 0">敬請期待</td></tr>`
                     }
                   </tbody>
