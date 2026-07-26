@@ -634,10 +634,7 @@
   <main class="page">
     <section id="app"></section>
   </main>
-            <--Youtube <a class="btn-sm btn-youtube" href="https://www.youtube.com/@FUMA168" target="_blank" aria-label="YouTube 直播">
-              <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.5 12 3.5 12 3.5s-7.51 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14C4.49 20.5 12 20.5 12 20.5s7.51 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81ZM9.6 15.6V8.4L15.82 12 9.6 15.6Z"/></svg>
-            </a> -->
-
+  <script src="./json/award5.js"></script>
   <script>
     const prizes = [
       { name:"iphone 17 pro max 256g",           qty:5,  price:43900,  total:219500, img:"./assets/iphone17.webp" },
@@ -667,6 +664,13 @@
       "嚴禁刷水、套利、無風險下注等行為，一經查證我方將取消優惠或索回已支付的全部優惠紅利，包含盈利金額將回收，退還本金，並且取消領獎資格，列入高風險名單不予往來。",
       "FM富馬娛樂城保留對活動的最終解釋權，以及在無通知的情況下修改、終止活動的權利，適用於所有優惠。",
     ];
+
+    const winnerRows = window.AWARD5_ROWS || [];
+    const winnersByPrize = winnerRows.reduce((acc, row) => {
+      const idx = row[3];
+      (acc[idx] ||= []).push(row);
+      return acc;
+    }, {});
 
     function fmt(n){ return n.toLocaleString("zh-TW"); }
 
@@ -776,15 +780,21 @@
               </tr>
             </thead>
             <tbody>
-              ${prizes.map(p => `
+              ${prizes.map((p, i) => {
+                const winners = winnersByPrize[i] || [];
+                const winnerList = winners.length
+                  ? winners.map(w => `${escapeHtml(w[1])}（${escapeHtml(w[2])}）`).join("<br>")
+                  : "待公布";
+                return `
                 <tr>
                   <td data-col="0" data-label="商品名稱" style="vertical-align:middle;text-align:center">${escapeHtml(p.name)}</td>
                   <td data-label="獎品數量" style="text-align:center;vertical-align:middle">${p.qty} 份</td>
-                  <td data-label="得獎名單" style="text-align:center;vertical-align:middle;color:#64748b">待公布</td>
+                  <td data-label="得獎名單" style="text-align:center;vertical-align:middle;color:#64748b;line-height:1.9">${winnerList}</td>
                   <td data-label="獎品單價" style="text-align:center;vertical-align:middle">$${fmt(p.price)}</td>
                   <td data-label="獎品總價" style="text-align:center;vertical-align:middle">$${fmt(p.total)}</td>
                 </tr>
-              `).join("")}
+              `;
+              }).join("")}
               <tr class="total-row">
                 <td colspan="4" style="text-align:right;vertical-align:middle">獎品總額</td>
                 <td style="text-align:center;vertical-align:middle">$${fmt(grandTotal)}</td>
@@ -798,12 +808,38 @@
         <div class="section-head">
           <div>
             <h2>得獎名單</h2>
-            <p>直播結束後公布，得獎者請於 2026/8/5 前聯繫LINE客服領取</p>
+            <p>得獎者請於 2026/8/5 前聯繫LINE客服領取，逾期領取視同放棄</p>
           </div>
         </div>
+        ${winnerRows.length ? `
+        <div class="promo-table table-blue">
+          <table>
+            <colgroup>
+              <col style="width:26%">
+              <col style="width:20%">
+              <col style="width:20%">
+              <col style="width:34%">
+            </colgroup>
+            <thead>
+              <tr><th>會員帳號</th><th>姓名</th><th>抽獎編號</th><th>得獎項目</th></tr>
+            </thead>
+            <tbody>
+              ${winnerRows.map(row => `
+                <tr>
+                  <td data-label="會員帳號" style="text-align:center;vertical-align:middle">${escapeHtml(row[0])}</td>
+                  <td data-label="姓名" style="text-align:center;vertical-align:middle">${escapeHtml(row[1])}</td>
+                  <td data-label="抽獎編號" style="text-align:center;vertical-align:middle">${escapeHtml(row[2])}</td>
+                  <td data-label="得獎項目" style="text-align:center;vertical-align:middle">${escapeHtml(prizes[row[3]]?.name ?? "")}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+        ` : `
         <div class="card" style="text-align:center;padding:40px;color:#64748b;font-size:16px">
           🎉 得獎序號名單將於 7/25 20:00 直播後公告，敬請期待
         </div>
+        `}
       </section>
 
       <section class="section rules-wrap">
